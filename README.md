@@ -428,7 +428,7 @@ When set the picker will be open by default.
 
 ### `leftMode`
 
-(optional) `boolean` defaults to `true`
+(optional) `boolean` defaults to `false`
 
 When set and changed the picker will open to the left (right to left) instead of the default which is to open to the right (left to right)
 
@@ -442,13 +442,13 @@ To allow flexibility, center mode has been added where leftMode or default is no
 
 (optional) `boolean` defaults to `false`
 
-To allow flexibility, center mode has been added where leftMode or default is not enough.
+When set, the minimum date will be displayed in the picker footer.
 
 ### `displayMaxDate`
 
 (optional) `boolean` defaults to `false`
 
-To allow flexibility, center mode has been added where leftMode or default is not enough.
+When set, the maximum date will be displayed in the picker footer.
 
 ### `classNames`
 
@@ -462,12 +462,12 @@ Will add extra classNames to different parts of the picker. It's great for for t
 - `rangeButtonSelected`
 - `fromToRangeContainer`
 - `normalCell`
-- `normalCellHove`
-- `greyCel`
-- `invalidCel`
-- `startCel`
-- `endCel`
-- `withinRangeCel`
+- `normalCellHover`
+- `greyCell`
+- `invalidCell`
+- `startCell`
+- `endCell`
+- `withinRangeCell`
 - `startDot`
 - `endDot`
 - `footerContainer`
@@ -533,8 +533,8 @@ Builds the app for production to the `/dist` folder using vite's [library mode](
 - [x] Ability to add custom CSS classes for different parts of the component
 - [x] Migrate to [date-fns](https://www.npmjs.com/package/date-fns)
 - [x] Adding predefined themes
-- [ ] More demos showcasing different props
 - [x] Write tests
+- [ ] More demos showcasing different props
 
 ## License
 
