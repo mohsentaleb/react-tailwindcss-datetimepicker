@@ -104,26 +104,24 @@ const getDaysBeforeStartMonday = (firstDayOfMonth: Date) => {
 };
 
 const getDaysBeforeStartSunday = (firstDayOfMonth: Date) => {
-  let fortyTwoDays = [];
+  let days = [];
   let dayBeforeFirstDayOfMonth = getDay(firstDayOfMonth) - 1; // We dont want to include the first day of the new month
 
-  // Case whereby we need all previous week days
+  // Case whereby we need all previous week days (month starts on Sunday)
   if (dayBeforeFirstDayOfMonth === -1) {
     for (let i = 7; i > 0; i--) {
-      for (let i = 7; i > 0; i--) {
-        let previousDay = subDays(firstDayOfMonth, i);
-        fortyTwoDays.push(previousDay);
-      }
+      let previousDay = subDays(firstDayOfMonth, i);
+      days.push(previousDay);
     }
   }
   // Every other day
   else {
     for (let i = dayBeforeFirstDayOfMonth + 1; i > 0; i--) {
       let previousDay = subDays(firstDayOfMonth, i);
-      fortyTwoDays.push(previousDay);
+      days.push(previousDay);
     }
   }
-  return fortyTwoDays;
+  return days;
 };
 
 const getDaysBeforeStart = (firstDayOfMonth: Date, sundayFirst: boolean) => {
@@ -134,40 +132,36 @@ const getDaysBeforeStart = (firstDayOfMonth: Date, sundayFirst: boolean) => {
   }
 };
 
-export const getFourtyTwoDays = (initMonth: number, initYear: number, sundayFirst: boolean) => {
-  let fourtyTwoDays = [];
+const CALENDAR_DAYS = 42; // 6 weeks × 7 days
+
+export const getFortyTwoDays = (initMonth: number, initYear: number, sundayFirst: boolean) => {
+  let days = [];
   let firstDayOfMonth = startOfMonth(new Date(initYear, initMonth, 1));
   let lastDayOfMonth = endOfMonth(firstDayOfMonth);
 
-  fourtyTwoDays = getDaysBeforeStart(firstDayOfMonth, sundayFirst);
+  days = getDaysBeforeStart(firstDayOfMonth, sundayFirst);
   // Add in all days this month
   for (let i = 0; i < getDaysInMonth(firstDayOfMonth); i++) {
-    fourtyTwoDays.push(addDays(firstDayOfMonth, i));
+    days.push(addDays(firstDayOfMonth, i));
   }
-  // Add in all days at the end of the month until last day of week seen
+  // Add in all days at the end of the month until the grid is filled
   let toAdd = 1;
-  let gotAllDays = false;
-  while (!gotAllDays) {
-    if (fourtyTwoDays.length >= 42) {
-      gotAllDays = true;
-      break;
-    }
-    fourtyTwoDays.push(addDays(lastDayOfMonth, toAdd));
+  while (days.length < CALENDAR_DAYS) {
+    days.push(addDays(lastDayOfMonth, toAdd));
     toAdd++;
   }
-  return fourtyTwoDays;
+  return days;
 };
 
 export const isInbetweenDates = (isStartDate: boolean, dayToFindOut: Date, start: Date, end: Date) => {
-  let isInBetweenDates;
-
   if (isStartDate) {
-    isInBetweenDates = isAfter(dayToFindOut, start) && isBefore(dayToFindOut, end);
+    return isAfter(dayToFindOut, start) && isBefore(dayToFindOut, end);
   } else {
-    isInBetweenDates = isBefore(dayToFindOut, start) && isAfter(dayToFindOut, end);
+    // When isStartDate is false, start/end params have swapped semantic roles:
+    // start=calendarEndDate, end=calendarStartDate. The check reads:
+    // cellDay < calendarEndDate && cellDay > calendarStartDate
+    return isBefore(dayToFindOut, start) && isAfter(dayToFindOut, end);
   }
-
-  return isInBetweenDates;
 };
 
 export const isValidTimeChange = (mode: Mode, date: Date, start: Date, end: Date) => {

@@ -116,11 +116,13 @@ export default class TimeField extends React.Component<Props, State> {
     valueInput: number | string,
     onChangeInput: (event: BaseSyntheticEvent) => void,
     optionsInput: JSX.Element[],
-    id: string
+    id: string,
+    ariaLabel: string
   ) {
     return (
       <select
         id={id + '_' + this.props.mode}
+        aria-label={ariaLabel}
         value={valueInput}
         onChange={onChangeInput}
         className="rounded border border-gray-200 p-1 dark:border-slate-500 dark:bg-slate-600"
@@ -149,7 +151,7 @@ export default class TimeField extends React.Component<Props, State> {
             onFocus={this.hourFocus}
             onBlur={this.hourBlur}
           >
-            {this.renderSelectField(hour, this.handleHourChange, hours, 'Hour')}
+            {this.renderSelectField(hour, this.handleHourChange, hours, 'Hour', 'Hour')}
           </div>
           <div className="mx-1">:</div>
           <div
@@ -159,12 +161,12 @@ export default class TimeField extends React.Component<Props, State> {
             onFocus={this.minuteFocus}
             onBlur={this.minuteBlur}
           >
-            {this.renderSelectField(minute, this.handleMinuteChange, minutes, 'Minutes')}
+            {this.renderSelectField(minute, this.handleMinuteChange, minutes, 'Minutes', 'Minute')}
           </div>
         </div>
         {this.props.twelveHoursClock && (
           <div className="inline-block">
-            {this.renderSelectField(meridiem, this.handleMeridiemChange, meridiems, 'Meridiem')}
+            {this.renderSelectField(meridiem, this.handleMeridiemChange, meridiems, 'Meridiem', 'AM/PM')}
           </div>
         )}
       </div>

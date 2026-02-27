@@ -45,6 +45,7 @@ export default class Ranges extends React.Component<Props, State> {
       if (this.props.selectedRange !== prevProps.selectedRange) {
         this.setState({
           viewingIndex: this.props.selectedRange,
+          focused: this.state.focused.map(() => false),
         });
       }
     }
@@ -62,7 +63,7 @@ export default class Ranges extends React.Component<Props, State> {
 
   setFocusedCallback(index: number, focusedInput: boolean) {
     // Set the focus value of indexed item, focusedInput is true or false
-    let focused = this.state.focused;
+    const focused = [...this.state.focused];
     focused[index] = focusedInput;
     this.setState({
       focused: focused,

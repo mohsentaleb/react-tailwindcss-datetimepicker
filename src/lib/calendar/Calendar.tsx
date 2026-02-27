@@ -5,7 +5,7 @@ import MonthYearSelector from './MonthYearSelector';
 import CalendarHeader from './CalendarHeader';
 import CalendarRows from './CalendarRows';
 import { createYears } from '../utils/YearUtils';
-import { getMonth, getYear, getFourtyTwoDays } from '../utils/TimeFunctionUtils';
+import { getMonth, getYear, getFortyTwoDays } from '../utils/TimeFunctionUtils';
 
 import type { ClassNames, Locale, Mode, Theme } from '../types';
 import type { BaseSyntheticEvent } from 'react';
@@ -179,7 +179,7 @@ export default class Calendar extends React.Component<Props, State> {
       }
     }
 
-    let fourtyTwoDays = getFourtyTwoDays(this.state.month, this.state.year, sundayFirst);
+    let fourtyTwoDays = getFortyTwoDays(this.state.month, this.state.year, sundayFirst);
     return (
       <div>
         <MonthYearSelector

@@ -510,14 +510,17 @@ class DateTimeRangePicker extends React.Component<Props, State> {
     }
   };
 
-  renderStartDate(locale?: Locale) {
-    let label = locale?.fromDate ? locale.fromDate : 'From Date';
+  renderDatePicker(mode: 'start' | 'end', locale?: Locale) {
+    const isStart = mode === 'start';
+    const label = isStart
+      ? (locale?.fromDate ?? 'From Date')
+      : (locale?.toDate ?? 'To Date');
     return (
       <DatePicker
         label={label}
-        date={this.state.start}
-        otherDate={this.state.end}
-        mode="start"
+        date={isStart ? this.state.start : this.state.end}
+        otherDate={isStart ? this.state.end : this.state.start}
+        mode={mode}
         dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback}
         timeChangeCallback={this.timeChangeCallback}
         dateTextFieldCallback={this.dateTextFieldCallback}
@@ -526,40 +529,7 @@ class DateTimeRangePicker extends React.Component<Props, State> {
         focusDate={this.state.focusDate}
         cellFocusedCallback={this.cellFocusedCallback}
         onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
-        dateLabel={this.state.startLabel}
-        selectingModeFrom={this.state.selectingModeFrom}
-        changeSelectingModeCallback={this.changeSelectingModeCallback}
-        minDate={this.props.minDate}
-        maxDate={this.props.maxDate}
-        locale={this.props.locale}
-        descendingYears={this.props.descendingYears}
-        years={this.props.years}
-        pastSearchFriendly={this.props.pastSearchFriendly}
-        smartMode={this.props.smartMode}
-        twelveHoursClock={this.props.twelveHoursClock}
-        classNames={this.props.classNames}
-        theme={this.props.theme}
-      />
-    );
-  }
-
-  renderEndDate(locale?: Locale) {
-    let label = locale?.toDate ? locale.toDate : 'To Date';
-    return (
-      <DatePicker
-        label={label}
-        date={this.state.end}
-        otherDate={this.state.start}
-        mode="end"
-        dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback}
-        timeChangeCallback={this.timeChangeCallback}
-        dateTextFieldCallback={this.dateTextFieldCallback}
-        keyboardCellCallback={this.keyboardCellCallback}
-        focusOnCallback={this.focusOnCallback}
-        focusDate={this.state.focusDate}
-        cellFocusedCallback={this.cellFocusedCallback}
-        onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
-        dateLabel={this.state.endLabel}
+        dateLabel={isStart ? this.state.startLabel : this.state.endLabel}
         selectingModeFrom={this.state.selectingModeFrom}
         changeSelectingModeCallback={this.changeSelectingModeCallback}
         minDate={this.props.minDate}
@@ -606,8 +576,8 @@ class DateTimeRangePicker extends React.Component<Props, State> {
             classNames={this.props.classNames}
             theme={this.props.theme}
           />
-          {this.renderStartDate(this.props.locale)}
-          {this.renderEndDate(this.props.locale)}
+          {this.renderDatePicker('start', this.props.locale)}
+          {this.renderDatePicker('end', this.props.locale)}
         </div>
         <ApplyCancelButtons
           changeVisibleState={this.props.changeVisibleState}

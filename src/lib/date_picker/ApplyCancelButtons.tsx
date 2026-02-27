@@ -6,6 +6,7 @@ import { defaultDateFormat } from '../DateTimeRangePicker';
 
 import type { ClassNames, Locale, Theme } from '../types';
 import { defaultTheme } from '../ReactDateTimePicker';
+import { applyButtonClasses } from '../utils/themeClasses';
 
 interface Props {
   locale?: Locale;
@@ -85,18 +86,7 @@ export default class ApplyCancelButtons extends React.Component<Props> {
         <button
           className={clsx(
             'applyButton inline-flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm',
-            {
-              'bg-green-600 hover:bg-green-500 focus:ring-green-300': theme === 'blue',
-            },
-            {
-              'bg-orange-600 hover:bg-orange-500 focus:ring-orange-300': theme === 'orange',
-            },
-            {
-              'bg-emerald-600 hover:bg-emerald-500 focus:ring-emerald-300': theme === 'green',
-            },
-            {
-              'bg-purple-600 hover:bg-purple-500 focus:ring-purple-300': theme === 'purple',
-            },
+            applyButtonClasses[theme],
             this.props.classNames?.applyButton
           )}
           type="button"

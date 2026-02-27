@@ -72,11 +72,11 @@ export const pastMaxDate = (currentDate: Date, maxDate?: Date, minuteMode?: bool
     return false;
   }
 
-  if (minuteMode && maxDate && isAfter(currentDate, maxDate)) {
+  if (minuteMode && isAfter(currentDate, maxDate)) {
     return true;
   }
 
-  if (maxDate && !isSameDay(currentDate, maxDate) && isAfter(currentDate, maxDate)) {
+  if (!isSameDay(currentDate, maxDate) && isAfter(currentDate, maxDate)) {
     return true;
   }
   return false;
@@ -87,11 +87,11 @@ export const beforeMinDate = (currentDate: Date, minDate?: Date, minuteMode?: bo
     return false;
   }
 
-  if (minuteMode && minDate && isBefore(currentDate, minDate)) {
+  if (minuteMode && isBefore(currentDate, minDate)) {
     return true;
   }
 
-  if (minDate && !isSameDay(currentDate, minDate) && isBefore(currentDate, minDate)) {
+  if (!isSameDay(currentDate, minDate) && isBefore(currentDate, minDate)) {
     return true;
   }
   return false;

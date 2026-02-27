@@ -12,8 +12,8 @@ interface Props {
 export default class ActiveNotifier extends React.Component<Props> {
   getDotDiv(text: string, classNames: string, id: string) {
     return (
-      <div className="activeNotifier flex items-center justify-center" id={id}>
-        {text} <span className={clsx('ml-2 inline-block h-3 w-3 rounded-full', classNames)} />
+      <div className="activeNotifier flex items-center justify-center" id={id} aria-live="polite">
+        {text} <span className={clsx('ml-2 inline-block h-3 w-3 rounded-full', classNames)} aria-hidden="true" />
       </div>
     );
   }

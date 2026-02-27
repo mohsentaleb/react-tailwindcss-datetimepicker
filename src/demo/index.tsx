@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ReactDateTimePicker from '../lib/index';
 import { DateRanges } from './consts';
 import Header from './components/Header';
-import { add, set, format } from 'date-fns';
+import { add, sub, set, format } from 'date-fns';
 import type { Theme } from '../lib/types';
 
 export default function Demo() {
@@ -39,7 +39,7 @@ export default function Demo() {
               start={selectedRange.start}
               end={selectedRange.end}
               years={[2020, new Date().getFullYear()]}
-              minDate={set(add(start, { days: -1 }), {
+              minDate={set(sub(new Date(), { years: 2 }), {
                 hours: 0,
                 minutes: 0,
                 seconds: 0,

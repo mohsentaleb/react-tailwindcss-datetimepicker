@@ -1,6 +1,7 @@
 import React from 'react';
 import { isInbetweenDates } from '../utils/TimeFunctionUtils';
 import { beforeMinDate, pastMaxDate } from '../utils/DateSelectedUtils';
+import { endCellClasses, hoverCellClasses, inBetweenCellClasses, startCellClasses } from '../utils/themeClasses';
 
 import { ClassNames, Mode, Theme } from '../types';
 import clsx from 'clsx';
@@ -10,31 +11,6 @@ import { defaultTheme } from '../ReactDateTimePicker';
 const normalCellClasses = 'text-black cursor-pointer dark:text-white caret-transparent';
 const greyCellClasses = 'rounded-md text-gray-200 cursor-pointer opacity-30 caret-transparent';
 const invalidCellClasses = 'text-gray-300 cursor-not-allowed dark:text-slate-500';
-
-const hoverCellClasses = {
-  blue: 'text-black bg-sky-100 cursor-pointer dark:bg-slate-400 caret-transparent',
-  orange: 'text-black bg-orange-100 cursor-pointer dark:bg-slate-400 caret-transparent',
-  green: 'text-black bg-emerald-100 cursor-pointer dark:bg-slate-400 caret-transparent',
-  purple: 'text-black bg-purple-100 cursor-pointer dark:bg-slate-400 caret-transparent',
-};
-const startCellClasses = {
-  blue: 'rounded-l-md text-white bg-sky-500 cursor-pointer caret-transparent',
-  orange: 'rounded-l-md text-white bg-orange-500 cursor-pointer caret-transparent',
-  green: 'rounded-l-md text-white bg-emerald-500 cursor-pointer caret-transparent',
-  purple: 'rounded-l-md text-white bg-purple-500 cursor-pointer caret-transparent',
-};
-const endCellClasses = {
-  blue: 'rounded-r-md text-white bg-sky-500 cursor-pointer caret-transparent',
-  orange: 'rounded-r-md text-white bg-orange-500 cursor-pointer caret-transparent',
-  green: 'rounded-r-md text-white bg-emerald-500 cursor-pointer caret-transparent',
-  purple: 'rounded-r-md text-white bg-purple-500 cursor-pointer caret-transparent',
-};
-const inBetweenCellClasses: Record<Theme, string> = {
-  blue: 'text-sky-800 bg-sky-50 cursor-pointer dark:bg-slate-500 dark:text-white',
-  orange: 'text-orange-800 bg-orange-50 cursor-pointer dark:bg-slate-500 dark:text-white',
-  green: 'text-emerald-800 bg-emerald-50 cursor-pointer dark:bg-slate-500 dark:text-white',
-  purple: 'text-purple-800 bg-purple-50 cursor-pointer dark:bg-slate-500 dark:text-white',
-};
 
 interface Props {
   id: number;
@@ -360,8 +336,10 @@ export default class Cell extends React.Component<Props, State> {
 
   render() {
     const dateFormatted = format(this.props.cellDay, 'd');
+    const dateLabel = format(this.props.cellDay, 'MMMM d, yyyy');
+    const isSelected = this.isStartOrEndDate();
     let tabIndex = -1;
-    if (this.isStartOrEndDate() && !this.isCellMonthSameAsPropMonth(this.props.cellDay)) {
+    if (isSelected && !this.isCellMonthSameAsPropMonth(this.props.cellDay)) {
       document.addEventListener('keydown', this.keyDown, false);
       tabIndex = 0;
     } else {
@@ -372,6 +350,9 @@ export default class Cell extends React.Component<Props, State> {
         ref={(cell) => {
           this.cell = cell;
         }}
+        role="button"
+        aria-label={dateLabel}
+        aria-selected={isSelected}
         className={clsx(
           'p-2',
           {

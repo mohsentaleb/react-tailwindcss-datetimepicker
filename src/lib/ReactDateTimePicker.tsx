@@ -48,7 +48,7 @@ export default class ReactDateTimePicker extends React.Component<ReactDateTimePi
       visible: false,
     };
     const propValidationReturn = propValidation(this.props);
-    if (!propValidationReturn) {
+    if (propValidationReturn !== null) {
       alert(propValidationReturn);
     }
   }

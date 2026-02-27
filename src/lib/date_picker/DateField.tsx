@@ -39,6 +39,7 @@ export default class DateField extends React.Component<Props> {
         <input
           className="rounded border border-gray-200 p-2 dark:border-slate-500 dark:bg-slate-600"
           id={`datepicker-date-${this.props.mode}`}
+          aria-label={this.props.mode === 'start' ? 'Start date' : 'End date'}
           type="text"
           value={this.props.dateLabel}
           onChange={this.onChangeDateTextHandler}

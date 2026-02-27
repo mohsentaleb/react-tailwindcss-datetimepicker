@@ -534,7 +534,7 @@ Builds the app for production to the `/dist` folder using vite's [library mode](
 - [x] Migrate to [date-fns](https://www.npmjs.com/package/date-fns)
 - [x] Adding predefined themes
 - [ ] More demos showcasing different props
-- [ ] Write tests
+- [x] Write tests
 
 ## License
 
