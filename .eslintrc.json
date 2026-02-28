@@ -5,7 +5,6 @@
     },
     "extends": [
         "eslint:recommended",
-        "standard",
         "plugin:@typescript-eslint/recommended",
         "plugin:react/jsx-runtime",
         "plugin:react-hooks/recommended",
@@ -27,6 +26,7 @@
     "plugins": ["react", "@typescript-eslint", "import", "react-refresh"],
     "rules": {
         "no-undef": 0,
+        "import/no-named-as-default": 0,
         "import/no-unresolved": 0,
         "react-refresh/only-export-components": "warn",
         "import/order": [
