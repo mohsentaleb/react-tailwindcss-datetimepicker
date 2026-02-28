@@ -15,10 +15,11 @@ import {
   getMonth as dateFnsGetMonth,
   getYear as dateFnsGetYear,
 } from 'date-fns';
+
 import { Mode } from '../types';
 
 export const generateHours = () => {
-  let hours = [];
+  const hours = [];
   for (let i = 0; i < 24; i++) {
     hours.push(i);
   }
@@ -26,7 +27,7 @@ export const generateHours = () => {
 };
 
 export const generateMinutes = () => {
-  let minutes = [];
+  const minutes = [];
   for (let i = 0; i < 60; i++) {
     if (i < 10) {
       minutes.push(`0${i.toString()}`);
@@ -52,13 +53,13 @@ function workOutMonthYear(
   // If pastSearch Friendly mode is on and both months are the same and the same year
   // have "end"/right as the month and "start"/left as -1 month
   else if (isSameYear(date, secondDate) && mode === 'start' && pastSearchFriendly && smartMode) {
-    let lastMonth = subMonths(date, 1);
+    const lastMonth = subMonths(date, 1);
     return lastMonth;
   }
   // If pastSearch Friendly mode is off and both months are the same and the same year
   // have "end"/right as the month and "start"/left as +1 month
   else if (isSameYear(date, secondDate) && mode === 'end' && !pastSearchFriendly && smartMode) {
-    let lastMonth = addMonths(date, 1);
+    const lastMonth = addMonths(date, 1);
     return lastMonth;
   } else {
     return date;
@@ -77,26 +78,26 @@ export const getYear = (date: Date, secondDate: Date, mode?: Mode, pastSearchFri
   dateFnsGetYear(workOutMonthYear(date, secondDate, mode, pastSearchFriendly, smartMode));
 
 const getDaysBeforeStartMonday = (firstDayOfMonth: Date) => {
-  let fortyTwoDays = [];
-  let dayBeforeFirstDayOfMonth = getDay(firstDayOfMonth) - 1; // We dont want to include the first day of the new month
+  const fortyTwoDays = [];
+  const dayBeforeFirstDayOfMonth = getDay(firstDayOfMonth) - 1; // We dont want to include the first day of the new month
   // Case whereby day before is a Saturday (6) and we require Saturday back to Monday for that week
   if (dayBeforeFirstDayOfMonth === -1) {
     for (let i = 6; i > 0; i--) {
-      let previousDay = subDays(firstDayOfMonth, i);
+      const previousDay = subDays(firstDayOfMonth, i);
       fortyTwoDays.push(previousDay);
     }
   }
   // Case Whereby day before first day is the Sunday (0), therefore we want the entire previous week
   if (dayBeforeFirstDayOfMonth === 0) {
     for (let i = 7; i > 0; i--) {
-      let previousDay = subDays(firstDayOfMonth, i);
+      const previousDay = subDays(firstDayOfMonth, i);
       fortyTwoDays.push(previousDay);
     }
   }
   // Every other day
   else {
     for (let i = dayBeforeFirstDayOfMonth; i > 0; i--) {
-      let previousDay = subDays(firstDayOfMonth, i);
+      const previousDay = subDays(firstDayOfMonth, i);
       fortyTwoDays.push(previousDay);
     }
   }
@@ -104,20 +105,20 @@ const getDaysBeforeStartMonday = (firstDayOfMonth: Date) => {
 };
 
 const getDaysBeforeStartSunday = (firstDayOfMonth: Date) => {
-  let days = [];
-  let dayBeforeFirstDayOfMonth = getDay(firstDayOfMonth) - 1; // We dont want to include the first day of the new month
+  const days = [];
+  const dayBeforeFirstDayOfMonth = getDay(firstDayOfMonth) - 1; // We dont want to include the first day of the new month
 
   // Case whereby we need all previous week days (month starts on Sunday)
   if (dayBeforeFirstDayOfMonth === -1) {
     for (let i = 7; i > 0; i--) {
-      let previousDay = subDays(firstDayOfMonth, i);
+      const previousDay = subDays(firstDayOfMonth, i);
       days.push(previousDay);
     }
   }
   // Every other day
   else {
     for (let i = dayBeforeFirstDayOfMonth + 1; i > 0; i--) {
-      let previousDay = subDays(firstDayOfMonth, i);
+      const previousDay = subDays(firstDayOfMonth, i);
       days.push(previousDay);
     }
   }
@@ -136,8 +137,8 @@ const CALENDAR_DAYS = 42; // 6 weeks × 7 days
 
 export const getFortyTwoDays = (initMonth: number, initYear: number, sundayFirst: boolean) => {
   let days = [];
-  let firstDayOfMonth = startOfMonth(new Date(initYear, initMonth, 1));
-  let lastDayOfMonth = endOfMonth(firstDayOfMonth);
+  const firstDayOfMonth = startOfMonth(new Date(initYear, initMonth, 1));
+  const lastDayOfMonth = endOfMonth(firstDayOfMonth);
 
   days = getDaysBeforeStart(firstDayOfMonth, sundayFirst);
   // Add in all days this month
@@ -165,7 +166,7 @@ export const isInbetweenDates = (isStartDate: boolean, dayToFindOut: Date, start
 };
 
 export const isValidTimeChange = (mode: Mode, date: Date, start: Date, end: Date) => {
-  let modeStartAndDateSameOrBeforeStart = mode === 'start' && (isBefore(date, end) || isEqual(date, end));
-  let modeEndAndDateSameOrAfterEnd = mode === 'end' && (isAfter(date, start) || isEqual(date, start));
+  const modeStartAndDateSameOrBeforeStart = mode === 'start' && (isBefore(date, end) || isEqual(date, end));
+  const modeEndAndDateSameOrAfterEnd = mode === 'end' && (isAfter(date, start) || isEqual(date, start));
   return modeStartAndDateSameOrBeforeStart || modeEndAndDateSameOrAfterEnd;
 };

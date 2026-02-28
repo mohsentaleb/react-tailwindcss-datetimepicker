@@ -1,9 +1,12 @@
 import React from 'react';
-import DateTimeRangePicker from './DateTimeRangePicker';
-import { propValidation } from './utils/PropValidation';
+import type { ReactNode } from 'react';
+
 import clsx from 'clsx';
 
-import type { ReactNode } from 'react';
+import DateTimeRangePicker from './DateTimeRangePicker';
+import { propValidation } from './utils/PropValidation';
+
+
 import type { ClassNames, Locale, PresetDateRanges, Theme } from './types';
 
 export interface ReactDateTimePickerProps {
@@ -114,7 +117,7 @@ export default class ReactDateTimePicker extends React.Component<ReactDateTimePi
         noMobileMode={this.props.noMobileMode}
         forceMobileMode={this.props.forceMobileMode}
         standalone={this.props.standalone}
-        twelveHoursClock={this.props.twelveHoursClock == true}
+        twelveHoursClock={this.props.twelveHoursClock === true}
         classNames={this.props.classNames}
         displayMinDate={this.props.displayMinDate}
         displayMaxDate={this.props.displayMaxDate}

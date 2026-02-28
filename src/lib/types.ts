@@ -1,5 +1,4 @@
-const customRange = { 'Custom Range': 'Custom Range' } as const;
-export type PresetDateRanges = Record<string, [Date, Date]> & Partial<typeof customRange>;
+export type PresetDateRanges = Record<string, [Date, Date]> & { 'Custom Range'?: string };
 
 export type Locale = {
   format?: string;

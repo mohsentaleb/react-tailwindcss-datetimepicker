@@ -1,8 +1,11 @@
 import React from 'react';
+
 import clsx from 'clsx';
-import type { ClassNames, PresetDateRanges, Theme } from '../types';
+
 import { defaultTheme } from '../ReactDateTimePicker';
 import { rangeButtonDefaultClasses, rangeButtonSelectedClasses } from '../utils/themeClasses';
+
+import type { ClassNames, PresetDateRanges, Theme } from '../types';
 
 interface Props {
   selectedRange: number;
@@ -34,8 +37,8 @@ export default class RangeButton extends React.Component<Props, State> {
   }
 
   componentDidUpdate() {
-    let isComponentViewing = this.props.index === this.props.viewingIndex;
-    let focused = this.props.focused;
+    const isComponentViewing = this.props.index === this.props.viewingIndex;
+    const focused = this.props.focused;
     let focusedOnARange = false;
     for (let i = 0; i < focused.length; i++) {
       if (focused[i] === true) {
@@ -64,7 +67,7 @@ export default class RangeButton extends React.Component<Props, State> {
   }
 
   keyDown(e: KeyboardEvent) {
-    let componentFocused = document.activeElement === this.button;
+    const componentFocused = document.activeElement === this.button;
     // Up Key
     if (e.code === 'ArrowUp' && componentFocused) {
       e.preventDefault();

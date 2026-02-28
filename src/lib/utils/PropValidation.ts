@@ -1,4 +1,5 @@
 import { getYear } from 'date-fns';
+
 import type { ReactDateTimePickerProps } from '../ReactDateTimePicker';
 
 export const propValidation = (props: ReactDateTimePickerProps): string | null => {

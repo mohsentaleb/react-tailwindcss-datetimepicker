@@ -1,10 +1,13 @@
 import React from 'react';
-
-import ChevronRightIcon from '../icons/chevron-right.svg?react';
-import ChevronLeftIcon from '../icons/chevron-left.svg?react';
-import { Mode } from '../types';
 import type { BaseSyntheticEvent } from 'react';
+
 import clsx from 'clsx';
+
+import ChevronLeftIcon from '../icons/chevron-left.svg?react';
+import ChevronRightIcon from '../icons/chevron-right.svg?react';
+import { Mode } from '../types';
+
+
 
 interface Props {
   months: string[];
@@ -67,8 +70,8 @@ export default class MonthYearSelector extends React.Component<Props, State> {
   }
 
   render() {
-    let months = this.createCalendarMonths(this.props.months);
-    let years = this.createYears(this.props.years);
+    const months = this.createCalendarMonths(this.props.months);
+    const years = this.createYears(this.props.years);
 
     return (
       <div className="m-2 flex items-center gap-1">

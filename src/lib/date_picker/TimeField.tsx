@@ -1,12 +1,13 @@
 import React from 'react';
-import { generateMinutes } from '../utils/TimeFunctionUtils';
-
-import TimeIcon from '../icons/clock.svg?react';
-
-import type { ClassNames, Meridiem, Mode } from '../types';
 import type { BaseSyntheticEvent } from 'react';
+
 import clsx from 'clsx';
 import { format, getHours, getMinutes } from 'date-fns';
+
+import TimeIcon from '../icons/clock.svg?react';
+import { generateMinutes } from '../utils/TimeFunctionUtils';
+
+import type { ClassNames, Meridiem, Mode } from '../types';
 
 interface Props {
   timeChangeCallback: (newHour: number, newMinute: number, mode: Mode) => void;
@@ -30,7 +31,7 @@ export default class TimeField extends React.Component<Props, State> {
   }
 
   generateHourSelectValues() {
-    let selectValues = [];
+    const selectValues = [];
     for (let i = this.props.twelveHoursClock ? 1 : 0; i <= (this.props.twelveHoursClock ? 12 : 23); i++) {
       selectValues.push(
         <option key={i} value={i}>
@@ -42,8 +43,8 @@ export default class TimeField extends React.Component<Props, State> {
   }
 
   generateMinuteSelectValues() {
-    let minutes = generateMinutes();
-    let selectValues = [];
+    const minutes = generateMinutes();
+    const selectValues = [];
     for (let i = 0; i < minutes.length; i++) {
       selectValues.push(
         <option key={i} value={i}>
@@ -55,7 +56,7 @@ export default class TimeField extends React.Component<Props, State> {
   }
 
   generateMeridiemSelectValues() {
-    let selectValues = [
+    const selectValues = [
       <option key={'am'} value={'am'}>
         AM
       </option>,
@@ -133,12 +134,12 @@ export default class TimeField extends React.Component<Props, State> {
   }
 
   render() {
-    let hours = this.generateHourSelectValues();
-    let minutes = this.generateMinuteSelectValues();
-    let meridiems = this.generateMeridiemSelectValues();
-    let hour = this.props.twelveHoursClock ? parseInt(format(this.props.date, 'h')) : getHours(this.props.date);
-    let minute = getMinutes(this.props.date);
-    let meridiem = format(this.props.date, 'aaa');
+    const hours = this.generateHourSelectValues();
+    const minutes = this.generateMinuteSelectValues();
+    const meridiems = this.generateMeridiemSelectValues();
+    const hour = this.props.twelveHoursClock ? parseInt(format(this.props.date, 'h')) : getHours(this.props.date);
+    const minute = getMinutes(this.props.date);
+    const meridiem = format(this.props.date, 'aaa');
 
     return (
       <div className="flex shrink items-center justify-center gap-2 p-2">

@@ -1,8 +1,12 @@
 import { useState } from 'react';
-import ReactDateTimePicker from '../lib/index';
-import { DateRanges } from './consts';
-import Header from './components/Header';
+
 import { add, sub, set, format } from 'date-fns';
+
+import ReactDateTimePicker from '../lib/index';
+
+import Header from './components/Header';
+import { DateRanges } from './consts';
+
 import type { Theme } from '../lib/types';
 
 const THEMES: { value: Theme | undefined; label: string; className: string }[] = [

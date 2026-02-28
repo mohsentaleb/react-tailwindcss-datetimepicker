@@ -1,12 +1,13 @@
 import React, { KeyboardEvent } from 'react';
+
 import clsx from 'clsx';
 import { format } from 'date-fns';
 
 import { defaultDateFormat } from '../DateTimeRangePicker';
-
-import type { ClassNames, Locale, Theme } from '../types';
 import { defaultTheme } from '../ReactDateTimePicker';
 import { applyButtonClasses } from '../utils/themeClasses';
+
+import type { ClassNames, Locale, Theme } from '../types';
 
 interface Props {
   locale?: Locale;
@@ -23,10 +24,6 @@ interface Props {
 }
 
 export default class ApplyCancelButtons extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
-
   cancelPressed = () => {
     this.props.changeVisibleState();
   };
@@ -56,7 +53,7 @@ export default class ApplyCancelButtons extends React.Component<Props> {
 
   getMinDateBox() {
     if (this.props.minDate) {
-      let label = this.props.locale?.minDate || 'Min Date';
+      const label = this.props.locale?.minDate || 'Min Date';
       return (
         <div className="maxDateLabel p-2 text-xs">
           {label}: {format(this.props.minDate, this.props.locale?.format || defaultDateFormat)}
@@ -67,7 +64,7 @@ export default class ApplyCancelButtons extends React.Component<Props> {
 
   getMaxDateBox() {
     if (this.props.maxDate) {
-      let label = this.props.locale?.maxDate || 'Max Date';
+      const label = this.props.locale?.maxDate || 'Max Date';
       return (
         <div className="maxDateLabel p-2 text-xs">
           {label}: {format(this.props.maxDate, this.props.locale?.format || defaultDateFormat)}
