@@ -45,6 +45,7 @@ This project is a fork of [react-datetimepicker](https://github.com/v0ltoz/react
   - [from `2.x.x to ` to `3.x.x`:](#from-2xx-to--to-3xx)
   - [From `1.x.x to ` to `2.x.x`:](#from-1xx-to--to-2xx)
 - [Roadmap](#roadmap)
+- [Get Help](#get-help)
 - [License](#license)
 
 ## Installation
@@ -552,6 +553,11 @@ Builds the app for production to the `/dist` folder using vite's [library mode](
 - [x] Adding predefined themes
 - [x] Write tests
 - [ ] More demos showcasing different props
+
+## Get Help
+
+- 💬 [Discussion forums](https://github.com/mohsentaleb/react-tailwindcss-datetimepicker/discussions) - Get support and share your experience.
+- 🪳 [Report an issue](https://github.com/mohsentaleb/react-tailwindcss-datetimepicker/issues/new/choose) - Report bugs or request features.
 
 ## License
 
