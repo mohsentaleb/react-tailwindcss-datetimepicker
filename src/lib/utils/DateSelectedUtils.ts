@@ -24,7 +24,7 @@ export const datePicked = (startDate: Date, endDate: Date, newDate: Date, startM
 const newDateStartMode = (newDate: Date, endDate: Date, startDate: Date, smartMode?: boolean) => {
   // Create a new moment object which combines the new date and the original start date as newDate
   // doesnt contain time info which is important to determining equality
-  let newDateWithTime = createNewDateWithTime(
+  const newDateWithTime = createNewDateWithTime(
     newDate,
     getHours(startDate),
     getMinutes(startDate),
@@ -44,11 +44,11 @@ const newDateStartMode = (newDate: Date, endDate: Date, startDate: Date, smartMo
 const newDateEndMode = (newDate: Date, startDate: Date, endDate: Date, smartMode?: boolean) => {
   // Create a new moment object which combines the new date and the original end date as newDate
   // doesnt contain time info which is important to determining equality
-  let newDateWithTime = createNewDateWithTime(newDate, getHours(endDate), getMinutes(endDate), getSeconds(endDate));
+  const newDateWithTime = createNewDateWithTime(newDate, getHours(endDate), getMinutes(endDate), getSeconds(endDate));
   if (isAfter(newDateWithTime, startDate) || isEqual(newDateWithTime, startDate)) {
     return returnDateObject(startDate, newDate);
   } else if (smartMode) {
-    let newStart = subDays(newDate, 1);
+    const newStart = subDays(newDate, 1);
     return returnDateObject(newStart, newDate);
   } else {
     return returnDateObject(startDate, endDate);
@@ -72,11 +72,11 @@ export const pastMaxDate = (currentDate: Date, maxDate?: Date, minuteMode?: bool
     return false;
   }
 
-  if (minuteMode && maxDate && isAfter(currentDate, maxDate)) {
+  if (minuteMode && isAfter(currentDate, maxDate)) {
     return true;
   }
 
-  if (maxDate && !isSameDay(currentDate, maxDate) && isAfter(currentDate, maxDate)) {
+  if (!isSameDay(currentDate, maxDate) && isAfter(currentDate, maxDate)) {
     return true;
   }
   return false;
@@ -87,11 +87,11 @@ export const beforeMinDate = (currentDate: Date, minDate?: Date, minuteMode?: bo
     return false;
   }
 
-  if (minuteMode && minDate && isBefore(currentDate, minDate)) {
+  if (minuteMode && isBefore(currentDate, minDate)) {
     return true;
   }
 
-  if (minDate && !isSameDay(currentDate, minDate) && isBefore(currentDate, minDate)) {
+  if (!isSameDay(currentDate, minDate) && isBefore(currentDate, minDate)) {
     return true;
   }
   return false;

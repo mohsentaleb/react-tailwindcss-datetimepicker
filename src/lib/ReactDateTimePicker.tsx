@@ -1,9 +1,12 @@
 import React from 'react';
-import DateTimeRangePicker from './DateTimeRangePicker';
-import { propValidation } from './utils/PropValidation';
+import type { ReactNode } from 'react';
+
 import clsx from 'clsx';
 
-import type { ReactNode } from 'react';
+import DateTimeRangePicker from './DateTimeRangePicker';
+import { propValidation } from './utils/PropValidation';
+
+
 import type { ClassNames, Locale, PresetDateRanges, Theme } from './types';
 
 export interface ReactDateTimePickerProps {
@@ -37,7 +40,7 @@ interface State {
   visible: boolean;
 }
 
-export const defaultTheme: Theme = 'blue';
+export const defaultTheme: Theme = 'sky';
 
 export default class ReactDateTimePicker extends React.Component<ReactDateTimePickerProps, State> {
   container: HTMLDivElement | null = null;
@@ -48,7 +51,7 @@ export default class ReactDateTimePicker extends React.Component<ReactDateTimePi
       visible: false,
     };
     const propValidationReturn = propValidation(this.props);
-    if (!propValidationReturn) {
+    if (propValidationReturn !== null) {
       alert(propValidationReturn);
     }
   }
@@ -114,7 +117,7 @@ export default class ReactDateTimePicker extends React.Component<ReactDateTimePi
         noMobileMode={this.props.noMobileMode}
         forceMobileMode={this.props.forceMobileMode}
         standalone={this.props.standalone}
-        twelveHoursClock={this.props.twelveHoursClock == true}
+        twelveHoursClock={this.props.twelveHoursClock === true}
         classNames={this.props.classNames}
         displayMinDate={this.props.displayMinDate}
         displayMaxDate={this.props.displayMaxDate}
@@ -132,8 +135,8 @@ export default class ReactDateTimePicker extends React.Component<ReactDateTimePi
           className={clsx(
             'flex max-w-2xl flex-col rounded border border-gray-100 bg-white shadow-lg dark:border-none dark:bg-slate-700 dark:text-white',
             {
-              '!flex-col': this.props.forceMobileMode,
-              '!flex-row': this.props.noMobileMode,
+              'flex-col!': this.props.forceMobileMode,
+              'flex-row!': this.props.noMobileMode,
             },
             this.props.classNames?.rootContainer
           )}
@@ -156,13 +159,13 @@ export default class ReactDateTimePicker extends React.Component<ReactDateTimePi
         <div
           id="datepicker"
           className={clsx(
-            'absolute top-full z-20 mt-[1px] w-full max-w-2xl rounded border border-gray-100 bg-white shadow-lg dark:border-none dark:bg-slate-700 dark:text-white md:w-auto',
+            'absolute top-full z-20 mt-px w-full max-w-2xl rounded border border-gray-100 bg-white shadow-lg dark:border-none dark:bg-slate-700 dark:text-white md:w-auto md:min-w-max',
             {
               'right-0': this.props.leftMode,
               'left-1/2': this.props.centerMode,
               'flex flex-col': this.state.visible,
-              '!flex-col': this.props.forceMobileMode,
-              '!flex-row': this.props.noMobileMode, // If "noMobileMode" prop not set then allow mobile mode
+              'flex-col!': this.props.forceMobileMode,
+              'flex-row!': this.props.noMobileMode, // If "noMobileMode" prop not set then allow mobile mode
               hidden: !this.state.visible,
             },
             this.props.classNames?.rootContainer

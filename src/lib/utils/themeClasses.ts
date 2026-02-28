@@ -1,0 +1,191 @@
+import type { Theme } from '../types';
+
+// Calendar cell classes
+export const hoverCellClasses: Record<Theme, string> = {
+  blue: 'text-black bg-sky-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  orange: 'text-black bg-orange-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  green: 'text-black bg-emerald-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  purple: 'text-black bg-purple-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  slate: 'text-black bg-slate-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  gray: 'text-black bg-gray-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  zinc: 'text-black bg-zinc-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  neutral: 'text-black bg-neutral-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  stone: 'text-black bg-stone-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  red: 'text-black bg-red-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  amber: 'text-black bg-amber-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  yellow: 'text-black bg-yellow-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  lime: 'text-black bg-lime-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  emerald: 'text-black bg-emerald-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  teal: 'text-black bg-teal-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  cyan: 'text-black bg-cyan-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  sky: 'text-black bg-sky-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  indigo: 'text-black bg-indigo-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  violet: 'text-black bg-violet-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  fuchsia: 'text-black bg-fuchsia-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  pink: 'text-black bg-pink-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+  rose: 'text-black bg-rose-100 cursor-pointer dark:bg-slate-400 caret-transparent',
+};
+
+export const startCellClasses: Record<Theme, string> = {
+  blue: 'rounded-l-md text-white bg-sky-500 cursor-pointer caret-transparent',
+  orange: 'rounded-l-md text-white bg-orange-500 cursor-pointer caret-transparent',
+  green: 'rounded-l-md text-white bg-emerald-500 cursor-pointer caret-transparent',
+  purple: 'rounded-l-md text-white bg-purple-500 cursor-pointer caret-transparent',
+  slate: 'rounded-l-md text-white bg-slate-500 cursor-pointer caret-transparent',
+  gray: 'rounded-l-md text-white bg-gray-500 cursor-pointer caret-transparent',
+  zinc: 'rounded-l-md text-white bg-zinc-500 cursor-pointer caret-transparent',
+  neutral: 'rounded-l-md text-white bg-neutral-500 cursor-pointer caret-transparent',
+  stone: 'rounded-l-md text-white bg-stone-500 cursor-pointer caret-transparent',
+  red: 'rounded-l-md text-white bg-red-500 cursor-pointer caret-transparent',
+  amber: 'rounded-l-md text-white bg-amber-500 cursor-pointer caret-transparent',
+  yellow: 'rounded-l-md text-white bg-yellow-500 cursor-pointer caret-transparent',
+  lime: 'rounded-l-md text-white bg-lime-500 cursor-pointer caret-transparent',
+  emerald: 'rounded-l-md text-white bg-emerald-500 cursor-pointer caret-transparent',
+  teal: 'rounded-l-md text-white bg-teal-500 cursor-pointer caret-transparent',
+  cyan: 'rounded-l-md text-white bg-cyan-500 cursor-pointer caret-transparent',
+  sky: 'rounded-l-md text-white bg-sky-500 cursor-pointer caret-transparent',
+  indigo: 'rounded-l-md text-white bg-indigo-500 cursor-pointer caret-transparent',
+  violet: 'rounded-l-md text-white bg-violet-500 cursor-pointer caret-transparent',
+  fuchsia: 'rounded-l-md text-white bg-fuchsia-500 cursor-pointer caret-transparent',
+  pink: 'rounded-l-md text-white bg-pink-500 cursor-pointer caret-transparent',
+  rose: 'rounded-l-md text-white bg-rose-500 cursor-pointer caret-transparent',
+};
+
+export const endCellClasses: Record<Theme, string> = {
+  blue: 'rounded-r-md text-white bg-sky-500 cursor-pointer caret-transparent',
+  orange: 'rounded-r-md text-white bg-orange-500 cursor-pointer caret-transparent',
+  green: 'rounded-r-md text-white bg-emerald-500 cursor-pointer caret-transparent',
+  purple: 'rounded-r-md text-white bg-purple-500 cursor-pointer caret-transparent',
+  slate: 'rounded-r-md text-white bg-slate-500 cursor-pointer caret-transparent',
+  gray: 'rounded-r-md text-white bg-gray-500 cursor-pointer caret-transparent',
+  zinc: 'rounded-r-md text-white bg-zinc-500 cursor-pointer caret-transparent',
+  neutral: 'rounded-r-md text-white bg-neutral-500 cursor-pointer caret-transparent',
+  stone: 'rounded-r-md text-white bg-stone-500 cursor-pointer caret-transparent',
+  red: 'rounded-r-md text-white bg-red-500 cursor-pointer caret-transparent',
+  amber: 'rounded-r-md text-white bg-amber-500 cursor-pointer caret-transparent',
+  yellow: 'rounded-r-md text-white bg-yellow-500 cursor-pointer caret-transparent',
+  lime: 'rounded-r-md text-white bg-lime-500 cursor-pointer caret-transparent',
+  emerald: 'rounded-r-md text-white bg-emerald-500 cursor-pointer caret-transparent',
+  teal: 'rounded-r-md text-white bg-teal-500 cursor-pointer caret-transparent',
+  cyan: 'rounded-r-md text-white bg-cyan-500 cursor-pointer caret-transparent',
+  sky: 'rounded-r-md text-white bg-sky-500 cursor-pointer caret-transparent',
+  indigo: 'rounded-r-md text-white bg-indigo-500 cursor-pointer caret-transparent',
+  violet: 'rounded-r-md text-white bg-violet-500 cursor-pointer caret-transparent',
+  fuchsia: 'rounded-r-md text-white bg-fuchsia-500 cursor-pointer caret-transparent',
+  pink: 'rounded-r-md text-white bg-pink-500 cursor-pointer caret-transparent',
+  rose: 'rounded-r-md text-white bg-rose-500 cursor-pointer caret-transparent',
+};
+
+export const inBetweenCellClasses: Record<Theme, string> = {
+  blue: 'text-sky-800 bg-sky-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  orange: 'text-orange-800 bg-orange-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  green: 'text-emerald-800 bg-emerald-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  purple: 'text-purple-800 bg-purple-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  slate: 'text-slate-800 bg-slate-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  gray: 'text-gray-800 bg-gray-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  zinc: 'text-zinc-800 bg-zinc-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  neutral: 'text-neutral-800 bg-neutral-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  stone: 'text-stone-800 bg-stone-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  red: 'text-red-800 bg-red-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  amber: 'text-amber-800 bg-amber-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  yellow: 'text-yellow-800 bg-yellow-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  lime: 'text-lime-800 bg-lime-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  emerald: 'text-emerald-800 bg-emerald-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  teal: 'text-teal-800 bg-teal-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  cyan: 'text-cyan-800 bg-cyan-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  sky: 'text-sky-800 bg-sky-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  indigo: 'text-indigo-800 bg-indigo-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  violet: 'text-violet-800 bg-violet-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  fuchsia: 'text-fuchsia-800 bg-fuchsia-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  pink: 'text-pink-800 bg-pink-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+  rose: 'text-rose-800 bg-rose-50 cursor-pointer dark:bg-slate-500 dark:text-white',
+};
+
+// Range button classes
+export const rangeButtonSelectedClasses: Record<Theme, string> = {
+  blue: 'bg-sky-600 text-white hover:bg-sky-600 hover:text-white',
+  orange: 'bg-orange-600 text-white hover:bg-orange-600 hover:text-white',
+  green: 'bg-emerald-600 text-white hover:bg-emerald-600 hover:text-white',
+  purple: 'bg-purple-600 text-white hover:bg-purple-600 hover:text-white',
+  slate: 'bg-slate-600 text-white hover:bg-slate-600 hover:text-white',
+  gray: 'bg-gray-600 text-white hover:bg-gray-600 hover:text-white',
+  zinc: 'bg-zinc-600 text-white hover:bg-zinc-600 hover:text-white',
+  neutral: 'bg-neutral-600 text-white hover:bg-neutral-600 hover:text-white',
+  stone: 'bg-stone-600 text-white hover:bg-stone-600 hover:text-white',
+  red: 'bg-red-600 text-white hover:bg-red-600 hover:text-white',
+  amber: 'bg-amber-600 text-white hover:bg-amber-600 hover:text-white',
+  yellow: 'bg-yellow-600 text-white hover:bg-yellow-600 hover:text-white',
+  lime: 'bg-lime-600 text-white hover:bg-lime-600 hover:text-white',
+  emerald: 'bg-emerald-600 text-white hover:bg-emerald-600 hover:text-white',
+  teal: 'bg-teal-600 text-white hover:bg-teal-600 hover:text-white',
+  cyan: 'bg-cyan-600 text-white hover:bg-cyan-600 hover:text-white',
+  sky: 'bg-sky-600 text-white hover:bg-sky-600 hover:text-white',
+  indigo: 'bg-indigo-600 text-white hover:bg-indigo-600 hover:text-white',
+  violet: 'bg-violet-600 text-white hover:bg-violet-600 hover:text-white',
+  fuchsia: 'bg-fuchsia-600 text-white hover:bg-fuchsia-600 hover:text-white',
+  pink: 'bg-pink-600 text-white hover:bg-pink-600 hover:text-white',
+  rose: 'bg-rose-600 text-white hover:bg-rose-600 hover:text-white',
+};
+
+export const rangeButtonDefaultClasses: Record<Theme, string> = {
+  blue: 'bg-gray-50 text-black hover:bg-sky-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  orange:
+    'bg-gray-50 text-black hover:bg-orange-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  green:
+    'bg-gray-50 text-black hover:bg-emerald-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  purple:
+    'bg-gray-50 text-black hover:bg-purple-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  slate:
+    'bg-gray-50 text-black hover:bg-slate-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  gray: 'bg-gray-50 text-black hover:bg-gray-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  zinc: 'bg-gray-50 text-black hover:bg-zinc-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  neutral:
+    'bg-gray-50 text-black hover:bg-neutral-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  stone:
+    'bg-gray-50 text-black hover:bg-stone-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  red: 'bg-gray-50 text-black hover:bg-red-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  amber:
+    'bg-gray-50 text-black hover:bg-amber-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  yellow:
+    'bg-gray-50 text-black hover:bg-yellow-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  lime: 'bg-gray-50 text-black hover:bg-lime-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  emerald:
+    'bg-gray-50 text-black hover:bg-emerald-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  teal: 'bg-gray-50 text-black hover:bg-teal-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  cyan: 'bg-gray-50 text-black hover:bg-cyan-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  sky: 'bg-gray-50 text-black hover:bg-sky-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  indigo:
+    'bg-gray-50 text-black hover:bg-indigo-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  violet:
+    'bg-gray-50 text-black hover:bg-violet-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  fuchsia:
+    'bg-gray-50 text-black hover:bg-fuchsia-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  pink: 'bg-gray-50 text-black hover:bg-pink-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+  rose: 'bg-gray-50 text-black hover:bg-rose-100 hover:text-black dark:bg-slate-600 dark:text-white dark:hover:bg-slate-500',
+};
+
+// Apply button classes
+export const applyButtonClasses: Record<Theme, string> = {
+  blue: 'bg-green-600 hover:bg-green-500 focus:ring-green-300',
+  orange: 'bg-orange-600 hover:bg-orange-500 focus:ring-orange-300',
+  green: 'bg-emerald-600 hover:bg-emerald-500 focus:ring-emerald-300',
+  purple: 'bg-purple-600 hover:bg-purple-500 focus:ring-purple-300',
+  slate: 'bg-slate-600 hover:bg-slate-500 focus:ring-slate-300',
+  gray: 'bg-gray-600 hover:bg-gray-500 focus:ring-gray-300',
+  zinc: 'bg-zinc-600 hover:bg-zinc-500 focus:ring-zinc-300',
+  neutral: 'bg-neutral-600 hover:bg-neutral-500 focus:ring-neutral-300',
+  stone: 'bg-stone-600 hover:bg-stone-500 focus:ring-stone-300',
+  red: 'bg-red-600 hover:bg-red-500 focus:ring-red-300',
+  amber: 'bg-amber-600 hover:bg-amber-500 focus:ring-amber-300',
+  yellow: 'bg-yellow-600 hover:bg-yellow-500 focus:ring-yellow-300',
+  lime: 'bg-lime-600 hover:bg-lime-500 focus:ring-lime-300',
+  emerald: 'bg-emerald-600 hover:bg-emerald-500 focus:ring-emerald-300',
+  teal: 'bg-teal-600 hover:bg-teal-500 focus:ring-teal-300',
+  cyan: 'bg-cyan-600 hover:bg-cyan-500 focus:ring-cyan-300',
+  sky: 'bg-sky-600 hover:bg-sky-500 focus:ring-sky-300',
+  indigo: 'bg-indigo-600 hover:bg-indigo-500 focus:ring-indigo-300',
+  violet: 'bg-violet-600 hover:bg-violet-500 focus:ring-violet-300',
+  fuchsia: 'bg-fuchsia-600 hover:bg-fuchsia-500 focus:ring-fuchsia-300',
+  pink: 'bg-pink-600 hover:bg-pink-500 focus:ring-pink-300',
+  rose: 'bg-rose-600 hover:bg-rose-500 focus:ring-rose-300',
+};

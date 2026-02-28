@@ -1,7 +1,9 @@
 import React from 'react';
-import Cell from './Cell';
 
 import { ClassNames, Mode, Theme } from '../types';
+
+import Cell from './Cell';
+
 
 interface Props {
   row: number;
@@ -25,8 +27,8 @@ interface Props {
 
 export default class CalendarRow extends React.Component<Props> {
   generateCells() {
-    let cells = [];
-    let daysSize = this.props.rowDays.length;
+    const cells = [];
+    const daysSize = this.props.rowDays.length;
     for (let i = 0; i < daysSize; i++) {
       cells.push(
         <Cell
@@ -55,7 +57,7 @@ export default class CalendarRow extends React.Component<Props> {
   }
 
   render() {
-    let cells = this.generateCells();
+    const cells = this.generateCells();
     return <div className="grid grid-cols-7 text-center">{cells}</div>;
   }
 }

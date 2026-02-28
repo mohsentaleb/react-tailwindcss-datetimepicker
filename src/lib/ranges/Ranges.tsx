@@ -1,8 +1,10 @@
 import React from 'react';
+
+import { clsx } from 'clsx';
+
 import RangeButton from './RangeButton';
 
 import type { ClassNames, PresetDateRanges, Theme } from '../types';
-import { clsx } from 'clsx';
 
 interface Props {
   ranges: PresetDateRanges;
@@ -24,7 +26,7 @@ export default class Ranges extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    let focused = [];
+    const focused = [];
     const ranges = Object.values(this.props.ranges);
 
     for (let i = 0; i < ranges.length; i++) {
@@ -33,7 +35,7 @@ export default class Ranges extends React.Component<Props, State> {
 
     this.state = {
       viewingIndex: this.props.selectedRange,
-      focused: focused,
+      focused,
     };
 
     this.viewingIndexChangeCallback = this.viewingIndexChangeCallback.bind(this);
@@ -45,6 +47,7 @@ export default class Ranges extends React.Component<Props, State> {
       if (this.props.selectedRange !== prevProps.selectedRange) {
         this.setState({
           viewingIndex: this.props.selectedRange,
+          focused: this.state.focused.map(() => false),
         });
       }
     }
@@ -52,7 +55,7 @@ export default class Ranges extends React.Component<Props, State> {
 
   viewingIndexChangeCallback(newIndex: number) {
     // Allow a new item selected to be made
-    let length = this.state.focused.length;
+    const length = this.state.focused.length;
     if (newIndex >= 0 && newIndex < length) {
       this.setState({
         viewingIndex: newIndex,
@@ -62,10 +65,10 @@ export default class Ranges extends React.Component<Props, State> {
 
   setFocusedCallback(index: number, focusedInput: boolean) {
     // Set the focus value of indexed item, focusedInput is true or false
-    let focused = this.state.focused;
+    const focused = [...this.state.focused];
     focused[index] = focusedInput;
     this.setState({
-      focused: focused,
+      focused,
     });
   }
 

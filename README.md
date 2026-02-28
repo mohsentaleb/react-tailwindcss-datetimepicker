@@ -59,18 +59,13 @@ yarn add react-tailwindcss-datetimepicker
 
 ### With TailwindCSS
 
-If you're already including TailwindCSS in your project, just open up your `tailwind.config.js` file and add the following line to your `content` array so that tailwind could find CSS classes used in picker and add those to your project's global css file:
+If you're already including TailwindCSS in your project, add a `@source` directive to your main CSS file so that Tailwind can find the class names used by the picker:
 
-```js
-// tailwind.config.js
-
-module.exports = {
-  content: [
-    './src/**/*.{js,jsx,ts,tsx}',
-    './node_modules/react-tailwindcss-datetimepicker/dist/react-tailwindcss-datetimepicker.js',
-    // Add this line 👆
-  ],
-};
+```css
+/* your main CSS file */
+@import "tailwindcss";
+@source "../node_modules/react-tailwindcss-datetimepicker/dist/react-tailwindcss-datetimepicker.js";
+/* Add the line above 👆 */
 ```
 
 ### Without TailwindCSS
@@ -241,7 +236,7 @@ export default App;
 | [`displayMinDate`](#displaymindate)         | optional     | `Boolean`  | `false`       | Will display Min Date in picker footer                                         |
 | [`displayMaxDate`](#displaymaxdate)         | optional     | `Boolean`  | `false`       | Will display Max Date in picker footer                                         |
 | [`classNames`](#classnames)                 | optional     | `Object`   | `undefined`   | Will override classNames for different parts of the picker                     |
-| [`theme`](#theme)                           | optional     | `string`   | `blue`        | Predefined color themes for the calendar view                                  |
+| [`theme`](#theme)                           | optional     | `string`   | `sky`         | Color theme — all 22 Tailwind CSS named colors supported                       |
 
 ### `ranges`
 
@@ -363,9 +358,9 @@ Maximum date that can be selected in calendar.
 
 ### `autoApply`
 
-(optional)\*\* `boolean` defaults to `false`
+(optional) `boolean` defaults to `false`
 
-When set there will only be one button in the bottom right to close the screen. With this set to `true` upon changing anything in picker the `callbackfunction` will be automatically called
+When set there will only be one button in the bottom right to close the screen. With this set to `true` upon changing anything in picker the `applyCallback` will be automatically called
 
 ### `descendingYears`
 
@@ -428,7 +423,7 @@ When set the picker will be open by default.
 
 ### `leftMode`
 
-(optional) `boolean` defaults to `true`
+(optional) `boolean` defaults to `false`
 
 When set and changed the picker will open to the left (right to left) instead of the default which is to open to the right (left to right)
 
@@ -442,13 +437,13 @@ To allow flexibility, center mode has been added where leftMode or default is no
 
 (optional) `boolean` defaults to `false`
 
-To allow flexibility, center mode has been added where leftMode or default is not enough.
+When set, the minimum date will be displayed in the picker footer.
 
 ### `displayMaxDate`
 
 (optional) `boolean` defaults to `false`
 
-To allow flexibility, center mode has been added where leftMode or default is not enough.
+When set, the maximum date will be displayed in the picker footer.
 
 ### `classNames`
 
@@ -462,12 +457,12 @@ Will add extra classNames to different parts of the picker. It's great for for t
 - `rangeButtonSelected`
 - `fromToRangeContainer`
 - `normalCell`
-- `normalCellHove`
-- `greyCel`
-- `invalidCel`
-- `startCel`
-- `endCel`
-- `withinRangeCel`
+- `normalCellHover`
+- `greyCell`
+- `invalidCell`
+- `startCell`
+- `endCell`
+- `withinRangeCell`
 - `startDot`
 - `endDot`
 - `footerContainer`
@@ -489,11 +484,33 @@ The following illustration shows the different components of the picker which ca
 ![Date Time Picker Components Illustration](https://raw.githubusercontent.com/mohsentaleb/react-tailwindcss-datetimepicker/master/public/date-picker-illustration.png)
 
 ### `theme`
-There are 4 color themes available to choose from. (More to come later)
-- `blue` (Default)
+All standard Tailwind CSS v4 named colors are available as themes:
+
+**Chromatic**
+- `sky` (Default)
+- `blue` (alias for `sky`, kept for backward compatibility)
 - `orange`
-- `green`
+- `emerald`
+- `green` (alias for `emerald`, kept for backward compatibility)
 - `purple`
+- `red`
+- `amber`
+- `yellow`
+- `lime`
+- `teal`
+- `cyan`
+- `indigo`
+- `violet`
+- `fuchsia`
+- `pink`
+- `rose`
+
+**Gray scale**
+- `slate`
+- `gray`
+- `zinc`
+- `neutral`
+- `stone`
 
 ## Development
 
@@ -533,8 +550,8 @@ Builds the app for production to the `/dist` folder using vite's [library mode](
 - [x] Ability to add custom CSS classes for different parts of the component
 - [x] Migrate to [date-fns](https://www.npmjs.com/package/date-fns)
 - [x] Adding predefined themes
+- [x] Write tests
 - [ ] More demos showcasing different props
-- [ ] Write tests
 
 ## License
 

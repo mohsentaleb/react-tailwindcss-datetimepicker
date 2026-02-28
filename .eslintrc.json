@@ -5,11 +5,13 @@
     },
     "extends": [
         "eslint:recommended",
-        // "plugin:@typescript-eslint/eslint-recommended",
+        "standard",
         "plugin:@typescript-eslint/recommended",
         "plugin:react/jsx-runtime",
+        "plugin:react-hooks/recommended",
         "plugin:import/recommended",
-        "plugin:import/typescript"
+        "plugin:import/typescript",
+        "prettier"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -19,20 +21,22 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "plugins": ["react", "@typescript-eslint", "import"],
-    // "rules" always wins over "extends"
+    "settings": {
+        "react": { "version": "18.2" }
+    },
+    "plugins": ["react", "@typescript-eslint", "import", "react-refresh"],
     "rules": {
         "no-undef": 0,
+        "import/no-unresolved": 0,
+        "react-refresh/only-export-components": "warn",
         "import/order": [
             "error",
             {
-                // Always insert new line between groups
                 "newlines-between": "always",
                 "alphabetize": {
-                    "order": "asc" /* sort in ascending order */,
-                    "caseInsensitive": true /* ignore case */
+                    "order": "asc",
+                    "caseInsensitive": true
                 },
-                // We want to import react before the other externals
                 "pathGroups": [
                     {
                         "pattern": "react",
@@ -42,17 +46,11 @@
                 ],
                 "pathGroupsExcludedImportTypes": ["internal"],
                 "groups": [
-                    // Externals are next (react, redux, etc)
                     "external",
-                    // Internals are next (@app/**/*, etc)
                     "internal",
-                    // Parent directories imports are the next (../**/*)
                     "parent",
-                    // Same directory imports are the next (./foo)
                     "sibling",
-                    // Index files are nex ('./')
                     "index",
-                    // And lastly the types
                     "type"
                 ]
             }

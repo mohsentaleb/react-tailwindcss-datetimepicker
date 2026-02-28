@@ -1,7 +1,8 @@
 import { getYear } from 'date-fns';
+
 import type { ReactDateTimePickerProps } from '../ReactDateTimePicker';
 
-export const propValidation = (props: ReactDateTimePickerProps) => {
+export const propValidation = (props: ReactDateTimePickerProps): string | null => {
   if (props.years) {
     const { start, end, years } = props;
     if (years[0] > years[1]) {
@@ -18,5 +19,5 @@ export const propValidation = (props: ReactDateTimePickerProps) => {
       return 'End year should be in the custom years defined';
     }
   }
-  return true;
+  return null;
 };

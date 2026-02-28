@@ -1,40 +1,18 @@
 import React from 'react';
-import { isInbetweenDates } from '../utils/TimeFunctionUtils';
-import { beforeMinDate, pastMaxDate } from '../utils/DateSelectedUtils';
 
-import { ClassNames, Mode, Theme } from '../types';
+
 import clsx from 'clsx';
 import { addDays, format, getMonth, isAfter, isBefore, isEqual, isSameDay, subDays } from 'date-fns';
+
 import { defaultTheme } from '../ReactDateTimePicker';
+import { ClassNames, Mode, Theme } from '../types';
+import { beforeMinDate, pastMaxDate } from '../utils/DateSelectedUtils';
+import { endCellClasses, hoverCellClasses, inBetweenCellClasses, startCellClasses } from '../utils/themeClasses';
+import { isInbetweenDates } from '../utils/TimeFunctionUtils';
 
 const normalCellClasses = 'text-black cursor-pointer dark:text-white caret-transparent';
 const greyCellClasses = 'rounded-md text-gray-200 cursor-pointer opacity-30 caret-transparent';
 const invalidCellClasses = 'text-gray-300 cursor-not-allowed dark:text-slate-500';
-
-const hoverCellClasses = {
-  blue: 'text-black bg-sky-100 cursor-pointer dark:bg-slate-400 caret-transparent',
-  orange: 'text-black bg-orange-100 cursor-pointer dark:bg-slate-400 caret-transparent',
-  green: 'text-black bg-emerald-100 cursor-pointer dark:bg-slate-400 caret-transparent',
-  purple: 'text-black bg-purple-100 cursor-pointer dark:bg-slate-400 caret-transparent',
-};
-const startCellClasses = {
-  blue: 'rounded-l-md text-white bg-sky-500 cursor-pointer caret-transparent',
-  orange: 'rounded-l-md text-white bg-orange-500 cursor-pointer caret-transparent',
-  green: 'rounded-l-md text-white bg-emerald-500 cursor-pointer caret-transparent',
-  purple: 'rounded-l-md text-white bg-purple-500 cursor-pointer caret-transparent',
-};
-const endCellClasses = {
-  blue: 'rounded-r-md text-white bg-sky-500 cursor-pointer caret-transparent',
-  orange: 'rounded-r-md text-white bg-orange-500 cursor-pointer caret-transparent',
-  green: 'rounded-r-md text-white bg-emerald-500 cursor-pointer caret-transparent',
-  purple: 'rounded-r-md text-white bg-purple-500 cursor-pointer caret-transparent',
-};
-const inBetweenCellClasses: Record<Theme, string> = {
-  blue: 'text-sky-800 bg-sky-50 cursor-pointer dark:bg-slate-500 dark:text-white',
-  orange: 'text-orange-800 bg-orange-50 cursor-pointer dark:bg-slate-500 dark:text-white',
-  green: 'text-emerald-800 bg-emerald-50 cursor-pointer dark:bg-slate-500 dark:text-white',
-  purple: 'text-purple-800 bg-purple-50 cursor-pointer dark:bg-slate-500 dark:text-white',
-};
 
 interface Props {
   id: number;
@@ -69,7 +47,7 @@ export default class Cell extends React.Component<Props, State> {
   }
 
   componentDidUpdate(previousProps: Props) {
-    let isDifferentTheme = previousProps.theme !== this.props.theme
+    const isDifferentTheme = previousProps.theme !== this.props.theme
     let isDifferentDateObject =
       !isEqual(previousProps.date, this.props.date) || !isEqual(previousProps.otherDate, this.props.otherDate);
     let isDifferentTime =
@@ -92,9 +70,9 @@ export default class Cell extends React.Component<Props, State> {
     // and its not a gray cell
     // Then Focus on this cell
     let cellFocused = false;
-    let focusDateIsCellDate =
+    const focusDateIsCellDate =
       typeof this.props.focusDate === 'object' && isSameDay(this.props.focusDate, this.props.cellDay);
-    let activeElement = document.activeElement?.id;
+    const activeElement = document.activeElement?.id;
     if (activeElement && activeElement.indexOf('_cell_') !== -1) {
       cellFocused = true;
     }
@@ -131,13 +109,13 @@ export default class Cell extends React.Component<Props, State> {
   }
 
   keyDown = (e: KeyboardEvent) => {
-    let componentFocused = document.activeElement === this.cell;
+    const componentFocused = document.activeElement === this.cell;
 
     if (componentFocused && ['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'].includes(e.key)) {
       e.preventDefault();
       let newDate = new Date(this.props.cellDay);
       // Check to see if this cell is the date prop
-      let isCellDateProp = isSameDay(this.props.cellDay, this.props.date);
+      const isCellDateProp = isSameDay(this.props.cellDay, this.props.date);
       if (e.key === 'ArrowUp') {
         // Up Key
         newDate = subDays(newDate, 7);
@@ -163,7 +141,7 @@ export default class Cell extends React.Component<Props, State> {
         }
         newDate = addDays(newDate, 1);
       }
-      let isSuccessfulCallback = this.props.keyboardCellCallback(this.props.cellDay, newDate);
+      const isSuccessfulCallback = this.props.keyboardCellCallback(this.props.cellDay, newDate);
       if (isSuccessfulCallback) {
         this.props.focusOnCallback(newDate);
       }
@@ -224,8 +202,8 @@ export default class Cell extends React.Component<Props, State> {
   };
 
   isCellMonthSameAsPropMonth(cellDay: Date) {
-    let month = this.props.month;
-    let cellDayMonth = getMonth(cellDay);
+    const month = this.props.month;
+    const cellDayMonth = getMonth(cellDay);
     if (month !== cellDayMonth) {
       return true;
     }
@@ -291,9 +269,9 @@ export default class Cell extends React.Component<Props, State> {
   }
 
   styleCellNonMouseEnter() {
-    let cellDay = this.props.cellDay;
-    let date = this.props.date;
-    let otherDate = this.props.otherDate;
+    const cellDay = this.props.cellDay;
+    const date = this.props.date;
+    const otherDate = this.props.otherDate;
     const theme = this.props.theme || defaultTheme;
 
     // If Past Max Date Style Cell Out of Use
@@ -320,9 +298,9 @@ export default class Cell extends React.Component<Props, State> {
     }
 
     const isDateStart = isBefore(date, otherDate) || isEqual(date, otherDate);
-    let inbetweenDates = isInbetweenDates(isDateStart, cellDay, date, otherDate);
-    let isStart = this.shouldStyleCellStartEnd(cellDay, date, otherDate, true, false);
-    let isEnd = this.shouldStyleCellStartEnd(cellDay, date, otherDate, false, true);
+    const inbetweenDates = isInbetweenDates(isDateStart, cellDay, date, otherDate);
+    const isStart = this.shouldStyleCellStartEnd(cellDay, date, otherDate, true, false);
+    const isEnd = this.shouldStyleCellStartEnd(cellDay, date, otherDate, false, true);
     // If start, end or inbetween date then style according to user input or use default
     if (isStart || isEnd || inbetweenDates) {
       let className;
@@ -334,10 +312,6 @@ export default class Cell extends React.Component<Props, State> {
         className = clsx(inBetweenCellClasses[theme], this.props.classNames?.withinRangeCell);
       }
       this.setState({ className });
-    } else if (inbetweenDates) {
-      this.setState({
-        className: clsx(inBetweenCellClasses[theme], this.props.classNames?.withinRangeCell),
-      });
     } else {
       this.setState({
         className: clsx(normalCellClasses, this.props.classNames?.normalCell),
@@ -346,9 +320,9 @@ export default class Cell extends React.Component<Props, State> {
   }
 
   isStartOrEndDate() {
-    let cellDay = this.props.cellDay;
-    let date = this.props.date;
-    let otherDate = this.props.otherDate;
+    const cellDay = this.props.cellDay;
+    const date = this.props.date;
+    const otherDate = this.props.otherDate;
     if (
       this.shouldStyleCellStartEnd(cellDay, date, otherDate, true, false) ||
       this.shouldStyleCellStartEnd(cellDay, date, otherDate, false, true)
@@ -360,8 +334,10 @@ export default class Cell extends React.Component<Props, State> {
 
   render() {
     const dateFormatted = format(this.props.cellDay, 'd');
+    const dateLabel = format(this.props.cellDay, 'MMMM d, yyyy');
+    const isSelected = this.isStartOrEndDate();
     let tabIndex = -1;
-    if (this.isStartOrEndDate() && !this.isCellMonthSameAsPropMonth(this.props.cellDay)) {
+    if (isSelected && !this.isCellMonthSameAsPropMonth(this.props.cellDay)) {
       document.addEventListener('keydown', this.keyDown, false);
       tabIndex = 0;
     } else {
@@ -372,6 +348,9 @@ export default class Cell extends React.Component<Props, State> {
         ref={(cell) => {
           this.cell = cell;
         }}
+        role="button"
+        aria-label={dateLabel}
+        aria-selected={isSelected}
         className={clsx(
           'p-2',
           {

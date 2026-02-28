@@ -1,5 +1,4 @@
-const customRange = { 'Custom Range': 'Custom Range' } as const;
-export type PresetDateRanges = Record<string, [Date, Date]> & Partial<typeof customRange>;
+export type PresetDateRanges = Record<string, [Date, Date]> & { 'Custom Range'?: string };
 
 export type Locale = {
   format?: string;
@@ -39,4 +38,26 @@ export type ClassNames = {
 
 export type Mode = 'start' | 'end';
 export type Meridiem = 'am' | 'pm';
-export type Theme = 'blue' | 'orange' | 'green' | 'purple';
+export type Theme =
+  | 'blue'
+  | 'orange'
+  | 'green'
+  | 'purple'
+  | 'slate'
+  | 'gray'
+  | 'zinc'
+  | 'neutral'
+  | 'stone'
+  | 'red'
+  | 'amber'
+  | 'yellow'
+  | 'lime'
+  | 'emerald'
+  | 'teal'
+  | 'cyan'
+  | 'sky'
+  | 'indigo'
+  | 'violet'
+  | 'fuchsia'
+  | 'pink'
+  | 'rose';

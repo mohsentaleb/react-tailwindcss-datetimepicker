@@ -1,10 +1,13 @@
 import React from 'react';
-
-import ChevronRightIcon from '../icons/chevron-right.svg?react';
-import ChevronLeftIcon from '../icons/chevron-left.svg?react';
-import { Mode } from '../types';
 import type { BaseSyntheticEvent } from 'react';
+
 import clsx from 'clsx';
+
+import ChevronLeftIcon from '../icons/chevron-left.svg?react';
+import ChevronRightIcon from '../icons/chevron-right.svg?react';
+import { Mode } from '../types';
+
+
 
 interface Props {
   months: string[];
@@ -67,20 +70,25 @@ export default class MonthYearSelector extends React.Component<Props, State> {
   }
 
   render() {
-    let months = this.createCalendarMonths(this.props.months);
-    let years = this.createYears(this.props.years);
+    const months = this.createCalendarMonths(this.props.months);
+    const years = this.createYears(this.props.years);
 
     return (
       <div className="m-2 flex items-center gap-1">
         <div className="grow text-left">
-          <ChevronLeftIcon
-            className="size-7 cursor-pointer rounded p-2 hover:bg-gray-100 dark:hover:bg-slate-600"
+          <button
+            type="button"
+            aria-label="Previous month"
+            className="rounded p-0 border-0 bg-transparent hover:bg-gray-100 dark:hover:bg-slate-600"
             onClick={() => this.props.changeMonthArrowsCallback(true, false)}
-          />
+          >
+            <ChevronLeftIcon className="size-7 p-2" />
+          </button>
         </div>
         <div className="shrink text-center">
           <select
             id={'MonthSelector_' + this.props.mode}
+            aria-label="Month"
             value={this.props.months[this.props.month]}
             onChange={this.props.changeMonthCallback}
             className={clsx('rounded border border-gray-200 p-1 dark:border-slate-500 dark:bg-slate-600', {
@@ -95,6 +103,7 @@ export default class MonthYearSelector extends React.Component<Props, State> {
         <div className="shrink text-center">
           <select
             id={'YearSelector_' + this.props.mode}
+            aria-label="Year"
             value={this.props.year}
             onChange={this.props.changeYearCallback}
             className={clsx('rounded border border-gray-200 p-1 dark:border-slate-500 dark:bg-slate-600', {
@@ -106,11 +115,15 @@ export default class MonthYearSelector extends React.Component<Props, State> {
             {years}
           </select>
         </div>
-        <div className="grow text-right ">
-          <ChevronRightIcon
-            className="size-7 cursor-pointer rounded p-2 hover:bg-gray-100 dark:hover:bg-slate-600"
+        <div className="grow text-right">
+          <button
+            type="button"
+            aria-label="Next month"
+            className="rounded p-0 border-0 bg-transparent hover:bg-gray-100 dark:hover:bg-slate-600"
             onClick={() => this.props.changeMonthArrowsCallback(false, true)}
-          />
+          >
+            <ChevronRightIcon className="size-7 p-2" />
+          </button>
         </div>
       </div>
     );

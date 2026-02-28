@@ -1,11 +1,13 @@
 import React, { KeyboardEvent } from 'react';
+
 import clsx from 'clsx';
 import { format } from 'date-fns';
 
 import { defaultDateFormat } from '../DateTimeRangePicker';
+import { defaultTheme } from '../ReactDateTimePicker';
+import { applyButtonClasses } from '../utils/themeClasses';
 
 import type { ClassNames, Locale, Theme } from '../types';
-import { defaultTheme } from '../ReactDateTimePicker';
 
 interface Props {
   locale?: Locale;
@@ -22,10 +24,6 @@ interface Props {
 }
 
 export default class ApplyCancelButtons extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
-
   cancelPressed = () => {
     this.props.changeVisibleState();
   };
@@ -55,7 +53,7 @@ export default class ApplyCancelButtons extends React.Component<Props> {
 
   getMinDateBox() {
     if (this.props.minDate) {
-      let label = this.props.locale?.minDate || 'Min Date';
+      const label = this.props.locale?.minDate || 'Min Date';
       return (
         <div className="maxDateLabel p-2 text-xs">
           {label}: {format(this.props.minDate, this.props.locale?.format || defaultDateFormat)}
@@ -66,7 +64,7 @@ export default class ApplyCancelButtons extends React.Component<Props> {
 
   getMaxDateBox() {
     if (this.props.maxDate) {
-      let label = this.props.locale?.maxDate || 'Max Date';
+      const label = this.props.locale?.maxDate || 'Max Date';
       return (
         <div className="maxDateLabel p-2 text-xs">
           {label}: {format(this.props.maxDate, this.props.locale?.format || defaultDateFormat)}
@@ -85,18 +83,7 @@ export default class ApplyCancelButtons extends React.Component<Props> {
         <button
           className={clsx(
             'applyButton inline-flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm',
-            {
-              'bg-green-600 hover:bg-green-500 focus:ring-green-300': theme === 'blue',
-            },
-            {
-              'bg-orange-600 hover:bg-orange-500 focus:ring-orange-300': theme === 'orange',
-            },
-            {
-              'bg-emerald-600 hover:bg-emerald-500 focus:ring-emerald-300': theme === 'green',
-            },
-            {
-              'bg-purple-600 hover:bg-purple-500 focus:ring-purple-300': theme === 'purple',
-            },
+            applyButtonClasses[theme],
             this.props.classNames?.applyButton
           )}
           type="button"

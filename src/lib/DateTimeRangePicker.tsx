@@ -1,4 +1,6 @@
+/* eslint-disable react-refresh/only-export-components */
 import React from 'react';
+
 import {
   format,
   isSameDay,
@@ -20,11 +22,11 @@ import {
   subMinutes,
 } from 'date-fns';
 
-import Ranges from './ranges/Ranges';
-import DatePicker from './date_picker/DatePicker';
-import { isValidTimeChange } from './utils/TimeFunctionUtils';
-import { beforeMinDate, datePicked, pastMaxDate } from './utils/DateSelectedUtils';
 import ApplyCancelButtons from './date_picker/ApplyCancelButtons';
+import DatePicker from './date_picker/DatePicker';
+import Ranges from './ranges/Ranges';
+import { beforeMinDate, datePicked, pastMaxDate } from './utils/DateSelectedUtils';
+import { isValidTimeChange } from './utils/TimeFunctionUtils';
 
 import type { Locale, Mode, PresetDateRanges, ClassNames, Theme } from './types';
 
@@ -72,8 +74,8 @@ interface State {
 class DateTimeRangePicker extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    let ranges = {} as PresetDateRanges;
-    let customRange = { 'Custom Range': 'Custom Range' };
+    const ranges = {} as PresetDateRanges;
+    const customRange = { 'Custom Range': 'Custom Range' };
     Object.assign(ranges, this.props.ranges, customRange);
     let dateFormat = `dd-MM-yyyy ${this.props.twelveHoursClock ? 'h:mm a' : 'HH:mm'}`;
 
@@ -84,7 +86,7 @@ class DateTimeRangePicker extends React.Component<Props, State> {
     this.state = {
       selectedRange: this.props.selectedRange || 0,
       selectingModeFrom: true,
-      ranges: ranges,
+      ranges,
       start: this.props.start,
       startLabel: format(this.props.start, dateFormat),
       end: this.props.end,
@@ -99,9 +101,9 @@ class DateTimeRangePicker extends React.Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props) {
-    let isDifferentMomentObject =
+    const isDifferentMomentObject =
       !isEqual(this.props.start, prevProps.start) || !isEqual(this.props.end, prevProps.end);
-    let isDifferentTime =
+    const isDifferentTime =
       format(this.props.start, 'dd-MM-yyyy HH:mm') !== format(prevProps.start, 'dd-MM-yyyy HH:mm') ||
       format(this.props.end, 'dd-MM-yyyy HH:mm') !== format(prevProps.end, 'dd-MM-yyyy HH:mm');
     if (isDifferentMomentObject || isDifferentTime) {
@@ -218,13 +220,13 @@ class DateTimeRangePicker extends React.Component<Props, State> {
     }
 
     // Get the new dates from the dates selected by the user
-    let newDates = datePicked(this.state.start, this.state.end, cellDate, isSelectingModeFrom, this.props.smartMode);
+    const newDates = datePicked(this.state.start, this.state.end, cellDate, isSelectingModeFrom, this.props.smartMode);
 
     // unpack the new dates and set them
-    let startDate = newDates.startDate;
-    let endDate = newDates.endDate;
-    let newStart = this.duplicateMomentTimeFromState(startDate, true);
-    let newEnd = this.duplicateMomentTimeFromState(endDate, false);
+    const startDate = newDates.startDate;
+    const endDate = newDates.endDate;
+    const newStart = this.duplicateMomentTimeFromState(startDate, true);
+    const newEnd = this.duplicateMomentTimeFromState(endDate, false);
 
     this.updateStartEndAndLabels(newStart, newEnd);
     this.setToRangeValue(newStart, newEnd);
@@ -277,7 +279,7 @@ class DateTimeRangePicker extends React.Component<Props, State> {
   }
 
   updateTime(origDate: Date, newHour: number, newMinute: number, mode: Mode, stateDateToChangeName: Mode) {
-    let date = new Date(origDate);
+    const date = new Date(origDate);
     date.setHours(newHour);
     date.setMinutes(newMinute);
 
@@ -339,16 +341,16 @@ class DateTimeRangePicker extends React.Component<Props, State> {
 
   dateTextFieldCallback = (mode: Mode) => {
     if (mode === 'start') {
-      let newDate = parse(this.state.startLabel, this.state.dateFormat, new Date());
-      let isValidNewDate = isValid(newDate);
-      let isAfterEndDate = isAfter(newDate, this.state.end);
-      let isSameOrBeforeEnd = isEqual(newDate, this.state.end) || isBefore(newDate, this.state.end);
+      const newDate = parse(this.state.startLabel, this.state.dateFormat, new Date());
+      const isValidNewDate = isValid(newDate);
+      const isAfterEndDate = isAfter(newDate, this.state.end);
+      const isSameOrBeforeEnd = isEqual(newDate, this.state.end) || isBefore(newDate, this.state.end);
       this.updateDate(mode, newDate, isValidNewDate, isSameOrBeforeEnd, isAfterEndDate, 'start');
     } else {
-      let newDate = parse(this.state.endLabel, this.state.dateFormat, new Date());
-      let isValidNewDate = isValid(newDate);
-      let isBeforeStartDate = isBefore(newDate, this.state.start);
-      let isSameOrAfterStartDate = isEqual(newDate, this.state.start) || isAfter(newDate, this.state.start);
+      const newDate = parse(this.state.endLabel, this.state.dateFormat, new Date());
+      const isValidNewDate = isValid(newDate);
+      const isBeforeStartDate = isBefore(newDate, this.state.start);
+      const isSameOrAfterStartDate = isEqual(newDate, this.state.start) || isAfter(newDate, this.state.start);
       this.updateDate(mode, newDate, isValidNewDate, isSameOrAfterStartDate, isBeforeStartDate, 'end');
     }
   };
@@ -402,11 +404,11 @@ class DateTimeRangePicker extends React.Component<Props, State> {
 
   updateInvalidDate(mode: Mode, newDate: Date) {
     if (mode === 'start') {
-      let newEndDate = addDays(newDate, 1);
+      const newEndDate = addDays(newDate, 1);
       this.updateLabelsAndRangeValues(newDate, newEndDate);
       this.checkAutoApplyActiveApplyIfActive(newDate, newEndDate);
     } else {
-      let newStartDate = subDays(newDate, 1);
+      const newStartDate = subDays(newDate, 1);
       this.updateStartEndAndLabels(newStartDate, newDate);
       this.checkAutoApplyActiveApplyIfActive(newStartDate, newDate);
     }
@@ -436,7 +438,7 @@ class DateTimeRangePicker extends React.Component<Props, State> {
     // Then if cell end called allow new end date. Allow new start if cell start called
     // Done for when the start and end date are the same
     if (isSameDay(originalDate, this.state.start) && isSameDay(originalDate, this.state.end) && !this.props.smartMode) {
-      let activeElement = document.activeElement?.id;
+      const activeElement = document.activeElement?.id;
       // If Focused Cell is an end cell
       if (activeElement && activeElement.includes('_cell_') && activeElement.includes('_end')) {
         // Allow a new end date from the date calledback
@@ -510,14 +512,17 @@ class DateTimeRangePicker extends React.Component<Props, State> {
     }
   };
 
-  renderStartDate(locale?: Locale) {
-    let label = locale?.fromDate ? locale.fromDate : 'From Date';
+  renderDatePicker(mode: 'start' | 'end', locale?: Locale) {
+    const isStart = mode === 'start';
+    const label = isStart
+      ? (locale?.fromDate ?? 'From Date')
+      : (locale?.toDate ?? 'To Date');
     return (
       <DatePicker
         label={label}
-        date={this.state.start}
-        otherDate={this.state.end}
-        mode="start"
+        date={isStart ? this.state.start : this.state.end}
+        otherDate={isStart ? this.state.end : this.state.start}
+        mode={mode}
         dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback}
         timeChangeCallback={this.timeChangeCallback}
         dateTextFieldCallback={this.dateTextFieldCallback}
@@ -526,40 +531,7 @@ class DateTimeRangePicker extends React.Component<Props, State> {
         focusDate={this.state.focusDate}
         cellFocusedCallback={this.cellFocusedCallback}
         onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
-        dateLabel={this.state.startLabel}
-        selectingModeFrom={this.state.selectingModeFrom}
-        changeSelectingModeCallback={this.changeSelectingModeCallback}
-        minDate={this.props.minDate}
-        maxDate={this.props.maxDate}
-        locale={this.props.locale}
-        descendingYears={this.props.descendingYears}
-        years={this.props.years}
-        pastSearchFriendly={this.props.pastSearchFriendly}
-        smartMode={this.props.smartMode}
-        twelveHoursClock={this.props.twelveHoursClock}
-        classNames={this.props.classNames}
-        theme={this.props.theme}
-      />
-    );
-  }
-
-  renderEndDate(locale?: Locale) {
-    let label = locale?.toDate ? locale.toDate : 'To Date';
-    return (
-      <DatePicker
-        label={label}
-        date={this.state.end}
-        otherDate={this.state.start}
-        mode="end"
-        dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback}
-        timeChangeCallback={this.timeChangeCallback}
-        dateTextFieldCallback={this.dateTextFieldCallback}
-        keyboardCellCallback={this.keyboardCellCallback}
-        focusOnCallback={this.focusOnCallback}
-        focusDate={this.state.focusDate}
-        cellFocusedCallback={this.cellFocusedCallback}
-        onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
-        dateLabel={this.state.endLabel}
+        dateLabel={isStart ? this.state.startLabel : this.state.endLabel}
         selectingModeFrom={this.state.selectingModeFrom}
         changeSelectingModeCallback={this.changeSelectingModeCallback}
         minDate={this.props.minDate}
@@ -606,8 +578,8 @@ class DateTimeRangePicker extends React.Component<Props, State> {
             classNames={this.props.classNames}
             theme={this.props.theme}
           />
-          {this.renderStartDate(this.props.locale)}
-          {this.renderEndDate(this.props.locale)}
+          {this.renderDatePicker('start', this.props.locale)}
+          {this.renderDatePicker('end', this.props.locale)}
         </div>
         <ApplyCancelButtons
           changeVisibleState={this.props.changeVisibleState}
