@@ -135,8 +135,8 @@ export default class ReactDateTimePicker extends React.Component<ReactDateTimePi
           className={clsx(
             'flex max-w-2xl flex-col rounded border border-gray-100 bg-white shadow-lg dark:border-none dark:bg-slate-700 dark:text-white',
             {
-              '!flex-col': this.props.forceMobileMode,
-              '!flex-row': this.props.noMobileMode,
+              'flex-col!': this.props.forceMobileMode,
+              'flex-row!': this.props.noMobileMode,
             },
             this.props.classNames?.rootContainer
           )}
@@ -159,13 +159,13 @@ export default class ReactDateTimePicker extends React.Component<ReactDateTimePi
         <div
           id="datepicker"
           className={clsx(
-            'absolute top-full z-20 mt-[1px] w-full max-w-2xl rounded border border-gray-100 bg-white shadow-lg dark:border-none dark:bg-slate-700 dark:text-white md:w-auto',
+            'absolute top-full z-20 mt-px w-full max-w-2xl rounded border border-gray-100 bg-white shadow-lg dark:border-none dark:bg-slate-700 dark:text-white md:w-auto md:min-w-max',
             {
               'right-0': this.props.leftMode,
               'left-1/2': this.props.centerMode,
               'flex flex-col': this.state.visible,
-              '!flex-col': this.props.forceMobileMode,
-              '!flex-row': this.props.noMobileMode, // If "noMobileMode" prop not set then allow mobile mode
+              'flex-col!': this.props.forceMobileMode,
+              'flex-row!': this.props.noMobileMode, // If "noMobileMode" prop not set then allow mobile mode
               hidden: !this.state.visible,
             },
             this.props.classNames?.rootContainer

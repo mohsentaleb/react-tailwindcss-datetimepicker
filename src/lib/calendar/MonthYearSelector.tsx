@@ -79,7 +79,7 @@ export default class MonthYearSelector extends React.Component<Props, State> {
           <button
             type="button"
             aria-label="Previous month"
-            className="rounded hover:bg-gray-100 dark:hover:bg-slate-600"
+            className="rounded p-0 border-0 bg-transparent hover:bg-gray-100 dark:hover:bg-slate-600"
             onClick={() => this.props.changeMonthArrowsCallback(true, false)}
           >
             <ChevronLeftIcon className="size-7 p-2" />
@@ -119,7 +119,7 @@ export default class MonthYearSelector extends React.Component<Props, State> {
           <button
             type="button"
             aria-label="Next month"
-            className="rounded hover:bg-gray-100 dark:hover:bg-slate-600"
+            className="rounded p-0 border-0 bg-transparent hover:bg-gray-100 dark:hover:bg-slate-600"
             onClick={() => this.props.changeMonthArrowsCallback(false, true)}
           >
             <ChevronRightIcon className="size-7 p-2" />
