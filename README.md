@@ -358,9 +358,9 @@ Maximum date that can be selected in calendar.
 
 ### `autoApply`
 
-(optional)\*\* `boolean` defaults to `false`
+(optional) `boolean` defaults to `false`
 
-When set there will only be one button in the bottom right to close the screen. With this set to `true` upon changing anything in picker the `callbackfunction` will be automatically called
+When set there will only be one button in the bottom right to close the screen. With this set to `true` upon changing anything in picker the `applyCallback` will be automatically called
 
 ### `descendingYears`
 
