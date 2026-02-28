@@ -256,8 +256,8 @@ endOfToday.setDate(endOfToday.getDate() + 1);
 endOfToday.setSeconds(endOfToday.getSeconds() - 1);
 
 const ranges = {
-  Today: [startOfToday, startOfToday],
-  // 'Last 30 Days': [..., ...],
+  Today: [startOfToday, endOfToday],
+  // 'Last 30 Days': [start, end],
 };
 ```
 
@@ -377,7 +377,7 @@ Takes a tuple where the first value is the start year and the second values is t
 Example:
 
 ```js
-years={[2000, 2025]}
+years={[2000, 2026]}
 ```
 
 ### `smartMode`
@@ -475,7 +475,7 @@ By providing CSS `className`(s) for these keys, you can customize/override them.
 
 ```tsx
 classNames={{
-  rootContainer: '!bg-red-700'
+  rootContainer: 'bg-red-700!'
 }}
 ```
 
