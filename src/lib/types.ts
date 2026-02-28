@@ -39,4 +39,26 @@ export type ClassNames = {
 
 export type Mode = 'start' | 'end';
 export type Meridiem = 'am' | 'pm';
-export type Theme = 'blue' | 'orange' | 'green' | 'purple';
+export type Theme =
+  | 'blue'
+  | 'orange'
+  | 'green'
+  | 'purple'
+  | 'slate'
+  | 'gray'
+  | 'zinc'
+  | 'neutral'
+  | 'stone'
+  | 'red'
+  | 'amber'
+  | 'yellow'
+  | 'lime'
+  | 'emerald'
+  | 'teal'
+  | 'cyan'
+  | 'sky'
+  | 'indigo'
+  | 'violet'
+  | 'fuchsia'
+  | 'pink'
+  | 'rose';

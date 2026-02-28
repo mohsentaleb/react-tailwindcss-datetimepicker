@@ -241,7 +241,7 @@ export default App;
 | [`displayMinDate`](#displaymindate)         | optional     | `Boolean`  | `false`       | Will display Min Date in picker footer                                         |
 | [`displayMaxDate`](#displaymaxdate)         | optional     | `Boolean`  | `false`       | Will display Max Date in picker footer                                         |
 | [`classNames`](#classnames)                 | optional     | `Object`   | `undefined`   | Will override classNames for different parts of the picker                     |
-| [`theme`](#theme)                           | optional     | `string`   | `blue`        | Predefined color themes for the calendar view                                  |
+| [`theme`](#theme)                           | optional     | `string`   | `sky`         | Color theme — all 22 Tailwind CSS named colors supported                       |
 
 ### `ranges`
 
@@ -489,11 +489,33 @@ The following illustration shows the different components of the picker which ca
 ![Date Time Picker Components Illustration](https://raw.githubusercontent.com/mohsentaleb/react-tailwindcss-datetimepicker/master/public/date-picker-illustration.png)
 
 ### `theme`
-There are 4 color themes available to choose from. (More to come later)
-- `blue` (Default)
+All standard Tailwind CSS v3 named colors are available as themes:
+
+**Chromatic**
+- `sky` (Default)
+- `blue` (alias for `sky`, kept for backward compatibility)
 - `orange`
-- `green`
+- `emerald`
+- `green` (alias for `emerald`, kept for backward compatibility)
 - `purple`
+- `red`
+- `amber`
+- `yellow`
+- `lime`
+- `teal`
+- `cyan`
+- `indigo`
+- `violet`
+- `fuchsia`
+- `pink`
+- `rose`
+
+**Gray scale**
+- `slate`
+- `gray`
+- `zinc`
+- `neutral`
+- `stone`
 
 ## Development
 

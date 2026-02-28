@@ -5,6 +5,31 @@ import Header from './components/Header';
 import { add, sub, set, format } from 'date-fns';
 import type { Theme } from '../lib/types';
 
+const THEMES: { value: Theme | undefined; label: string; className: string }[] = [
+  // Chromatic
+  { value: undefined, label: 'Sky (Default)', className: 'bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-300' },
+  { value: 'orange', label: 'Orange', className: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300' },
+  { value: 'emerald', label: 'Emerald', className: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300' },
+  { value: 'purple', label: 'Purple', className: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300' },
+  { value: 'red', label: 'Red', className: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' },
+  { value: 'amber', label: 'Amber', className: 'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-300' },
+  { value: 'yellow', label: 'Yellow', className: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300' },
+  { value: 'lime', label: 'Lime', className: 'bg-lime-100 text-lime-800 dark:bg-lime-900 dark:text-lime-300' },
+  { value: 'teal', label: 'Teal', className: 'bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-300' },
+  { value: 'cyan', label: 'Cyan', className: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-300' },
+  { value: 'indigo', label: 'Indigo', className: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300' },
+  { value: 'violet', label: 'Violet', className: 'bg-violet-100 text-violet-800 dark:bg-violet-900 dark:text-violet-300' },
+  { value: 'fuchsia', label: 'Fuchsia', className: 'bg-fuchsia-100 text-fuchsia-800 dark:bg-fuchsia-900 dark:text-fuchsia-300' },
+  { value: 'pink', label: 'Pink', className: 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-300' },
+  { value: 'rose', label: 'Rose', className: 'bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-300' },
+  // Gray scale
+  { value: 'slate', label: 'Slate', className: 'bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-300' },
+  { value: 'gray', label: 'Gray', className: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300' },
+  { value: 'zinc', label: 'Zinc', className: 'bg-zinc-100 text-zinc-800 dark:bg-zinc-700 dark:text-zinc-300' },
+  { value: 'neutral', label: 'Neutral', className: 'bg-neutral-100 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-300' },
+  { value: 'stone', label: 'Stone', className: 'bg-stone-100 text-stone-800 dark:bg-stone-700 dark:text-stone-300' },
+];
+
 export default function Demo() {
   const [standaloneMode, setStandaloneMode] = useState(true);
   const [twelveHoursClock, setTwelveHoursClock] = useState(true);
@@ -98,37 +123,19 @@ export default function Demo() {
                     </label>
                   </div>
                 </div>
-                <div className="flex">
-                  <label className="w-full font-bold md:w-1/3">Theme</label>
-                  <div className="flex w-full flex-wrap justify-end gap-2 md:w-2/3">
-                    <button
-                      type="button"
-                      className="rounded-full bg-sky-100 px-3 py-1 text-xs font-medium text-sky-800 dark:bg-sky-900 dark:text-sky-300"
-                      onClick={() => setTheme('blue')}
-                    >
-                      Default (Blue)
-                    </button>
-                    <button
-                      type="button"
-                      className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-800 dark:bg-emerald-700 dark:text-emerald-300"
-                      onClick={() => setTheme('green')}
-                    >
-                      Green
-                    </button>
-                    <button
-                      type="button"
-                      className="rounded-full bg-orange-100 px-3 py-1 text-xs font-medium text-orange-800 dark:bg-orange-900 dark:text-orange-300"
-                      onClick={() => setTheme('orange')}
-                    >
-                      Orange
-                    </button>
-                    <button
-                      type="button"
-                      className="rounded-full bg-purple-100 px-3 py-1 text-xs font-medium text-purple-800 dark:bg-purple-900 dark:text-purple-300"
-                      onClick={() => setTheme('purple')}
-                    >
-                      Purple
-                    </button>
+                <div className="flex flex-col gap-2">
+                  <label className="font-bold">Theme</label>
+                  <div className="flex flex-wrap gap-2">
+                    {THEMES.map(({ value, label, className }) => (
+                      <button
+                        key={label}
+                        type="button"
+                        className={`rounded-full px-3 py-1 text-xs font-medium ${className} ${theme === value ? 'ring-2 ring-offset-1 ring-current' : ''}`}
+                        onClick={() => setTheme(value)}
+                      >
+                        {label}
+                      </button>
+                    ))}
                   </div>
                 </div>
               </div>

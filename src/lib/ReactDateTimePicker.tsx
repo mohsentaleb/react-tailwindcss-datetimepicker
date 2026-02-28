@@ -37,7 +37,7 @@ interface State {
   visible: boolean;
 }
 
-export const defaultTheme: Theme = 'blue';
+export const defaultTheme: Theme = 'sky';
 
 export default class ReactDateTimePicker extends React.Component<ReactDateTimePickerProps, State> {
   container: HTMLDivElement | null = null;
