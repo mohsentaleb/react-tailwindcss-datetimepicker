@@ -306,7 +306,7 @@ Example:
 
 ```ts
 const locale = {
-  format: 'dd-MM-yyyy HH:mm', // See: https://date-fns.org/v2.16.1/docs/format
+  format: 'dd-MM-yyyy HH:mm', // See: https://date-fns.org/v4.1.0/docs/format
   sundayFirst: false,
   days: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'So'],
   months: [

@@ -72,6 +72,7 @@ export default defineConfig({
       entry: resolve(__dirname, './src/lib/index.tsx'),
       formats: ['es', 'umd', 'cjs'],
       name: 'react-tailwindcss-datetimepicker',
+      cssFileName: 'style',
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
