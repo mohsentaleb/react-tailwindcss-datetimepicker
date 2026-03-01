@@ -215,7 +215,7 @@ export default App;
 
 | Option                                      | Required     | Type       | Default       | Description                                                                    |
 |---------------------------------------------| ------------ | ---------- | ------------- |--------------------------------------------------------------------------------|
-| [`ranges`](#ranges)                         | **Required** | `Object`   | `undefined`   | A record of ranges defined as labels and a tuple of Date times.                |
+| [`ranges`](#ranges)                         | optional     | `Object`   | `{}`          | A record of ranges defined as labels and a tuple of Date times. When empty or omitted, the ranges panel is hidden. |
 | [`start`](#start)                           | **Required** | `Date`     | `undefined`   | Initial start Date set in the picker                                           |
 | [`end`](#end)                               | **Required** | `Date`     | `undefined`   | Initial end Date set in the picker                                             |
 | [`applyCallback`](#applycallback)           | **Required** | `Function` | `undefined`   | Function which is called when the apply button is clicked                      |

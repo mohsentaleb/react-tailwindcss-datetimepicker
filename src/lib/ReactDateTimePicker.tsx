@@ -10,7 +10,7 @@ import { propValidation } from './utils/PropValidation';
 import type { ClassNames, Locale, PresetDateRanges, Theme } from './types';
 
 export interface ReactDateTimePickerProps {
-  ranges: PresetDateRanges;
+  ranges?: PresetDateRanges;
   start: Date;
   end: Date;
   locale?: Locale;
@@ -100,7 +100,7 @@ export default class ReactDateTimePicker extends React.Component<ReactDateTimePi
   renderPicker() {
     return (
       <DateTimeRangePicker
-        ranges={this.props.ranges}
+        ranges={this.props.ranges ?? {}}
         start={this.props.start}
         end={this.props.end}
         locale={this.props.locale}
