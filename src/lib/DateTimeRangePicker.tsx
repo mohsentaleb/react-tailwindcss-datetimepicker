@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import React from 'react';
 
+import { clsx } from 'clsx';
 import {
   format,
   isSameDay,
@@ -22,6 +23,7 @@ import {
   subMinutes,
 } from 'date-fns';
 
+
 import ApplyCancelButtons from './date_picker/ApplyCancelButtons';
 import DatePicker from './date_picker/DatePicker';
 import Ranges from './ranges/Ranges';
@@ -34,7 +36,7 @@ export const ModeEnum = Object.freeze({ start: 'start', end: 'end' });
 export const defaultDateFormat = 'dd-MM-yyyy HH:mm';
 
 interface Props {
-  ranges: PresetDateRanges;
+  ranges?: PresetDateRanges;
   start: Date;
   end: Date;
   locale?: Locale;
@@ -75,8 +77,10 @@ class DateTimeRangePicker extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     const ranges = {} as PresetDateRanges;
-    const customRange = { 'Custom Range': 'Custom Range' };
-    Object.assign(ranges, this.props.ranges, customRange);
+    const propsRanges = this.props.ranges ?? {};
+    if (Object.keys(propsRanges).length > 0) {
+      Object.assign(ranges, propsRanges, { 'Custom Range': 'Custom Range' });
+    }
     let dateFormat = `dd-MM-yyyy ${this.props.twelveHoursClock ? 'h:mm a' : 'HH:mm'}`;
 
     if (this.props.locale?.format) {
@@ -114,6 +118,25 @@ class DateTimeRangePicker extends React.Component<Props, State> {
         },
         () => this.updateStartEndAndLabels(this.props.start, this.props.end, true)
       );
+    }
+
+    if (this.props.ranges !== prevProps.ranges) {
+      const ranges = {} as PresetDateRanges;
+      const propsRanges = this.props.ranges ?? {};
+      if (Object.keys(propsRanges).length > 0) {
+        Object.assign(ranges, propsRanges, { 'Custom Range': 'Custom Range' });
+      }
+      this.setState({ ranges });
+    }
+
+    if (this.props.locale?.format !== prevProps.locale?.format) {
+      const newFormat =
+        this.props.locale?.format || `dd-MM-yyyy ${this.props.twelveHoursClock ? 'h:mm a' : 'HH:mm'}`;
+      this.setState({
+        dateFormat: newFormat,
+        startLabel: format(this.state.start, newFormat),
+        endLabel: format(this.state.end, newFormat),
+      });
     }
   }
 
@@ -549,8 +572,9 @@ class DateTimeRangePicker extends React.Component<Props, State> {
   }
 
   render() {
-    const disabledButtons = Object.keys(this.props.ranges).map(rangeKey => {
-      const range = this.props.ranges[rangeKey];
+    const propsRanges = this.props.ranges ?? {};
+    const disabledButtons = Object.keys(propsRanges).map(rangeKey => {
+      const range = propsRanges[rangeKey];
 
       if (Array.isArray(range)) {
         const [start, end] = range.map(date => new Date(date));
@@ -567,17 +591,22 @@ class DateTimeRangePicker extends React.Component<Props, State> {
     });
     return (
       <>
-        <div className="flex flex-col gap-2 p-2 md:flex-row">
-          <Ranges
-            ranges={this.state.ranges}
-            disabledRanges={disabledButtons}
-            selectedRange={this.state.selectedRange}
-            rangeSelectedCallback={this.rangeSelectedCallback}
-            noMobileMode={this.props.noMobileMode}
-            forceMobileMode={this.props.forceMobileMode}
-            classNames={this.props.classNames}
-            theme={this.props.theme}
-          />
+        <div className={clsx('flex flex-col gap-2 p-2', {
+          'md:flex-row': !this.props.forceMobileMode,
+          'flex-row!': this.props.noMobileMode,
+        })}>
+          {Object.keys(this.state.ranges).length > 0 && (
+            <Ranges
+              ranges={this.state.ranges}
+              disabledRanges={disabledButtons}
+              selectedRange={this.state.selectedRange}
+              rangeSelectedCallback={this.rangeSelectedCallback}
+              noMobileMode={this.props.noMobileMode}
+              forceMobileMode={this.props.forceMobileMode}
+              classNames={this.props.classNames}
+              theme={this.props.theme}
+            />
+          )}
           {this.renderDatePicker('start', this.props.locale)}
           {this.renderDatePicker('end', this.props.locale)}
         </div>

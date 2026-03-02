@@ -44,7 +44,6 @@ This project is a fork of [react-datetimepicker](https://github.com/v0ltoz/react
 - [Migration](#migration)
   - [from `2.x.x to ` to `3.x.x`:](#from-2xx-to--to-3xx)
   - [From `1.x.x to ` to `2.x.x`:](#from-1xx-to--to-2xx)
-- [Roadmap](#roadmap)
 - [Get Help](#get-help)
 - [License](#license)
 
@@ -215,7 +214,7 @@ export default App;
 
 | Option                                      | Required     | Type       | Default       | Description                                                                    |
 |---------------------------------------------| ------------ | ---------- | ------------- |--------------------------------------------------------------------------------|
-| [`ranges`](#ranges)                         | **Required** | `Object`   | `undefined`   | A record of ranges defined as labels and a tuple of Date times.                |
+| [`ranges`](#ranges)                         | optional     | `Object`   | `{}`          | A record of ranges defined as labels and a tuple of Date times. When empty or omitted, the ranges panel is hidden. |
 | [`start`](#start)                           | **Required** | `Date`     | `undefined`   | Initial start Date set in the picker                                           |
 | [`end`](#end)                               | **Required** | `Date`     | `undefined`   | Initial end Date set in the picker                                             |
 | [`applyCallback`](#applycallback)           | **Required** | `Function` | `undefined`   | Function which is called when the apply button is clicked                      |
@@ -224,16 +223,15 @@ export default App;
 | [`maxDate`](#maxdate)                       | optional     | `Date`     | `undefined`   | Maximum date that can be selected in calendar                                  |
 | [`minDate`](#mindate)                       | optional     | `Date`     | `undefined`   | Minimum date that can be selected in calendar                                  |
 | [`autoApply`](#autoapply)                   | optional     | `Boolean`  | `false`       | Set dates as soon as they're clicked without pressing apply                    |
-| [`descendingYears`](#descendingyears)       | optional     | `Boolean`  | `false`       | Set years be displayed in descending order                                     |
+| [`descendingYears`](#descendingyears)       | optional     | `Boolean`  | `true`        | Set years be displayed in descending order                                     |
 | [`years`](#years)                           | optional     | `Array`    | `[1900, now]` | Limit the years shown in calendar                                              |
-| [`smartMode`](#smartmode)                   | optional     | `Boolean`  | `false`       | Switch the month on the right hand side (RHS) when two dates in the same month |
-| [`pastSearchFriendly`](#pastsearchfriendly) | optional     | `Boolean`  | `false`       | Optimize calendar for past searches                                            |
+| [`smartMode`](#smartmode)                   | optional     | `Boolean`  | `false`       | Enables flexible date selection with ping-pong mode, auto-swap, and relaxed constraints |
+| [`pastSearchFriendly`](#pastsearchfriendly) | optional     | `Boolean`  | `false`       | With `smartMode`, shifts the left calendar back one month instead of the right forward   |
 | [`noMobileMode`](#nomobilemode)             | optional     | `Boolean`  | `false`       | Picker will always be displayed in full screen mode                            |
 | [`forceMobileMode`](#forcemobilemode)       | optional     | `Boolean`  | `false`       | Picker will always be displayed in condensed mode all the time                 |
 | [`twelveHoursClock`](#twelvehoursclock)     | optional     | `Boolean`  | `false`       | Display time values in a 12-hour format rather than a 24-hour format           |
 | [`standalone`](#standalone)                 | optional     | `Boolean`  | `false`       | When set the picker will be open by default                                    |
-| [`leftMode`](#leftmode)                     | optional     | `Boolean`  | `false`       | Picker will open to the left                                                   |
-| [`centerMode`](#centermode)                 | optional     | `Boolean`  | `false`       | Picker will open in center                                                     |
+| [`alignment`](#alignment)                   | optional     | `String`   | `'left'`      | Horizontal alignment of the dropdown: `'left'`, `'center'`, or `'right'`       |
 | [`displayMinDate`](#displaymindate)         | optional     | `Boolean`  | `false`       | Will display Min Date in picker footer                                         |
 | [`displayMaxDate`](#displaymaxdate)         | optional     | `Boolean`  | `false`       | Will display Max Date in picker footer                                         |
 | [`classNames`](#classnames)                 | optional     | `Object`   | `undefined`   | Will override classNames for different parts of the picker                     |
@@ -365,9 +363,9 @@ When set there will only be one button in the bottom right to close the screen. 
 
 ### `descendingYears`
 
-(optional) `boolean` defaults to `false`
+(optional) `boolean` defaults to `true`
 
-To set years be displayed in descending order in picker instead of ascending.
+Years are displayed in descending order by default (largest first). Set to `false` to display in ascending order.
 
 ### `years`
 
@@ -385,18 +383,20 @@ years={[2000, 2026]}
 
 (optional) `boolean` defaults to `false`
 
-The date time picker will switch the month on the right hand side (RHS) when two dates in the same month are selected. Can be used in
-conjunction with `pastSearchFriendly` to switch the month on the left hand side (LHS) when the two dates are from the same month.
+Enables flexible date selection with several behaviors:
+
+- **Ping-pong selection:** Clicks alternate between setting the start and end date regardless of which calendar side is clicked. A "Selecting From" / "Selecting To" indicator shows which date will be set next.
+- **Auto-swap invalid ranges:** When a selection (cell click or typed input) would make start after end, the other date is automatically adjusted by one day. Without `smartMode`, such selections are rejected.
+- **Same-month calendar offset:** When both dates fall in the same month and year, the right calendar shifts forward one month to always show two different months. (Use `pastSearchFriendly` to shift the left calendar back instead.)
+- **Relaxed cell constraints:** Without `smartMode`, cells outside the current range are greyed out and unclickable. With `smartMode`, all cells are clickable and auto-swap handles any conflicts.
 
 ### `pastSearchFriendly`
 
-(optional) `boolean`
+(optional) `boolean` defaults to `false`
 
 **Note:** Requires `smartMode` to be enabled.
 
-Changes the mode of the date time picker to be optimised for past searches. Where possible, the start and end time will be shown on the RHS when the month and year are equal. This allows for the previous month to be shown on the LHS to allow easier backwards searching.
-
-This setting is `false` by default meaning that the LHS is used when dates are selected in the same month & year
+Modifies the same-month calendar offset behavior of `smartMode`. When both dates are in the same month and year, the left calendar shifts back one month (showing the previous month) instead of the right calendar shifting forward. This is useful for searching backward in time, as the current month stays on the right with the previous month visible on the left.
 
 ### `noMobileMode`
 
@@ -422,17 +422,15 @@ When enabled, the picker will display time values in a 12-hour format rather tha
 
 When set the picker will be open by default.
 
-### `leftMode`
+### `alignment`
 
-(optional) `boolean` defaults to `false`
+(optional) `'left' | 'center' | 'right'` defaults to `'left'`
 
-When set and changed the picker will open to the left (right to left) instead of the default which is to open to the right (left to right)
+Controls the horizontal alignment of the dropdown relative to the trigger element:
 
-### `centerMode`
-
-(optional) `boolean` defaults to `false`
-
-To allow flexibility, center mode has been added where leftMode or default is not enough.
+- `'left'` — Opens left-aligned (default behavior)
+- `'center'` — Centers the dropdown relative to the trigger
+- `'right'` — Aligns to the right edge of the trigger (opens right-to-left)
 
 ### `displayMinDate`
 
@@ -544,15 +542,6 @@ Builds the app for production to the `/dist` folder using vite's [library mode](
 - `local` prop has been renamed to [`locale`](#locale) and it's now an **optional** prop.
 - `style` prop has been removed in favor of [`classNames`](#classnames).
 - `darkMode` prop has been removed. All UI elements of the picker now have dark styles defined for them. If you add `className=dark` to your `<body>` tag (or any other parent element of it), dark mode will be automatically turned on.
-
-## Roadmap
-
-- [x] Support TypeScript
-- [x] Ability to add custom CSS classes for different parts of the component
-- [x] Migrate to [date-fns](https://www.npmjs.com/package/date-fns)
-- [x] Adding predefined themes
-- [x] Write tests
-- [ ] More demos showcasing different props
 
 ## Get Help
 

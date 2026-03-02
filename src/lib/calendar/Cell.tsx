@@ -61,7 +61,10 @@ export default class Cell extends React.Component<Props, State> {
     isDifferentTime =
       format(this.props.cellDay, 'dd-MM-yyyy HH:mm') !== format(previousProps.cellDay, 'dd-MM-yyyy HH:mm');
 
-    if (isDifferentDateObject || isDifferentTime || isDifferentTheme) {
+    const isDifferentSmartMode = previousProps.smartMode !== this.props.smartMode;
+    const isDifferentClassNames = previousProps.classNames !== this.props.classNames;
+
+    if (isDifferentDateObject || isDifferentTime || isDifferentTheme || isDifferentSmartMode || isDifferentClassNames) {
       this.styleCellNonMouseEnter();
     }
 

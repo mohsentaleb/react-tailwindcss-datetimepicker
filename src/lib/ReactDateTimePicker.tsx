@@ -10,7 +10,7 @@ import { propValidation } from './utils/PropValidation';
 import type { ClassNames, Locale, PresetDateRanges, Theme } from './types';
 
 export interface ReactDateTimePickerProps {
-  ranges: PresetDateRanges;
+  ranges?: PresetDateRanges;
   start: Date;
   end: Date;
   locale?: Locale;
@@ -27,8 +27,7 @@ export interface ReactDateTimePickerProps {
   forceMobileMode?: boolean;
   twelveHoursClock?: boolean;
   standalone?: boolean;
-  leftMode?: boolean;
-  centerMode?: boolean;
+  alignment?: 'left' | 'center' | 'right';
   classNames?: ClassNames;
   displayMinDate?: boolean;
   displayMaxDate?: boolean;
@@ -100,7 +99,7 @@ export default class ReactDateTimePicker extends React.Component<ReactDateTimePi
   renderPicker() {
     return (
       <DateTimeRangePicker
-        ranges={this.props.ranges}
+        ranges={this.props.ranges ?? {}}
         start={this.props.start}
         end={this.props.end}
         locale={this.props.locale}
@@ -134,10 +133,6 @@ export default class ReactDateTimePicker extends React.Component<ReactDateTimePi
           id="datepicker-container-standalone"
           className={clsx(
             'flex max-w-2xl flex-col rounded border border-gray-100 bg-white shadow-lg dark:border-none dark:bg-slate-700 dark:text-white',
-            {
-              'flex-col!': this.props.forceMobileMode,
-              'flex-row!': this.props.noMobileMode,
-            },
             this.props.classNames?.rootContainer
           )}
         >
@@ -161,11 +156,9 @@ export default class ReactDateTimePicker extends React.Component<ReactDateTimePi
           className={clsx(
             'absolute top-full z-20 mt-px w-full max-w-2xl rounded border border-gray-100 bg-white shadow-lg dark:border-none dark:bg-slate-700 dark:text-white md:w-auto md:min-w-max',
             {
-              'right-0': this.props.leftMode,
-              'left-1/2': this.props.centerMode,
+              'right-0': this.props.alignment === 'right',
+              'left-1/2 -translate-x-1/2': this.props.alignment === 'center',
               'flex flex-col': this.state.visible,
-              'flex-col!': this.props.forceMobileMode,
-              'flex-row!': this.props.noMobileMode, // If "noMobileMode" prop not set then allow mobile mode
               hidden: !this.state.visible,
             },
             this.props.classNames?.rootContainer

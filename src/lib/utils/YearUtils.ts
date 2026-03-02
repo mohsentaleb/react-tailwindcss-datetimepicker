@@ -14,5 +14,5 @@ export const createYears = (userDefinedYears?: [number, number], descendingYears
     }
   }
 
-  return descendingYears ? years.reverse() : years;
+  return descendingYears === false ? years : years.reverse();
 };

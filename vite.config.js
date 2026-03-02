@@ -60,6 +60,7 @@ export default defineConfig({
     svgr(),
     dts({
       rollupTypes: true,
+      tsconfigPath: resolve(__dirname, 'tsconfig-build.json'),
     }),
     stripCssLayers(),
   ],
