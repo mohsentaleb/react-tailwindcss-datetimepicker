@@ -144,12 +144,8 @@ export default function PlaygroundPage() {
   // Build ranges
   const ranges = RANGE_PRESETS[rangesPreset] || DateRanges;
 
-  // Sections open state
-  const [coreOpen, setCoreOpen] = useState(true);
-  const [layoutOpen, setLayoutOpen] = useState(false);
-  const [localeOpen, setLocaleOpen] = useState(false);
-  const [rangesOpen, setRangesOpen] = useState(false);
-  const [classNamesOpen, setClassNamesOpen] = useState(false);
+  // Active tab
+  const [activeTab, setActiveTab] = useState<'core' | 'layout' | 'locale' | 'ranges' | 'customization'>('core');
 
   function handleApply(start: Date, end: Date) {
     setSelectedRange({ start, end });
@@ -234,9 +230,139 @@ export default function PlaygroundPage() {
           Interact with the date picker and tweak its props live. The generated code below updates automatically.
         </p>
 
-        <div className="flex flex-col gap-6 xl:flex-row">
+        {/* Controls Panel — tabbed */}
+        <div className="rounded-xl border border-slate-200 dark:border-slate-700">
+          {/* Tab buttons */}
+          <div className="flex border-b border-slate-200 dark:border-slate-700">
+            {([
+              ['core', 'Core Props'],
+              ['layout', 'Layout'],
+              ['locale', 'Locale'],
+              ['ranges', 'Ranges'],
+              ['customization', 'Customization'],
+            ] as const).map(([key, label]) => (
+              <button
+                key={key}
+                onClick={() => setActiveTab(key)}
+                className={`px-4 py-2.5 text-sm font-medium transition-colors ${
+                  activeTab === key
+                    ? 'border-b-2 border-sky-500 text-sky-600 dark:text-sky-400'
+                    : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+
+          {/* Tab content */}
+          <div className="px-4 py-3">
+            {activeTab === 'core' && (
+              <>
+                <ThemePicker value={theme} onChange={setTheme} />
+                <div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
+                  <ToggleControl label="Standalone" description="Always-visible inline picker" checked={standalone} onChange={() => setStandalone((s) => !s)} />
+                  <ToggleControl label="12-Hour Clock" checked={twelveHoursClock} onChange={() => setTwelveHoursClock((s) => !s)} />
+                  <ToggleControl label="Smart Mode" description="Ping-pong start/end selection" checked={smartMode} onChange={() => setSmartMode((s) => !s)} docsUrl="/docs/features#smart-mode" />
+                  <ToggleControl label="Past Search Friendly" checked={pastSearchFriendly} onChange={() => setPastSearchFriendly((s) => !s)} docsUrl="/docs/features#smart-mode" />
+                  <ToggleControl label="Auto Apply" description="Apply on every change" checked={autoApply} onChange={() => setAutoApply((s) => !s)} />
+                  <ToggleControl label="Descending Years" checked={descendingYears} onChange={() => setDescendingYears((s) => !s)} />
+                  <DateControl label="Min Date" value={minDate} onChange={setMinDate} />
+                  <DateControl label="Max Date" value={maxDate} onChange={setMaxDate} />
+                  <ToggleControl label="Display Min Date" checked={displayMinDate} onChange={() => setDisplayMinDate((s) => !s)} />
+                  <ToggleControl label="Display Max Date" checked={displayMaxDate} onChange={() => setDisplayMaxDate((s) => !s)} />
+                </div>
+              </>
+            )}
+
+            {activeTab === 'layout' && (
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
+                <ToggleControl label="No Mobile Mode" description="Always side-by-side" checked={noMobileMode} onChange={() => setNoMobileMode((s) => !s)} />
+                <ToggleControl label="Force Mobile Mode" description="Always stacked" checked={forceMobileMode} onChange={() => setForceMobileMode((s) => !s)} />
+                <ToggleControl label="Left Mode" checked={leftMode} onChange={() => setLeftMode((s) => !s)} />
+                <ToggleControl label="Center Mode" checked={centerMode} onChange={() => setCenterMode((s) => !s)} />
+              </div>
+            )}
+
+            {activeTab === 'locale' && (
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+                <ToggleControl label="Sunday First" checked={sundayFirst} onChange={() => setSundayFirst((s) => !s)} />
+                <SelectControl
+                  label="Date Format"
+                  value={dateFormat}
+                  options={FORMAT_OPTIONS}
+                  onChange={setDateFormat}
+                />
+                <SelectControl
+                  label="Language"
+                  value={language}
+                  options={[
+                    { value: 'english', label: 'English' },
+                    { value: 'french', label: 'French' },
+                    { value: 'german', label: 'German' },
+                    { value: 'persian', label: 'Persian' },
+                  ]}
+                  onChange={setLanguage}
+                />
+              </div>
+            )}
+
+            {activeTab === 'ranges' && (
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+                <SelectControl
+                  label="Ranges Set"
+                  value={rangesPreset}
+                  options={[
+                    { value: 'default', label: 'Default (8 ranges)' },
+                    { value: 'minimal', label: 'Minimal (2 ranges)' },
+                    { value: 'none', label: 'None (empty)' },
+                  ]}
+                  onChange={setRangesPreset}
+                />
+              </div>
+            )}
+
+            {activeTab === 'customization' && (
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+                <SelectControl
+                  label="Cell Style"
+                  value={cellStyle}
+                  options={[
+                    { value: 'default', label: 'Default' },
+                    { value: 'rounded', label: 'Rounded' },
+                    { value: 'large', label: 'Large' },
+                  ]}
+                  onChange={setCellStyle}
+                />
+                <SelectControl
+                  label="Range Buttons"
+                  value={rangeButtonStyle}
+                  options={[
+                    { value: 'default', label: 'Default' },
+                    { value: 'pill', label: 'Pill' },
+                    { value: 'bordered', label: 'Bordered' },
+                  ]}
+                  onChange={setRangeButtonStyle}
+                />
+                <SelectControl
+                  label="Footer Style"
+                  value={footerStyle}
+                  options={[
+                    { value: 'default', label: 'Default' },
+                    { value: 'compact', label: 'Compact' },
+                    { value: 'accent', label: 'Accent (Emerald)' },
+                  ]}
+                  onChange={setFooterStyle}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Calendar + Generated Code — side by side */}
+        <div className="mt-6 flex flex-col gap-6 lg:flex-row">
           {/* Live Picker */}
-          <div className="min-w-0 flex-1">
+          <div className="min-w-0 lg:w-2/3">
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800">
               <ReactDateTimePicker
                 ranges={ranges}
@@ -269,177 +395,14 @@ export default function PlaygroundPage() {
             </div>
           </div>
 
-          {/* Controls Panel */}
-          <div className="w-full shrink-0 xl:w-80">
-            <div className="sticky top-20 space-y-4 overflow-y-auto rounded-xl border border-slate-200 p-4 dark:border-slate-700" style={{ maxHeight: 'calc(100vh - 6rem)' }}>
-              {/* Core Props */}
-              <div>
-                <button
-                  onClick={() => setCoreOpen((o) => !o)}
-                  className="flex w-full items-center justify-between border-b border-slate-200 pb-2 text-sm font-semibold uppercase tracking-wider text-slate-700 dark:border-slate-700 dark:text-slate-300"
-                >
-                  ⚙️ Core Props
-                  <svg className={`h-4 w-4 transition-transform ${coreOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {coreOpen && (
-                  <div className="mt-3 flex flex-col gap-3">
-                    <ThemePicker value={theme} onChange={setTheme} />
-                    <ToggleControl label="Standalone" description="Always-visible inline picker" checked={standalone} onChange={() => setStandalone((s) => !s)} />
-                    <ToggleControl label="12-Hour Clock" checked={twelveHoursClock} onChange={() => setTwelveHoursClock((s) => !s)} />
-                    <ToggleControl label="Smart Mode" description="Ping-pong start/end selection" checked={smartMode} onChange={() => setSmartMode((s) => !s)} docsUrl="/docs/features#smart-mode" />
-                    <ToggleControl label="Past Search Friendly" checked={pastSearchFriendly} onChange={() => setPastSearchFriendly((s) => !s)} docsUrl="/docs/features#smart-mode" />
-                    <ToggleControl label="Auto Apply" description="Apply on every change" checked={autoApply} onChange={() => setAutoApply((s) => !s)} />
-                    <ToggleControl label="Descending Years" checked={descendingYears} onChange={() => setDescendingYears((s) => !s)} />
-                    <DateControl label="Min Date" value={minDate} onChange={setMinDate} />
-                    <DateControl label="Max Date" value={maxDate} onChange={setMaxDate} />
-                    <ToggleControl label="Display Min Date" checked={displayMinDate} onChange={() => setDisplayMinDate((s) => !s)} />
-                    <ToggleControl label="Display Max Date" checked={displayMaxDate} onChange={() => setDisplayMaxDate((s) => !s)} />
-                  </div>
-                )}
-              </div>
-
-              {/* Layout */}
-              <div>
-                <button
-                  onClick={() => setLayoutOpen((o) => !o)}
-                  className="flex w-full items-center justify-between border-b border-slate-200 pb-2 text-sm font-semibold uppercase tracking-wider text-slate-700 dark:border-slate-700 dark:text-slate-300"
-                >
-                  📐 Layout
-                  <svg className={`h-4 w-4 transition-transform ${layoutOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {layoutOpen && (
-                  <div className="mt-3 flex flex-col gap-3">
-                    <ToggleControl label="No Mobile Mode" description="Always side-by-side" checked={noMobileMode} onChange={() => setNoMobileMode((s) => !s)} />
-                    <ToggleControl label="Force Mobile Mode" description="Always stacked" checked={forceMobileMode} onChange={() => setForceMobileMode((s) => !s)} />
-                    <ToggleControl label="Left Mode" checked={leftMode} onChange={() => setLeftMode((s) => !s)} />
-                    <ToggleControl label="Center Mode" checked={centerMode} onChange={() => setCenterMode((s) => !s)} />
-                  </div>
-                )}
-              </div>
-
-              {/* Locale */}
-              <div>
-                <button
-                  onClick={() => setLocaleOpen((o) => !o)}
-                  className="flex w-full items-center justify-between border-b border-slate-200 pb-2 text-sm font-semibold uppercase tracking-wider text-slate-700 dark:border-slate-700 dark:text-slate-300"
-                >
-                  🌍 Locale
-                  <svg className={`h-4 w-4 transition-transform ${localeOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {localeOpen && (
-                  <div className="mt-3 flex flex-col gap-3">
-                    <ToggleControl label="Sunday First" checked={sundayFirst} onChange={() => setSundayFirst((s) => !s)} />
-                    <SelectControl
-                      label="Date Format"
-                      value={dateFormat}
-                      options={FORMAT_OPTIONS}
-                      onChange={setDateFormat}
-                    />
-                    <SelectControl
-                      label="Language"
-                      value={language}
-                      options={[
-                        { value: 'english', label: 'English' },
-                        { value: 'french', label: 'French' },
-                        { value: 'german', label: 'German' },
-                        { value: 'persian', label: 'Persian' },
-                      ]}
-                      onChange={setLanguage}
-                    />
-                  </div>
-                )}
-              </div>
-
-              {/* Preset Ranges */}
-              <div>
-                <button
-                  onClick={() => setRangesOpen((o) => !o)}
-                  className="flex w-full items-center justify-between border-b border-slate-200 pb-2 text-sm font-semibold uppercase tracking-wider text-slate-700 dark:border-slate-700 dark:text-slate-300"
-                >
-                  📅 Preset Ranges
-                  <svg className={`h-4 w-4 transition-transform ${rangesOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {rangesOpen && (
-                  <div className="mt-3 flex flex-col gap-3">
-                    <SelectControl
-                      label="Ranges Set"
-                      value={rangesPreset}
-                      options={[
-                        { value: 'default', label: 'Default (8 ranges)' },
-                        { value: 'minimal', label: 'Minimal (2 ranges)' },
-                        { value: 'none', label: 'None (empty)' },
-                      ]}
-                      onChange={setRangesPreset}
-                    />
-                  </div>
-                )}
-              </div>
-
-              {/* Customization (classNames) */}
-              <div>
-                <button
-                  onClick={() => setClassNamesOpen((o) => !o)}
-                  className="flex w-full items-center justify-between pb-2 text-sm font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300"
-                >
-                  🎨 Customization
-                  <svg className={`h-4 w-4 transition-transform ${classNamesOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {classNamesOpen && (
-                  <div className="mt-3 flex flex-col gap-3">
-                    <SelectControl
-                      label="Cell Style"
-                      value={cellStyle}
-                      options={[
-                        { value: 'default', label: 'Default' },
-                        { value: 'rounded', label: 'Rounded' },
-                        { value: 'large', label: 'Large' },
-                      ]}
-                      onChange={setCellStyle}
-                    />
-                    <SelectControl
-                      label="Range Buttons"
-                      value={rangeButtonStyle}
-                      options={[
-                        { value: 'default', label: 'Default' },
-                        { value: 'pill', label: 'Pill' },
-                        { value: 'bordered', label: 'Bordered' },
-                      ]}
-                      onChange={setRangeButtonStyle}
-                    />
-                    <SelectControl
-                      label="Footer Style"
-                      value={footerStyle}
-                      options={[
-                        { value: 'default', label: 'Default' },
-                        { value: 'compact', label: 'Compact' },
-                        { value: 'accent', label: 'Accent (Emerald)' },
-                      ]}
-                      onChange={setFooterStyle}
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
+          {/* Generated Code */}
+          <div className="min-w-0 lg:w-1/3">
+            <h2 className="mb-3 text-xl font-bold text-slate-900 dark:text-white">Generated Code</h2>
+            <p className="mb-3 text-sm text-slate-500 dark:text-slate-400">
+              Copy this code to use the picker with your current settings.
+            </p>
+            <CodeBlock code={generateCode()} lang="tsx" />
           </div>
-        </div>
-
-        {/* Generated Code */}
-        <div className="mt-8">
-          <h2 className="mb-3 text-xl font-bold text-slate-900 dark:text-white">Generated Code</h2>
-          <p className="mb-3 text-sm text-slate-500 dark:text-slate-400">
-            Copy this code to use the picker with your current settings.
-          </p>
-          <CodeBlock code={generateCode()} lang="tsx" />
         </div>
       </div>
     </div>
