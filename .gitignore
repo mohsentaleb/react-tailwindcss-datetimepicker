@@ -11,6 +11,7 @@
 # production
 /build
 /dist
+/dist-demo
 /.idea
 /cypress/screenshots
 

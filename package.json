@@ -21,6 +21,7 @@
     "build": "tsc -p ./tsconfig-build.json && vite build",
     "build:types": "tsc",
     "lint": "eslint src --ext js,jsx,ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "build:demo": "vite build --config vite.config.demo.js",
     "preview": "vite preview",
     "test": "vitest",
     "test:coverage": "vitest --coverage"
