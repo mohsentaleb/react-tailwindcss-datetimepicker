@@ -310,17 +310,21 @@ export default function PlaygroundPage() {
           {/* Tab content */}
           <div className="px-4 py-3">
             {activeTab === 'core' && (
-              <>
-                <ThemePicker value={theme} onChange={setTheme} />
-                <div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
-                  <ToggleControl label="Standalone" description="Always-visible inline picker" checked={standalone} onChange={() => setStandalone((s) => !s)} docsUrl="/docs/api-reference#layout" />
-                  <ToggleControl label="12-Hour Clock" description="Use AM/PM time format" checked={twelveHoursClock} onChange={() => setTwelveHoursClock((s) => !s)} docsUrl="/docs/features#time-selection" />
-                  <ToggleControl label="Smart Mode" description="Ping-pong start/end selection" checked={smartMode} onChange={() => setSmartMode((s) => !s)} docsUrl="/docs/features#smart-mode" />
-                  <ToggleControl label="Past Search Friendly" description="End date stays in the past" checked={pastSearchFriendly} onChange={() => setPastSearchFriendly((s) => !s)} docsUrl="/docs/features#smart-mode" />
-                  <ToggleControl label="Auto Apply" description="Apply callback on every change" checked={autoApply} onChange={() => setAutoApply((s) => !s)} docsUrl="/docs/api-reference#behavior" />
-                  <ToggleControl label="Descending Years" description="Newest years shown first" checked={descendingYears} onChange={() => setDescendingYears((s) => !s)} docsUrl="/docs/api-reference#behavior" />
+              <div className="flex flex-col gap-4 md:flex-row">
+                <div className="md:w-1/3">
+                  <ThemePicker value={theme} onChange={setTheme} />
                 </div>
-              </>
+                <div className="md:w-2/3">
+                  <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+                    <ToggleControl label="Standalone" description="Always-visible inline picker" checked={standalone} onChange={() => setStandalone((s) => !s)} docsUrl="/docs/api-reference#layout" />
+                    <ToggleControl label="12-Hour Clock" description="Use AM/PM time format" checked={twelveHoursClock} onChange={() => setTwelveHoursClock((s) => !s)} docsUrl="/docs/features#time-selection" />
+                    <ToggleControl label="Smart Mode" description="Ping-pong start/end selection" checked={smartMode} onChange={() => setSmartMode((s) => !s)} docsUrl="/docs/features#smart-mode" />
+                    <ToggleControl label="Past Search Friendly" description="End date stays in the past" checked={pastSearchFriendly} onChange={() => setPastSearchFriendly((s) => !s)} docsUrl="/docs/features#smart-mode" />
+                    <ToggleControl label="Auto Apply" description="Apply callback on every change" checked={autoApply} onChange={() => setAutoApply((s) => !s)} docsUrl="/docs/api-reference#behavior" />
+                    <ToggleControl label="Descending Years" description="Newest years shown first" checked={descendingYears} onChange={() => setDescendingYears((s) => !s)} docsUrl="/docs/api-reference#behavior" />
+                  </div>
+                </div>
+              </div>
             )}
 
             {activeTab === 'constraints' && (

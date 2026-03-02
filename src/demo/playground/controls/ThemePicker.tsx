@@ -52,10 +52,11 @@ const themeColors: Record<string, { bg: string; active: string }> = {
 // "sky" maps to undefined (default theme)
 type ThemeKey = Theme | 'sky';
 
-const allThemes: ThemeKey[] = [
-  'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose', 'red',
-  'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan',
-  'slate', 'gray', 'zinc', 'neutral', 'stone',
+const themeRows: ThemeKey[][] = [
+  ['cyan', 'sky', 'blue', 'indigo', 'violet', 'purple'],
+  ['fuchsia', 'pink', 'rose', 'red', 'orange', 'amber'],
+  ['yellow', 'lime', 'green', 'emerald', 'teal'],
+  ['slate', 'gray', 'zinc', 'stone', 'neutral'],
 ];
 
 interface ThemePickerProps {
@@ -74,18 +75,22 @@ export default function ThemePicker({ value, onChange }: ThemePickerProps) {
   return (
     <div>
       <span className="mb-2 block text-sm font-medium text-slate-900 dark:text-white">Theme</span>
-      <div className="flex flex-wrap gap-1.5">
-        {allThemes.map((t) => (
-          <button
-            key={t}
-            type="button"
-            onClick={() => handleClick(t)}
-            className={`rounded-full px-3 py-1 text-xs font-medium capitalize transition-colors ${
-              activeKey === t ? themeColors[t].active : themeColors[t].bg
-            }`}
-          >
-            {t}
-          </button>
+      <div className="flex flex-col gap-1.5">
+        {themeRows.map((row, i) => (
+          <div key={i} className="flex gap-1.5">
+            {row.map((t) => (
+              <button
+                key={t}
+                type="button"
+                onClick={() => handleClick(t)}
+                className={`rounded-full px-3 py-1 text-xs font-medium capitalize transition-colors ${
+                  activeKey === t ? themeColors[t].active : themeColors[t].bg
+                }`}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
         ))}
       </div>
     </div>
