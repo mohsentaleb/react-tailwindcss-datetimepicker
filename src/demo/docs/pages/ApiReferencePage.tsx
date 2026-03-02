@@ -26,8 +26,7 @@ const behaviorProps: PropRow[] = [
 
 const layoutProps: PropRow[] = [
   { name: 'standalone', required: false, type: 'boolean', default: 'false', description: 'Renders the picker inline and always visible instead of as a dropdown.' },
-  { name: 'leftMode', required: false, type: 'boolean', default: 'false', description: 'Dropdown opens aligned to the right edge of the trigger.' },
-  { name: 'centerMode', required: false, type: 'boolean', default: 'false', description: 'Dropdown opens centered relative to the trigger.' },
+  { name: 'alignment', required: false, type: "'left' | 'center' | 'right'", default: "'left'", description: 'Controls horizontal alignment of the dropdown relative to the trigger. "left" (default) opens left-aligned, "center" centers the dropdown, "right" aligns to the right edge.' },
   { name: 'noMobileMode', required: false, type: 'boolean', default: 'false', description: 'Always renders side-by-side regardless of screen width.' },
   { name: 'forceMobileMode', required: false, type: 'boolean', default: 'false', description: 'Always uses stacked/mobile layout.' },
 ];

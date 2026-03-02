@@ -232,8 +232,7 @@ export default App;
 | [`forceMobileMode`](#forcemobilemode)       | optional     | `Boolean`  | `false`       | Picker will always be displayed in condensed mode all the time                 |
 | [`twelveHoursClock`](#twelvehoursclock)     | optional     | `Boolean`  | `false`       | Display time values in a 12-hour format rather than a 24-hour format           |
 | [`standalone`](#standalone)                 | optional     | `Boolean`  | `false`       | When set the picker will be open by default                                    |
-| [`leftMode`](#leftmode)                     | optional     | `Boolean`  | `false`       | Picker will open to the left                                                   |
-| [`centerMode`](#centermode)                 | optional     | `Boolean`  | `false`       | Picker will open in center                                                     |
+| [`alignment`](#alignment)                   | optional     | `String`   | `'left'`      | Horizontal alignment of the dropdown: `'left'`, `'center'`, or `'right'`       |
 | [`displayMinDate`](#displaymindate)         | optional     | `Boolean`  | `false`       | Will display Min Date in picker footer                                         |
 | [`displayMaxDate`](#displaymaxdate)         | optional     | `Boolean`  | `false`       | Will display Max Date in picker footer                                         |
 | [`classNames`](#classnames)                 | optional     | `Object`   | `undefined`   | Will override classNames for different parts of the picker                     |
@@ -424,17 +423,15 @@ When enabled, the picker will display time values in a 12-hour format rather tha
 
 When set the picker will be open by default.
 
-### `leftMode`
+### `alignment`
 
-(optional) `boolean` defaults to `false`
+(optional) `'left' | 'center' | 'right'` defaults to `'left'`
 
-When set and changed the picker will open to the left (right to left) instead of the default which is to open to the right (left to right)
+Controls the horizontal alignment of the dropdown relative to the trigger element:
 
-### `centerMode`
-
-(optional) `boolean` defaults to `false`
-
-To allow flexibility, center mode has been added where leftMode or default is not enough.
+- `'left'` — Opens left-aligned (default behavior)
+- `'center'` — Centers the dropdown relative to the trigger
+- `'right'` — Aligns to the right edge of the trigger (opens right-to-left)
 
 ### `displayMinDate`
 

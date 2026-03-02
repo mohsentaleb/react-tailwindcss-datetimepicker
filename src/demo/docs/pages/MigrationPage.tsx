@@ -1,5 +1,17 @@
 import CodeBlock from '../../components/CodeBlock';
 
+const alignmentMigration = `// leftMode / centerMode → alignment
+//
+// Before:
+<ReactDateTimePicker leftMode />          // opens right-aligned
+<ReactDateTimePicker centerMode />        // opens centered
+<ReactDateTimePicker />                   // opens left-aligned (default)
+
+// After:
+<ReactDateTimePicker alignment="right" /> // opens right-aligned
+<ReactDateTimePicker alignment="center" />// opens centered
+<ReactDateTimePicker />                   // opens left-aligned (default)`;
+
 const migrationSteps = `// v2 (Moment.js) → v3 (date-fns)
 //
 // 1. Date objects: Moment objects → plain JavaScript Date objects
@@ -34,7 +46,21 @@ export default function MigrationPage() {
       </p>
 
       <h2 className="mb-4 border-b border-slate-200 pb-2 text-2xl font-semibold text-slate-900 dark:border-slate-700 dark:text-white">
-        Migration Steps
+        Alignment Prop (replaces leftMode / centerMode)
+      </h2>
+      <p className="mb-4 text-slate-600 dark:text-slate-400">
+        The <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm dark:bg-slate-800">leftMode</code> and{' '}
+        <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm dark:bg-slate-800">centerMode</code> boolean props
+        have been removed and replaced with a single{' '}
+        <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm dark:bg-slate-800">alignment</code> prop that
+        accepts <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm dark:bg-slate-800">&apos;left&apos;</code>,{' '}
+        <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm dark:bg-slate-800">&apos;center&apos;</code>, or{' '}
+        <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm dark:bg-slate-800">&apos;right&apos;</code>.
+      </p>
+      <CodeBlock code={alignmentMigration} lang="tsx" />
+
+      <h2 className="mt-10 mb-4 border-b border-slate-200 pb-2 text-2xl font-semibold text-slate-900 dark:border-slate-700 dark:text-white">
+        v2 → v3: Moment.js to date-fns
       </h2>
       <CodeBlock code={migrationSteps} lang="ts" />
 

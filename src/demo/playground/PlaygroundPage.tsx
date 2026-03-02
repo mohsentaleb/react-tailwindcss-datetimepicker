@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { clsx } from 'clsx';
 import { format as formatDate } from 'date-fns';
 
 import ReactDateTimePicker from '../../lib/index';
@@ -66,8 +67,17 @@ const RANGE_PRESETS: Record<string, Record<string, [Date, Date]>> = {
 // --- ClassNames presets ---
 const CELL_STYLES: Record<string, Partial<ClassNames>> = {
   default: {},
-  rounded: { normalCell: 'rounded-full' },
-  large: { normalCell: 'text-lg p-3' },
+  rounded: {
+    startCell: 'rounded-full!',
+    endCell: 'rounded-full!',
+  },
+  large: {
+    normalCell: 'text-lg',
+    startCell: 'text-lg',
+    endCell: 'text-lg',
+    withinRangeCell: 'text-lg',
+    greyCell: 'text-lg',
+  },
 };
 
 const RANGE_BUTTON_STYLES: Record<string, Partial<ClassNames>> = {
@@ -106,8 +116,7 @@ export default function PlaygroundPage() {
   // Layout
   const [noMobileMode, setNoMobileMode] = useState(false);
   const [forceMobileMode, setForceMobileMode] = useState(false);
-  const [leftMode, setLeftMode] = useState(false);
-  const [centerMode, setCenterMode] = useState(false);
+  const [alignment, setAlignment] = useState<'left' | 'center' | 'right'>('left');
 
   // Locale
   const [sundayFirst, setSundayFirst] = useState(true);
@@ -169,8 +178,7 @@ export default function PlaygroundPage() {
     if (!descendingYears) lines.push('  descendingYears={false}');
     if (noMobileMode) lines.push('  noMobileMode');
     if (forceMobileMode) lines.push('  forceMobileMode');
-    if (leftMode) lines.push('  leftMode');
-    if (centerMode) lines.push('  centerMode');
+    if (alignment !== 'left') lines.push(`  alignment="${alignment}"`);
     if (displayMinDate) lines.push('  displayMinDate');
     if (displayMaxDate) lines.push('  displayMaxDate');
 
@@ -208,13 +216,11 @@ export default function PlaygroundPage() {
       lines.push(`  }}`);
     }
 
-    if (!standalone) {
-      lines.push('>');
-      lines.push('  <button>Select date range</button>');
-      lines.push('</ReactDateTimePicker>');
+    if (standalone) {
+      lines.push('/>');
     } else {
       lines.push('>');
-      lines.push('  <button>Select date range</button>');
+      lines.push('  <button>{`${start.toLocaleDateString()} – ${end.toLocaleDateString()}`}</button>');
       lines.push('</ReactDateTimePicker>');
     }
 
@@ -279,8 +285,17 @@ export default function PlaygroundPage() {
               <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
                 <ToggleControl label="No Mobile Mode" description="Always side-by-side" checked={noMobileMode} onChange={() => setNoMobileMode((s) => !s)} />
                 <ToggleControl label="Force Mobile Mode" description="Always stacked" checked={forceMobileMode} onChange={() => setForceMobileMode((s) => !s)} />
-                <ToggleControl label="Left Mode" checked={leftMode} onChange={() => setLeftMode((s) => !s)} />
-                <ToggleControl label="Center Mode" checked={centerMode} onChange={() => setCenterMode((s) => !s)} />
+                <SelectControl
+                  label="Alignment"
+                  description="Dropdown open direction"
+                  value={alignment}
+                  options={[
+                    { value: 'left', label: 'Left (default)' },
+                    { value: 'center', label: 'Center' },
+                    { value: 'right', label: 'Right' },
+                  ]}
+                  onChange={(v) => setAlignment(v as 'left' | 'center' | 'right')}
+                />
               </div>
             )}
 
@@ -363,7 +378,10 @@ export default function PlaygroundPage() {
         <div className="mt-6 flex flex-col gap-6 lg:flex-row">
           {/* Live Picker */}
           <div className="min-w-0 lg:w-2/3">
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800">
+            <div className={clsx('rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800', {
+              'flex justify-end': alignment === 'right',
+              'flex justify-center': alignment === 'center',
+            })}>
               <ReactDateTimePicker
                 ranges={ranges}
                 start={selectedRange.start}
@@ -378,8 +396,7 @@ export default function PlaygroundPage() {
                 descendingYears={descendingYears}
                 noMobileMode={noMobileMode}
                 forceMobileMode={forceMobileMode}
-                leftMode={leftMode}
-                centerMode={centerMode}
+                alignment={alignment}
                 displayMinDate={displayMinDate}
                 displayMaxDate={displayMaxDate}
                 minDate={minDate}

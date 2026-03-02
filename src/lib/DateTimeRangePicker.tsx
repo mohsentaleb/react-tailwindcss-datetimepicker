@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import React from 'react';
 
+import { clsx } from 'clsx';
 import {
   format,
   isSameDay,
@@ -21,6 +22,7 @@ import {
   isSameMinute,
   subMinutes,
 } from 'date-fns';
+
 
 import ApplyCancelButtons from './date_picker/ApplyCancelButtons';
 import DatePicker from './date_picker/DatePicker';
@@ -125,6 +127,16 @@ class DateTimeRangePicker extends React.Component<Props, State> {
         Object.assign(ranges, propsRanges, { 'Custom Range': 'Custom Range' });
       }
       this.setState({ ranges });
+    }
+
+    if (this.props.locale?.format !== prevProps.locale?.format) {
+      const newFormat =
+        this.props.locale?.format || `dd-MM-yyyy ${this.props.twelveHoursClock ? 'h:mm a' : 'HH:mm'}`;
+      this.setState({
+        dateFormat: newFormat,
+        startLabel: format(this.state.start, newFormat),
+        endLabel: format(this.state.end, newFormat),
+      });
     }
   }
 
@@ -579,7 +591,10 @@ class DateTimeRangePicker extends React.Component<Props, State> {
     });
     return (
       <>
-        <div className="flex flex-col gap-2 p-2 md:flex-row">
+        <div className={clsx('flex flex-col gap-2 p-2', {
+          'md:flex-row': !this.props.forceMobileMode,
+          'flex-row!': this.props.noMobileMode,
+        })}>
           {Object.keys(this.state.ranges).length > 0 && (
             <Ranges
               ranges={this.state.ranges}
