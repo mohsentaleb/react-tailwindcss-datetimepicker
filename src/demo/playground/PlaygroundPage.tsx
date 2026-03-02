@@ -331,8 +331,8 @@ export default function PlaygroundPage() {
               <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
                 <DateControl label="Min Date" value={minDate} onChange={setMinDate} docsUrl="/docs/api-reference#constraints" />
                 <DateControl label="Max Date" value={maxDate} onChange={setMaxDate} docsUrl="/docs/api-reference#constraints" />
-                <ToggleControl label="Display Min Date" description="Show min date in footer" checked={displayMinDate} onChange={() => setDisplayMinDate((s) => !s)} docsUrl="/docs/api-reference#constraints" />
-                <ToggleControl label="Display Max Date" description="Show max date in footer" checked={displayMaxDate} onChange={() => setDisplayMaxDate((s) => !s)} docsUrl="/docs/api-reference#constraints" />
+                <ToggleControl label="Display Min Date" description={minDate ? 'Show min date in footer' : 'Set a min date first'} checked={displayMinDate} onChange={() => setDisplayMinDate((s) => !s)} docsUrl="/docs/api-reference#constraints" disabled={!minDate} />
+                <ToggleControl label="Display Max Date" description={maxDate ? 'Show max date in footer' : 'Set a max date first'} checked={displayMaxDate} onChange={() => setDisplayMaxDate((s) => !s)} docsUrl="/docs/api-reference#constraints" disabled={!maxDate} />
               </div>
             )}
 
