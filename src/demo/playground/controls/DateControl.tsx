@@ -9,9 +9,9 @@ interface DateControlProps {
 
 export default function DateControl({ label, value, onChange, allowClear = true }: DateControlProps) {
   return (
-    <div className="flex items-start justify-between gap-3">
+    <div className="flex flex-col gap-1">
       <span className="text-sm font-medium text-slate-900 dark:text-white">{label}</span>
-      <div className="flex shrink-0 items-center gap-1">
+      <div className="flex items-center gap-1">
         <input
           type="date"
           value={value ? format(value, 'yyyy-MM-dd') : ''}

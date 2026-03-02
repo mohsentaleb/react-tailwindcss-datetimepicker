@@ -44,7 +44,6 @@ This project is a fork of [react-datetimepicker](https://github.com/v0ltoz/react
 - [Migration](#migration)
   - [from `2.x.x to ` to `3.x.x`:](#from-2xx-to--to-3xx)
   - [From `1.x.x to ` to `2.x.x`:](#from-1xx-to--to-2xx)
-- [Roadmap](#roadmap)
 - [Get Help](#get-help)
 - [License](#license)
 
@@ -543,15 +542,6 @@ Builds the app for production to the `/dist` folder using vite's [library mode](
 - `local` prop has been renamed to [`locale`](#locale) and it's now an **optional** prop.
 - `style` prop has been removed in favor of [`classNames`](#classnames).
 - `darkMode` prop has been removed. All UI elements of the picker now have dark styles defined for them. If you add `className=dark` to your `<body>` tag (or any other parent element of it), dark mode will be automatically turned on.
-
-## Roadmap
-
-- [x] Support TypeScript
-- [x] Ability to add custom CSS classes for different parts of the component
-- [x] Migrate to [date-fns](https://www.npmjs.com/package/date-fns)
-- [x] Adding predefined themes
-- [x] Write tests
-- [ ] More demos showcasing different props
 
 ## Get Help
 

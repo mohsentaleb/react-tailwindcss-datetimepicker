@@ -8,7 +8,7 @@ interface SelectControlProps {
 
 export default function SelectControl({ label, description, value, options, onChange }: SelectControlProps) {
   return (
-    <div className="flex items-start justify-between gap-3">
+    <div className="flex flex-col gap-1">
       <div className="min-w-0">
         <span className="text-sm font-medium text-slate-900 dark:text-white">{label}</span>
         {description && <p className="text-xs text-slate-500 dark:text-slate-400">{description}</p>}
@@ -16,7 +16,7 @@ export default function SelectControl({ label, description, value, options, onCh
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="shrink-0 rounded border border-slate-300 bg-white px-2 py-1 text-sm text-slate-700 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300"
+        className="w-full rounded border border-slate-300 bg-white px-2 py-1 text-sm text-slate-700 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300"
       >
         {options.map((opt) => (
           <option key={opt.value} value={opt.value}>

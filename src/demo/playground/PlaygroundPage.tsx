@@ -267,24 +267,26 @@ export default function PlaygroundPage() {
               <>
                 <ThemePicker value={theme} onChange={setTheme} />
                 <div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
-                  <ToggleControl label="Standalone" description="Always-visible inline picker" checked={standalone} onChange={() => setStandalone((s) => !s)} />
-                  <ToggleControl label="12-Hour Clock" checked={twelveHoursClock} onChange={() => setTwelveHoursClock((s) => !s)} />
+                  <ToggleControl label="Standalone" description="Always-visible inline picker" checked={standalone} onChange={() => setStandalone((s) => !s)} docsUrl="/docs/api-reference#layout" />
+                  <ToggleControl label="12-Hour Clock" description="Use AM/PM time format" checked={twelveHoursClock} onChange={() => setTwelveHoursClock((s) => !s)} docsUrl="/docs/features#time-selection" />
                   <ToggleControl label="Smart Mode" description="Ping-pong start/end selection" checked={smartMode} onChange={() => setSmartMode((s) => !s)} docsUrl="/docs/features#smart-mode" />
-                  <ToggleControl label="Past Search Friendly" checked={pastSearchFriendly} onChange={() => setPastSearchFriendly((s) => !s)} docsUrl="/docs/features#smart-mode" />
-                  <ToggleControl label="Auto Apply" description="Apply on every change" checked={autoApply} onChange={() => setAutoApply((s) => !s)} />
-                  <ToggleControl label="Descending Years" checked={descendingYears} onChange={() => setDescendingYears((s) => !s)} />
+                  <ToggleControl label="Past Search Friendly" description="End date stays in the past" checked={pastSearchFriendly} onChange={() => setPastSearchFriendly((s) => !s)} docsUrl="/docs/features#smart-mode" />
+                  <ToggleControl label="Auto Apply" description="Apply callback on every change" checked={autoApply} onChange={() => setAutoApply((s) => !s)} docsUrl="/docs/api-reference#behavior" />
+                  <ToggleControl label="Descending Years" description="Newest years shown first" checked={descendingYears} onChange={() => setDescendingYears((s) => !s)} docsUrl="/docs/api-reference#behavior" />
+                </div>
+                <div className="mt-3 grid grid-cols-2 gap-3 rounded-lg border border-slate-200 p-3 dark:border-slate-700 md:grid-cols-4">
                   <DateControl label="Min Date" value={minDate} onChange={setMinDate} />
                   <DateControl label="Max Date" value={maxDate} onChange={setMaxDate} />
-                  <ToggleControl label="Display Min Date" checked={displayMinDate} onChange={() => setDisplayMinDate((s) => !s)} />
-                  <ToggleControl label="Display Max Date" checked={displayMaxDate} onChange={() => setDisplayMaxDate((s) => !s)} />
+                  <ToggleControl label="Display Min Date" description="Show min date in footer" checked={displayMinDate} onChange={() => setDisplayMinDate((s) => !s)} docsUrl="/docs/api-reference#constraints" />
+                  <ToggleControl label="Display Max Date" description="Show max date in footer" checked={displayMaxDate} onChange={() => setDisplayMaxDate((s) => !s)} docsUrl="/docs/api-reference#constraints" />
                 </div>
               </>
             )}
 
             {activeTab === 'layout' && (
               <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
-                <ToggleControl label="No Mobile Mode" description="Always side-by-side" checked={noMobileMode} onChange={() => setNoMobileMode((s) => !s)} />
-                <ToggleControl label="Force Mobile Mode" description="Always stacked" checked={forceMobileMode} onChange={() => setForceMobileMode((s) => !s)} />
+                <ToggleControl label="No Mobile Mode" description="Always side-by-side" checked={noMobileMode} onChange={() => setNoMobileMode((s) => !s)} docsUrl="/docs/features#mobile-support" />
+                <ToggleControl label="Force Mobile Mode" description="Always stacked" checked={forceMobileMode} onChange={() => setForceMobileMode((s) => !s)} docsUrl="/docs/features#mobile-support" />
                 <SelectControl
                   label="Alignment"
                   description="Dropdown open direction"
@@ -301,7 +303,7 @@ export default function PlaygroundPage() {
 
             {activeTab === 'locale' && (
               <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
-                <ToggleControl label="Sunday First" checked={sundayFirst} onChange={() => setSundayFirst((s) => !s)} />
+                <ToggleControl label="Sunday First" description="Week starts on Sunday" checked={sundayFirst} onChange={() => setSundayFirst((s) => !s)} docsUrl="/docs/localization" />
                 <SelectControl
                   label="Date Format"
                   value={dateFormat}

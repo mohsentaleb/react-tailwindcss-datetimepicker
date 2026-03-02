@@ -1,6 +1,8 @@
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
 
+import logo from '../assets/logo.png';
+
 import ThemeToggler from './ThemeToggler';
 
 export default function NavBar({ onToggleSidebar }: { onToggleSidebar?: () => void }) {
@@ -27,8 +29,13 @@ export default function NavBar({ onToggleSidebar }: { onToggleSidebar?: () => vo
               </svg>
             </button>
           )}
-          <NavLink to="/docs" className="text-lg font-bold text-slate-900 dark:text-white" end={false}>
-            React TailwindCSS DateTimePicker
+          <NavLink
+            to="/docs"
+            className="flex items-center gap-2 text-lg font-bold text-slate-900 dark:text-white"
+            end={false}
+          >
+            <img src={logo} alt="Logo" className="h-8 w-8" />
+            React TailwindCSS Date &amp; Time Picker
           </NavLink>
         </div>
         <div className="flex items-center gap-2">
