@@ -89,7 +89,37 @@ const RANGE_BUTTON_STYLES: Record<string, Partial<ClassNames>> = {
 const FOOTER_STYLES: Record<string, Partial<ClassNames>> = {
   default: {},
   compact: { footerContainer: 'py-1 px-2' },
-  accent: { footerContainer: 'border-t-2 border-emerald-300', applyButton: 'bg-emerald-600! hover:bg-emerald-700! text-white' },
+  accent: {
+    footerContainer: 'border-t-2 border-emerald-300',
+    applyButton: 'bg-emerald-600! hover:bg-emerald-700! text-white',
+  },
+};
+
+const CONTAINER_STYLES: Record<string, Partial<ClassNames>> = {
+  default: {},
+  'shadow-xl': { rootContainer: 'shadow-xl' },
+  'rounded-2xl': { rootContainer: 'rounded-2xl overflow-hidden' },
+  minimal: { rootContainer: 'border-none! shadow-none!' },
+};
+
+const HOVER_STYLES: Record<string, Partial<ClassNames>> = {
+  default: {},
+  emerald: { normalCellHover: 'bg-emerald-100! dark:bg-emerald-900!' },
+  rose: { normalCellHover: 'bg-rose-100! dark:bg-rose-900!' },
+  ring: { normalCellHover: 'ring-2 ring-sky-400 bg-transparent!' },
+};
+
+const RANGE_HIGHLIGHT_STYLES: Record<string, Partial<ClassNames>> = {
+  default: {},
+  emerald: { withinRangeCell: 'bg-emerald-50! dark:bg-emerald-950!' },
+  amber: { withinRangeCell: 'bg-amber-50! dark:bg-amber-950!' },
+  transparent: { withinRangeCell: 'bg-transparent!' },
+};
+
+const RANGE_SELECTED_STYLES: Record<string, Partial<ClassNames>> = {
+  default: {},
+  bold: { rangeButtonSelected: 'font-extrabold underline' },
+  emerald: { rangeButtonSelected: 'bg-emerald-600! text-white!' },
 };
 
 // --- Format presets ---
@@ -130,6 +160,10 @@ export default function PlaygroundPage() {
   const [cellStyle, setCellStyle] = useState('default');
   const [rangeButtonStyle, setRangeButtonStyle] = useState('default');
   const [footerStyle, setFooterStyle] = useState('default');
+  const [containerStyle, setContainerStyle] = useState('default');
+  const [hoverStyle, setHoverStyle] = useState('default');
+  const [rangeHighlightStyle, setRangeHighlightStyle] = useState('default');
+  const [rangeSelectedStyle, setRangeSelectedStyle] = useState('default');
 
   // Date state
   const [selectedRange, setSelectedRange] = useState({ start: new Date(), end: new Date() });
@@ -144,11 +178,22 @@ export default function PlaygroundPage() {
 
   // Build classNames
   const classNames: ClassNames = {
+    ...CONTAINER_STYLES[containerStyle],
     ...CELL_STYLES[cellStyle],
+    ...HOVER_STYLES[hoverStyle],
+    ...RANGE_HIGHLIGHT_STYLES[rangeHighlightStyle],
     ...RANGE_BUTTON_STYLES[rangeButtonStyle],
+    ...RANGE_SELECTED_STYLES[rangeSelectedStyle],
     ...FOOTER_STYLES[footerStyle],
   };
-  const hasClassNames = cellStyle !== 'default' || rangeButtonStyle !== 'default' || footerStyle !== 'default';
+  const hasClassNames =
+    containerStyle !== 'default' ||
+    cellStyle !== 'default' ||
+    hoverStyle !== 'default' ||
+    rangeHighlightStyle !== 'default' ||
+    rangeButtonStyle !== 'default' ||
+    rangeSelectedStyle !== 'default' ||
+    footerStyle !== 'default';
 
   // Build ranges
   const ranges = RANGE_PRESETS[rangesPreset] || DateRanges;
@@ -275,8 +320,8 @@ export default function PlaygroundPage() {
                   <ToggleControl label="Descending Years" description="Newest years shown first" checked={descendingYears} onChange={() => setDescendingYears((s) => !s)} docsUrl="/docs/api-reference#behavior" />
                 </div>
                 <div className="mt-3 grid grid-cols-2 gap-3 rounded-lg border border-slate-200 p-3 dark:border-slate-700 md:grid-cols-4">
-                  <DateControl label="Min Date" value={minDate} onChange={setMinDate} />
-                  <DateControl label="Max Date" value={maxDate} onChange={setMaxDate} />
+                  <DateControl label="Min Date" value={minDate} onChange={setMinDate} docsUrl="/docs/api-reference#constraints" />
+                  <DateControl label="Max Date" value={maxDate} onChange={setMaxDate} docsUrl="/docs/api-reference#constraints" />
                   <ToggleControl label="Display Min Date" description="Show min date in footer" checked={displayMinDate} onChange={() => setDisplayMinDate((s) => !s)} docsUrl="/docs/api-reference#constraints" />
                   <ToggleControl label="Display Max Date" description="Show max date in footer" checked={displayMaxDate} onChange={() => setDisplayMaxDate((s) => !s)} docsUrl="/docs/api-reference#constraints" />
                 </div>
@@ -297,6 +342,7 @@ export default function PlaygroundPage() {
                     { value: 'right', label: 'Right' },
                   ]}
                   onChange={(v) => setAlignment(v as 'left' | 'center' | 'right')}
+                  docsUrl="/docs/api-reference#layout"
                 />
               </div>
             )}
@@ -309,6 +355,7 @@ export default function PlaygroundPage() {
                   value={dateFormat}
                   options={FORMAT_OPTIONS}
                   onChange={setDateFormat}
+                  docsUrl="/docs/localization"
                 />
                 <SelectControl
                   label="Language"
@@ -320,6 +367,7 @@ export default function PlaygroundPage() {
                     { value: 'persian', label: 'Persian' },
                   ]}
                   onChange={setLanguage}
+                  docsUrl="/docs/localization"
                 />
               </div>
             )}
@@ -335,12 +383,25 @@ export default function PlaygroundPage() {
                     { value: 'none', label: 'None (empty)' },
                   ]}
                   onChange={setRangesPreset}
+                  docsUrl="/docs/features#preset-ranges"
                 />
               </div>
             )}
 
             {activeTab === 'customization' && (
-              <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
+                <SelectControl
+                  label="Container"
+                  value={containerStyle}
+                  options={[
+                    { value: 'default', label: 'Default' },
+                    { value: 'shadow-xl', label: 'Shadow XL' },
+                    { value: 'rounded-2xl', label: 'Rounded 2XL' },
+                    { value: 'minimal', label: 'Minimal (no border)' },
+                  ]}
+                  onChange={setContainerStyle}
+                  docsUrl="/docs/customization"
+                />
                 <SelectControl
                   label="Cell Style"
                   value={cellStyle}
@@ -350,6 +411,31 @@ export default function PlaygroundPage() {
                     { value: 'large', label: 'Large' },
                   ]}
                   onChange={setCellStyle}
+                  docsUrl="/docs/customization"
+                />
+                <SelectControl
+                  label="Hover Effect"
+                  value={hoverStyle}
+                  options={[
+                    { value: 'default', label: 'Default' },
+                    { value: 'emerald', label: 'Emerald' },
+                    { value: 'rose', label: 'Rose' },
+                    { value: 'ring', label: 'Ring Outline' },
+                  ]}
+                  onChange={setHoverStyle}
+                  docsUrl="/docs/customization"
+                />
+                <SelectControl
+                  label="Range Highlight"
+                  value={rangeHighlightStyle}
+                  options={[
+                    { value: 'default', label: 'Default' },
+                    { value: 'emerald', label: 'Emerald' },
+                    { value: 'amber', label: 'Amber' },
+                    { value: 'transparent', label: 'Transparent' },
+                  ]}
+                  onChange={setRangeHighlightStyle}
+                  docsUrl="/docs/customization"
                 />
                 <SelectControl
                   label="Range Buttons"
@@ -360,6 +446,18 @@ export default function PlaygroundPage() {
                     { value: 'bordered', label: 'Bordered' },
                   ]}
                   onChange={setRangeButtonStyle}
+                  docsUrl="/docs/customization"
+                />
+                <SelectControl
+                  label="Selected Range Button"
+                  value={rangeSelectedStyle}
+                  options={[
+                    { value: 'default', label: 'Default' },
+                    { value: 'bold', label: 'Bold Underline' },
+                    { value: 'emerald', label: 'Emerald' },
+                  ]}
+                  onChange={setRangeSelectedStyle}
+                  docsUrl="/docs/customization"
                 />
                 <SelectControl
                   label="Footer Style"
@@ -370,6 +468,7 @@ export default function PlaygroundPage() {
                     { value: 'accent', label: 'Accent (Emerald)' },
                   ]}
                   onChange={setFooterStyle}
+                  docsUrl="/docs/customization"
                 />
               </div>
             )}

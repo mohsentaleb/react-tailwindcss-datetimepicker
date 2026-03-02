@@ -35,7 +35,7 @@ export default function NavBar({ onToggleSidebar }: { onToggleSidebar?: () => vo
             end={false}
           >
             <img src={logo} alt="Logo" className="h-8 w-8" />
-            React TailwindCSS Date &amp; Time Picker
+            <span className="hidden md:inline">React TailwindCSS Date &amp; Time Picker</span>
           </NavLink>
         </div>
         <div className="flex items-center gap-2">
@@ -45,7 +45,7 @@ export default function NavBar({ onToggleSidebar }: { onToggleSidebar?: () => vo
           <NavLink to="/playground" className={linkClass}>
             Playground
           </NavLink>
-          <div className="ml-2 border-l border-slate-200 pl-3 dark:border-slate-700">
+          <div className="ml-2 flex items-center border-l border-slate-200 pl-3 dark:border-slate-700">
             <ThemeToggler />
           </div>
           <a

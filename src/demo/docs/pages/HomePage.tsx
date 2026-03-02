@@ -151,7 +151,7 @@ export default function HomePage() {
         <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
           React TailwindCSS
           <br />
-          <span className="text-sky-500">DateTimePicker</span>
+          <span className="text-sky-500">Date &amp; Time Picker</span>
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
           A powerful, customizable date and time range picker component for React, styled with TailwindCSS.
@@ -170,7 +170,7 @@ export default function HomePage() {
             Playground
           </Link>
         </div>
-        <div className="mx-auto mt-6 max-w-xs">
+        <div className="mx-auto mt-6 max-w-md">
           <CodeBlock code="npm install react-tailwindcss-datetimepicker" lang="bash" />
         </div>
       </div>
@@ -182,7 +182,7 @@ export default function HomePage() {
           <div className="flex flex-col items-center gap-4">
             <div className="flex flex-col gap-2">
               {themes.map((row, i) => (
-                <div key={i} className="flex justify-center gap-2">
+                <div key={i} className="flex flex-wrap justify-center gap-2">
                   {row.map((t) => (
                     <button
                       key={t}

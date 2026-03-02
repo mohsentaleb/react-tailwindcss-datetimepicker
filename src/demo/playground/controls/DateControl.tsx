@@ -5,12 +5,18 @@ interface DateControlProps {
   value: Date | undefined;
   onChange: (value: Date | undefined) => void;
   allowClear?: boolean;
+  docsUrl?: string;
 }
 
-export default function DateControl({ label, value, onChange, allowClear = true }: DateControlProps) {
+export default function DateControl({ label, value, onChange, allowClear = true, docsUrl }: DateControlProps) {
   return (
     <div className="flex flex-col gap-1">
-      <span className="text-sm font-medium text-slate-900 dark:text-white">{label}</span>
+      <span className="text-sm font-medium text-slate-900 dark:text-white">
+        {label}
+        {docsUrl && (
+          <a href={docsUrl} className="ml-1.5 text-xs font-normal text-sky-500 hover:text-sky-600 dark:text-sky-400 dark:hover:text-sky-300" target="_blank" rel="noopener noreferrer">docs</a>
+        )}
+      </span>
       <div className="flex items-center gap-1">
         <input
           type="date"
