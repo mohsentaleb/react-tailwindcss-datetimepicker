@@ -24,6 +24,7 @@ export const sidebarConfig: SidebarSection[] = [
     heading: 'Features',
     items: [
       { label: 'Date Range', to: '/docs/features#date-range' },
+      { label: 'Smart Mode', to: '/docs/features#smart-mode' },
       { label: 'Time Selection', to: '/docs/features#time-selection' },
       { label: 'Preset Ranges', to: '/docs/features#preset-ranges' },
       { label: 'Dark Mode', to: '/docs/features#dark-mode' },

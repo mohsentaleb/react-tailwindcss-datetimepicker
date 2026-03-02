@@ -97,7 +97,7 @@ export default function PlaygroundPage() {
   const [smartMode, setSmartMode] = useState(false);
   const [autoApply, setAutoApply] = useState(false);
   const [pastSearchFriendly, setPastSearchFriendly] = useState(false);
-  const [descendingYears, setDescendingYears] = useState(false);
+  const [descendingYears, setDescendingYears] = useState(true);
   const [minDate, setMinDate] = useState<Date | undefined>(undefined);
   const [maxDate, setMaxDate] = useState<Date | undefined>(undefined);
   const [displayMinDate, setDisplayMinDate] = useState(false);
@@ -170,7 +170,7 @@ export default function PlaygroundPage() {
     if (smartMode) lines.push('  smartMode');
     if (autoApply) lines.push('  autoApply');
     if (pastSearchFriendly) lines.push('  pastSearchFriendly');
-    if (descendingYears) lines.push('  descendingYears');
+    if (!descendingYears) lines.push('  descendingYears={false}');
     if (noMobileMode) lines.push('  noMobileMode');
     if (forceMobileMode) lines.push('  forceMobileMode');
     if (leftMode) lines.push('  leftMode');
@@ -288,9 +288,9 @@ export default function PlaygroundPage() {
                     <ThemePicker value={theme} onChange={setTheme} />
                     <ToggleControl label="Standalone" description="Always-visible inline picker" checked={standalone} onChange={() => setStandalone((s) => !s)} />
                     <ToggleControl label="12-Hour Clock" checked={twelveHoursClock} onChange={() => setTwelveHoursClock((s) => !s)} />
-                    <ToggleControl label="Smart Mode" description="Ping-pong start/end selection" checked={smartMode} onChange={() => setSmartMode((s) => !s)} />
+                    <ToggleControl label="Smart Mode" description="Ping-pong start/end selection" checked={smartMode} onChange={() => setSmartMode((s) => !s)} docsUrl="/docs/features#smart-mode" />
+                    <ToggleControl label="Past Search Friendly" checked={pastSearchFriendly} onChange={() => setPastSearchFriendly((s) => !s)} docsUrl="/docs/features#smart-mode" />
                     <ToggleControl label="Auto Apply" description="Apply on every change" checked={autoApply} onChange={() => setAutoApply((s) => !s)} />
-                    <ToggleControl label="Past Search Friendly" checked={pastSearchFriendly} onChange={() => setPastSearchFriendly((s) => !s)} />
                     <ToggleControl label="Descending Years" checked={descendingYears} onChange={() => setDescendingYears((s) => !s)} />
                     <DateControl label="Min Date" value={minDate} onChange={setMinDate} />
                     <DateControl label="Max Date" value={maxDate} onChange={setMaxDate} />

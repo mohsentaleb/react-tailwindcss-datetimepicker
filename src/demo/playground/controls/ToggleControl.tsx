@@ -3,13 +3,19 @@ interface ToggleControlProps {
   description?: string;
   checked: boolean;
   onChange: () => void;
+  docsUrl?: string;
 }
 
-export default function ToggleControl({ label, description, checked, onChange }: ToggleControlProps) {
+export default function ToggleControl({ label, description, checked, onChange, docsUrl }: ToggleControlProps) {
   return (
     <div className="flex items-start justify-between gap-3">
       <div className="min-w-0">
-        <span className="text-sm font-medium text-slate-900 dark:text-white">{label}</span>
+        <span className="text-sm font-medium text-slate-900 dark:text-white">
+          {label}
+          {docsUrl && (
+            <a href={docsUrl} className="ml-1.5 text-xs font-normal text-sky-500 hover:text-sky-600 dark:text-sky-400 dark:hover:text-sky-300" target="_blank" rel="noopener noreferrer">docs</a>
+          )}
+        </span>
         {description && <p className="text-xs text-slate-500 dark:text-slate-400">{description}</p>}
       </div>
       <label className="inline-flex shrink-0 cursor-pointer items-center">

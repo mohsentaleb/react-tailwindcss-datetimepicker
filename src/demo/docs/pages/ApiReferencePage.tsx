@@ -18,9 +18,9 @@ const constraintProps: PropRow[] = [
 const behaviorProps: PropRow[] = [
   { name: 'ranges', required: false, type: 'Record<string, [Date, Date]>', default: '{}', description: 'Preset range buttons. Each key is the label; value is a [start, end] Date tuple. When empty or omitted, the ranges panel is hidden.' },
   { name: 'autoApply', required: false, type: 'boolean', default: 'false', description: 'Fires applyCallback immediately on every change. Hides the Apply button.' },
-  { name: 'smartMode', required: false, type: 'boolean', default: 'false', description: 'Enables ping-pong selection: clicks alternate between start and end date.' },
-  { name: 'pastSearchFriendly', required: false, type: 'boolean', default: 'false', description: 'With smartMode, places same-month dates on the right calendar for easier backward searching.' },
-  { name: 'descendingYears', required: false, type: 'boolean', default: 'false', description: 'Show years in descending order in the dropdown.' },
+  { name: 'smartMode', required: false, type: 'boolean', default: 'false', description: 'Enables flexible date selection: ping-pong selection (clicks alternate between start and end), auto-swap when a selection would create an invalid range, same-month calendar offset (right calendar shifts forward one month), and relaxed cell constraints (all cells clickable).' },
+  { name: 'pastSearchFriendly', required: false, type: 'boolean', default: 'false', description: 'Requires smartMode. Modifies the same-month calendar offset so the left calendar shifts back one month instead of the right shifting forward. Useful for backward-in-time searches.' },
+  { name: 'descendingYears', required: false, type: 'boolean', default: 'true', description: 'Show years in descending order in the dropdown. Set to false for ascending.' },
   { name: 'rangeCallback', required: false, type: '(index: number, value: string) => void', default: 'undefined', description: 'Called when a preset range button is clicked.' },
 ];
 

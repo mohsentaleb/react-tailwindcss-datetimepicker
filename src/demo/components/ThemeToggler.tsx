@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { useDarkMode } from 'usehooks-ts';
 
-import MoonIcon from '../../../public/moon.svg?react';
-import SunIcon from '../../../public/sun.svg?react';
+import MoonIcon from '../assets/moon.svg?react';
+import SunIcon from '../assets/sun.svg?react';
 
 function ThemeToggler() {
   const { isDarkMode, toggle } = useDarkMode();

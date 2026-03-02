@@ -224,10 +224,10 @@ export default App;
 | [`maxDate`](#maxdate)                       | optional     | `Date`     | `undefined`   | Maximum date that can be selected in calendar                                  |
 | [`minDate`](#mindate)                       | optional     | `Date`     | `undefined`   | Minimum date that can be selected in calendar                                  |
 | [`autoApply`](#autoapply)                   | optional     | `Boolean`  | `false`       | Set dates as soon as they're clicked without pressing apply                    |
-| [`descendingYears`](#descendingyears)       | optional     | `Boolean`  | `false`       | Set years be displayed in descending order                                     |
+| [`descendingYears`](#descendingyears)       | optional     | `Boolean`  | `true`        | Set years be displayed in descending order                                     |
 | [`years`](#years)                           | optional     | `Array`    | `[1900, now]` | Limit the years shown in calendar                                              |
-| [`smartMode`](#smartmode)                   | optional     | `Boolean`  | `false`       | Switch the month on the right hand side (RHS) when two dates in the same month |
-| [`pastSearchFriendly`](#pastsearchfriendly) | optional     | `Boolean`  | `false`       | Optimize calendar for past searches                                            |
+| [`smartMode`](#smartmode)                   | optional     | `Boolean`  | `false`       | Enables flexible date selection with ping-pong mode, auto-swap, and relaxed constraints |
+| [`pastSearchFriendly`](#pastsearchfriendly) | optional     | `Boolean`  | `false`       | With `smartMode`, shifts the left calendar back one month instead of the right forward   |
 | [`noMobileMode`](#nomobilemode)             | optional     | `Boolean`  | `false`       | Picker will always be displayed in full screen mode                            |
 | [`forceMobileMode`](#forcemobilemode)       | optional     | `Boolean`  | `false`       | Picker will always be displayed in condensed mode all the time                 |
 | [`twelveHoursClock`](#twelvehoursclock)     | optional     | `Boolean`  | `false`       | Display time values in a 12-hour format rather than a 24-hour format           |
@@ -365,9 +365,9 @@ When set there will only be one button in the bottom right to close the screen. 
 
 ### `descendingYears`
 
-(optional) `boolean` defaults to `false`
+(optional) `boolean` defaults to `true`
 
-To set years be displayed in descending order in picker instead of ascending.
+Years are displayed in descending order by default (largest first). Set to `false` to display in ascending order.
 
 ### `years`
 
@@ -385,18 +385,20 @@ years={[2000, 2026]}
 
 (optional) `boolean` defaults to `false`
 
-The date time picker will switch the month on the right hand side (RHS) when two dates in the same month are selected. Can be used in
-conjunction with `pastSearchFriendly` to switch the month on the left hand side (LHS) when the two dates are from the same month.
+Enables flexible date selection with several behaviors:
+
+- **Ping-pong selection:** Clicks alternate between setting the start and end date regardless of which calendar side is clicked. A "Selecting From" / "Selecting To" indicator shows which date will be set next.
+- **Auto-swap invalid ranges:** When a selection (cell click or typed input) would make start after end, the other date is automatically adjusted by one day. Without `smartMode`, such selections are rejected.
+- **Same-month calendar offset:** When both dates fall in the same month and year, the right calendar shifts forward one month to always show two different months. (Use `pastSearchFriendly` to shift the left calendar back instead.)
+- **Relaxed cell constraints:** Without `smartMode`, cells outside the current range are greyed out and unclickable. With `smartMode`, all cells are clickable and auto-swap handles any conflicts.
 
 ### `pastSearchFriendly`
 
-(optional) `boolean`
+(optional) `boolean` defaults to `false`
 
 **Note:** Requires `smartMode` to be enabled.
 
-Changes the mode of the date time picker to be optimised for past searches. Where possible, the start and end time will be shown on the RHS when the month and year are equal. This allows for the previous month to be shown on the LHS to allow easier backwards searching.
-
-This setting is `false` by default meaning that the LHS is used when dates are selected in the same month & year
+Modifies the same-month calendar offset behavior of `smartMode`. When both dates are in the same month and year, the left calendar shifts back one month (showing the previous month) instead of the right calendar shifting forward. This is useful for searching backward in time, as the current month stays on the right with the previous month visible on the left.
 
 ### `noMobileMode`
 

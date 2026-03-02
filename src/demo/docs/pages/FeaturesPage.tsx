@@ -5,7 +5,18 @@ const dateRangeExample = `<ReactDateTimePicker
   start={start}
   end={end}
   applyCallback={handleApply}
-  smartMode  // Enables ping-pong selection: click start, then end
+  smartMode
+>
+  <button>Pick dates</button>
+</ReactDateTimePicker>`;
+
+const pastSearchExample = `<ReactDateTimePicker
+  ranges={ranges}
+  start={start}
+  end={end}
+  applyCallback={handleApply}
+  smartMode
+  pastSearchFriendly
 >
   <button>Pick dates</button>
 </ReactDateTimePicker>`;
@@ -58,11 +69,56 @@ export default function FeaturesPage() {
           Date Range Selection
         </h2>
         <p className="mb-4 text-slate-600 dark:text-slate-400">
-          The picker displays two calendars side-by-side for selecting a start and end date. Enable{' '}
-          <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm dark:bg-slate-800">smartMode</code> to allow
-          ping-pong selection where clicks alternate between setting the start and end date.
+          The picker displays two calendars side-by-side for selecting a start and end date. By default, the left
+          calendar sets the start date and the right calendar sets the end date.
         </p>
         <CodeBlock code={dateRangeExample} lang="tsx" />
+      </section>
+
+      <section id="smart-mode" className="mt-10">
+        <h2 className="mb-4 border-b border-slate-200 pb-2 text-2xl font-semibold text-slate-900 dark:border-slate-700 dark:text-white">
+          Smart Mode
+        </h2>
+        <p className="mb-4 text-slate-600 dark:text-slate-400">
+          Enable <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm dark:bg-slate-800">smartMode</code> for a
+          more flexible date selection experience. It enables the following behaviors:
+        </p>
+        <ul className="mb-4 list-inside list-disc space-y-2 text-slate-600 dark:text-slate-400">
+          <li>
+            <strong className="text-slate-900 dark:text-white">Ping-pong selection</strong> &mdash; Clicks alternate
+            between setting the start and end date regardless of which calendar side is clicked. A &ldquo;Selecting
+            From&rdquo; / &ldquo;Selecting To&rdquo; indicator shows which date will be set next.
+          </li>
+          <li>
+            <strong className="text-slate-900 dark:text-white">Auto-swap invalid ranges</strong> &mdash; When a
+            selection (cell click or typed input) would place the start date after the end date, the other date is
+            automatically adjusted by one day. Without{' '}
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm dark:bg-slate-800">smartMode</code>, such
+            selections are rejected.
+          </li>
+          <li>
+            <strong className="text-slate-900 dark:text-white">Same-month calendar offset</strong> &mdash; When both
+            dates fall in the same month and year, the right calendar shifts forward one month so you always see two
+            different months.
+          </li>
+          <li>
+            <strong className="text-slate-900 dark:text-white">Relaxed cell constraints</strong> &mdash; Without{' '}
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm dark:bg-slate-800">smartMode</code>, cells
+            outside the current range are greyed out and unclickable. With{' '}
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm dark:bg-slate-800">smartMode</code>, all cells
+            are clickable and auto-swap handles any conflicts.
+          </li>
+        </ul>
+
+        <h3 className="mb-3 mt-6 text-lg font-semibold text-slate-900 dark:text-white">Past Search Friendly</h3>
+        <p className="mb-4 text-slate-600 dark:text-slate-400">
+          The <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm dark:bg-slate-800">pastSearchFriendly</code>{' '}
+          prop modifies the same-month calendar offset behavior. Instead of the right calendar shifting forward, the
+          left calendar shifts back one month. This keeps the current month on the right with the previous month visible
+          on the left, which is useful when searching backward in time (e.g. log analysis, historical data). Requires{' '}
+          <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm dark:bg-slate-800">smartMode</code>.
+        </p>
+        <CodeBlock code={pastSearchExample} lang="tsx" />
       </section>
 
       <section id="time-selection" className="mt-10">
