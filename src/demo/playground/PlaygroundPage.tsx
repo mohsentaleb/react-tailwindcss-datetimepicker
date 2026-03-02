@@ -199,7 +199,7 @@ export default function PlaygroundPage() {
   const ranges = RANGE_PRESETS[rangesPreset] || DateRanges;
 
   // Active tab
-  const [activeTab, setActiveTab] = useState<'core' | 'layout' | 'locale' | 'ranges' | 'customization'>('core');
+  const [activeTab, setActiveTab] = useState<'core' | 'constraints' | 'layout' | 'locale' | 'ranges' | 'customization'>('core');
 
   function handleApply(start: Date, end: Date) {
     setSelectedRange({ start, end });
@@ -287,6 +287,7 @@ export default function PlaygroundPage() {
           <div className="flex border-b border-slate-200 dark:border-slate-700">
             {([
               ['core', 'Core Props'],
+              ['constraints', 'Constraints'],
               ['layout', 'Layout'],
               ['locale', 'Locale'],
               ['ranges', 'Ranges'],
@@ -319,13 +320,16 @@ export default function PlaygroundPage() {
                   <ToggleControl label="Auto Apply" description="Apply callback on every change" checked={autoApply} onChange={() => setAutoApply((s) => !s)} docsUrl="/docs/api-reference#behavior" />
                   <ToggleControl label="Descending Years" description="Newest years shown first" checked={descendingYears} onChange={() => setDescendingYears((s) => !s)} docsUrl="/docs/api-reference#behavior" />
                 </div>
-                <div className="mt-3 grid grid-cols-2 gap-3 rounded-lg border border-slate-200 p-3 dark:border-slate-700 md:grid-cols-4">
-                  <DateControl label="Min Date" value={minDate} onChange={setMinDate} docsUrl="/docs/api-reference#constraints" />
-                  <DateControl label="Max Date" value={maxDate} onChange={setMaxDate} docsUrl="/docs/api-reference#constraints" />
-                  <ToggleControl label="Display Min Date" description="Show min date in footer" checked={displayMinDate} onChange={() => setDisplayMinDate((s) => !s)} docsUrl="/docs/api-reference#constraints" />
-                  <ToggleControl label="Display Max Date" description="Show max date in footer" checked={displayMaxDate} onChange={() => setDisplayMaxDate((s) => !s)} docsUrl="/docs/api-reference#constraints" />
-                </div>
               </>
+            )}
+
+            {activeTab === 'constraints' && (
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+                <DateControl label="Min Date" value={minDate} onChange={setMinDate} docsUrl="/docs/api-reference#constraints" />
+                <DateControl label="Max Date" value={maxDate} onChange={setMaxDate} docsUrl="/docs/api-reference#constraints" />
+                <ToggleControl label="Display Min Date" description="Show min date in footer" checked={displayMinDate} onChange={() => setDisplayMinDate((s) => !s)} docsUrl="/docs/api-reference#constraints" />
+                <ToggleControl label="Display Max Date" description="Show max date in footer" checked={displayMaxDate} onChange={() => setDisplayMaxDate((s) => !s)} docsUrl="/docs/api-reference#constraints" />
+              </div>
             )}
 
             {activeTab === 'layout' && (
