@@ -140,8 +140,8 @@ const features = [
 ];
 
 export default function HomePage() {
-  const [start, setStart] = useState(new Date());
-  const [end, setEnd] = useState(new Date());
+  const [start, setStart] = useState(DateRanges['Last 1 Week'][0]);
+  const [end, setEnd] = useState(DateRanges['Last 1 Week'][1]);
   const [theme, setTheme] = useState<Theme>('blue');
 
   return (

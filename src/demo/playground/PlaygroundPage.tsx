@@ -166,7 +166,7 @@ export default function PlaygroundPage() {
   const [rangeSelectedStyle, setRangeSelectedStyle] = useState('default');
 
   // Date state
-  const [selectedRange, setSelectedRange] = useState({ start: new Date(), end: new Date() });
+  const [selectedRange, setSelectedRange] = useState({ start: DateRanges['Last 1 Week'][0], end: DateRanges['Last 1 Week'][1] });
 
   // Build locale object
   const localePreset = LOCALE_PRESETS[language] || {};

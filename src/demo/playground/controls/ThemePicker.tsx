@@ -54,7 +54,7 @@ type ThemeKey = Theme | 'sky';
 
 const themeRows: ThemeKey[][] = [
   ['cyan', 'sky', 'blue', 'indigo', 'violet', 'purple'],
-  ['fuchsia', 'pink', 'rose', 'red', 'orange', 'amber'],
+  ['amber', 'orange', 'red', 'rose', 'pink', 'fuchsia'],
   ['yellow', 'lime', 'green', 'emerald', 'teal'],
   ['slate', 'gray', 'zinc', 'stone', 'neutral'],
 ];
