@@ -22,7 +22,7 @@
     "build:types": "tsc",
     "lint": "eslint src --ext js,jsx,ts,tsx --report-unused-disable-directives --max-warnings 0",
     "build:demo": "vite build --config vite.config.demo.js",
-    "deploy:demo": "npm run build:demo && npx wrangler deploy",
+    "deploy:demo": "npm run build:demo && npx wrangler deploy --config dist-demo/wrangler.json",
     "preview": "vite preview",
     "test": "vitest",
     "test:coverage": "vitest --coverage"

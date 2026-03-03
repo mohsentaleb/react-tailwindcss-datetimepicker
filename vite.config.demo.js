@@ -14,7 +14,7 @@ export default defineConfig({
   root: resolve(__dirname, 'src/demo'),
 
   plugins: [
-    cloudflare(),
+    cloudflare({ configPath: resolve(__dirname, 'wrangler.jsonc') }),
     svgr({
       svgrOptions: {
         // 1. Keeps the viewBox so the SVG can scale
@@ -45,9 +45,5 @@ export default defineConfig({
     // Output one level up to the project root's dist-demo folder
     outDir: resolve(__dirname, 'dist-demo'),
     emptyOutDir: true,
-    rollupOptions: {
-      // The entry point is the HTML file we just created
-      input: resolve(__dirname, 'src/demo/index.html'),
-    },
   },
 });
