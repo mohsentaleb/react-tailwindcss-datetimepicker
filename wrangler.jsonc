@@ -1,9 +1,10 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "react-tailwindcss-datetimepicker",
-  "pages": {
-    "build_command": "npm run build:demo",
-    "build_output_dir": "dist-demo"
+  "compatibility_date": "2026-03-03",
+  "assets": {
+    "directory": "dist-demo",
+    "not_found_handling": "single-page-application"
   },
   "routes": [
     { "pattern": "reactdatetime.dev", "custom_domain": true },

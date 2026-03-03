@@ -22,6 +22,7 @@
     "build:types": "tsc",
     "lint": "eslint src --ext js,jsx,ts,tsx --report-unused-disable-directives --max-warnings 0",
     "build:demo": "vite build --config vite.config.demo.js",
+    "deploy:demo": "npm run build:demo && npx wrangler deploy",
     "preview": "vite preview",
     "test": "vitest",
     "test:coverage": "vitest --coverage"
@@ -37,6 +38,7 @@
     "date-fns": "^4.1.0"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.25.6",
     "@tailwindcss/vite": "^4.2.1",
     "@types/react": "^18.3.28",
     "@types/react-dom": "^18.3.7",
