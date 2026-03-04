@@ -151,7 +151,7 @@ export default function HomePage() {
         <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
           React TailwindCSS
           <br />
-          <span className="text-sky-500">Date &amp; Time Picker</span>
+          <span className="text-sky-600 dark:text-sky-400">Date &amp; Time Picker</span>
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
           A powerful, customizable date and time range picker component for React, styled with TailwindCSS.
@@ -159,7 +159,7 @@ export default function HomePage() {
         <div className="mt-6 flex justify-center gap-3">
           <Link
             to="/docs/installation"
-            className="rounded-lg bg-sky-500 px-5 py-2.5 text-sm font-medium text-white hover:bg-sky-600"
+            className="rounded-lg bg-sky-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-sky-700"
           >
             Get Started
           </Link>

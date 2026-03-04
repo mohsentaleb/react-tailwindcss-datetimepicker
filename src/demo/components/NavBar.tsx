@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
 
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.webp';
 
 import ThemeToggler from './ThemeToggler';
 
@@ -34,7 +34,7 @@ export default function NavBar({ onToggleSidebar }: { onToggleSidebar?: () => vo
             className="flex items-center gap-2 text-lg font-bold text-slate-900 dark:text-white"
             end={false}
           >
-            <img src={logo} alt="Logo" className="h-8 w-8" />
+            <img src={logo} alt="Logo" className="h-8 w-8" width={32} height={32} />
             <span className="hidden md:inline">React TailwindCSS Date &amp; Time Picker</span>
           </NavLink>
         </div>
