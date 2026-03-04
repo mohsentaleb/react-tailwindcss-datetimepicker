@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
 
-import { type Highlighter, createHighlighter } from 'shiki';
+import type { Highlighter } from 'shiki';
 
 let highlighterPromise: Promise<Highlighter> | null = null;
 
 function getHighlighter() {
   if (!highlighterPromise) {
-    highlighterPromise = createHighlighter({
-      themes: ['github-light', 'github-dark'],
-      langs: ['tsx', 'typescript', 'bash', 'css', 'html', 'javascript'],
-    });
+    highlighterPromise = import('shiki').then(({ createHighlighter }) =>
+      createHighlighter({
+        themes: ['github-light', 'github-dark'],
+        langs: ['tsx', 'typescript', 'bash', 'css', 'html', 'javascript'],
+      }),
+    );
   }
   return highlighterPromise;
 }
