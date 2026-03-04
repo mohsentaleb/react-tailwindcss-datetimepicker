@@ -1,12 +1,11 @@
-import { Suspense, lazy, useState } from 'react';
+import { useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
 import ReactDateTimePicker from '../../../lib/index';
 import { Theme } from '../../../lib/types';
+import CodeBlock from '../../components/CodeBlock';
 import { DateRanges } from '../../consts';
-
-const CodeBlock = lazy(() => import('../../components/CodeBlock'));
 
 const themeColors: Record<string, { bg: string; active: string }> = {
   blue: { bg: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300', active: 'bg-blue-600 text-white' },
@@ -172,15 +171,7 @@ export default function HomePage() {
           </Link>
         </div>
         <div className="mx-auto mt-6 max-w-md">
-          <Suspense
-            fallback={
-              <pre className="overflow-x-auto rounded-lg bg-slate-50 p-4 text-sm text-slate-800 dark:bg-slate-800 dark:text-slate-200">
-                <code>npm install react-tailwindcss-datetimepicker</code>
-              </pre>
-            }
-          >
-            <CodeBlock code="npm install react-tailwindcss-datetimepicker" lang="bash" />
-          </Suspense>
+          <CodeBlock code="npm install react-tailwindcss-datetimepicker" lang="bash" />
         </div>
       </div>
 
@@ -220,15 +211,7 @@ export default function HomePage() {
               <button>Pick a date</button>
             </ReactDateTimePicker>
           </div>
-          <Suspense
-            fallback={
-              <pre className="overflow-x-auto rounded-lg bg-slate-50 p-4 text-sm text-slate-800 dark:bg-slate-800 dark:text-slate-200">
-                <code>{quickExample}</code>
-              </pre>
-            }
-          >
-            <CodeBlock code={quickExample} lang="tsx" />
-          </Suspense>
+          <CodeBlock code={quickExample} lang="tsx" />
         </div>
       </div>
 
