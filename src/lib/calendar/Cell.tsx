@@ -11,8 +11,8 @@ import { endCellClasses, hoverCellClasses, inBetweenCellClasses, startCellClasse
 import { isInbetweenDates } from '../utils/TimeFunctionUtils';
 
 const normalCellClasses = 'text-black cursor-pointer dark:text-white caret-transparent';
-const greyCellClasses = 'rounded-md text-gray-200 cursor-pointer opacity-30 caret-transparent';
-const invalidCellClasses = 'text-gray-300 cursor-not-allowed dark:text-slate-500';
+const greyCellClasses = 'rounded-md text-gray-400 cursor-pointer opacity-50 caret-transparent';
+const invalidCellClasses = 'text-gray-400 cursor-not-allowed dark:text-slate-400';
 
 interface Props {
   id: number;
@@ -351,7 +351,7 @@ export default class Cell extends React.Component<Props, State> {
         ref={(cell) => {
           this.cell = cell;
         }}
-        role="button"
+        role="gridcell"
         aria-label={dateLabel}
         aria-selected={isSelected}
         className={clsx(
