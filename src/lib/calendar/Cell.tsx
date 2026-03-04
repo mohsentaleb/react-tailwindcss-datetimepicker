@@ -11,8 +11,8 @@ import { endCellClasses, hoverCellClasses, inBetweenCellClasses, startCellClasse
 import { isInbetweenDates } from '../utils/TimeFunctionUtils';
 
 const normalCellClasses = 'text-black cursor-pointer dark:text-white caret-transparent';
-const greyCellClasses = 'rounded-md text-gray-400 cursor-pointer opacity-50 caret-transparent';
-const invalidCellClasses = 'text-gray-400 cursor-not-allowed dark:text-slate-400';
+const greyCellClasses = 'rounded-md text-gray-500 cursor-pointer caret-transparent';
+const invalidCellClasses = 'text-gray-500 cursor-not-allowed dark:text-slate-400';
 
 interface Props {
   id: number;

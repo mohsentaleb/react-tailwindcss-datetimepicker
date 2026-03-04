@@ -27,7 +27,7 @@ export const hoverCellClasses: Record<Theme, string> = {
 };
 
 export const startCellClasses: Record<Theme, string> = {
-  blue: 'rounded-l-md text-white bg-sky-600 cursor-pointer caret-transparent',
+  blue: 'rounded-l-md text-white bg-sky-700 cursor-pointer caret-transparent',
   orange: 'rounded-l-md text-white bg-orange-600 cursor-pointer caret-transparent',
   green: 'rounded-l-md text-white bg-emerald-600 cursor-pointer caret-transparent',
   purple: 'rounded-l-md text-white bg-purple-600 cursor-pointer caret-transparent',
@@ -43,7 +43,7 @@ export const startCellClasses: Record<Theme, string> = {
   emerald: 'rounded-l-md text-white bg-emerald-600 cursor-pointer caret-transparent',
   teal: 'rounded-l-md text-white bg-teal-600 cursor-pointer caret-transparent',
   cyan: 'rounded-l-md text-white bg-cyan-600 cursor-pointer caret-transparent',
-  sky: 'rounded-l-md text-white bg-sky-600 cursor-pointer caret-transparent',
+  sky: 'rounded-l-md text-white bg-sky-700 cursor-pointer caret-transparent',
   indigo: 'rounded-l-md text-white bg-indigo-600 cursor-pointer caret-transparent',
   violet: 'rounded-l-md text-white bg-violet-600 cursor-pointer caret-transparent',
   fuchsia: 'rounded-l-md text-white bg-fuchsia-600 cursor-pointer caret-transparent',
@@ -52,7 +52,7 @@ export const startCellClasses: Record<Theme, string> = {
 };
 
 export const endCellClasses: Record<Theme, string> = {
-  blue: 'rounded-r-md text-white bg-sky-600 cursor-pointer caret-transparent',
+  blue: 'rounded-r-md text-white bg-sky-700 cursor-pointer caret-transparent',
   orange: 'rounded-r-md text-white bg-orange-600 cursor-pointer caret-transparent',
   green: 'rounded-r-md text-white bg-emerald-600 cursor-pointer caret-transparent',
   purple: 'rounded-r-md text-white bg-purple-600 cursor-pointer caret-transparent',
@@ -68,7 +68,7 @@ export const endCellClasses: Record<Theme, string> = {
   emerald: 'rounded-r-md text-white bg-emerald-600 cursor-pointer caret-transparent',
   teal: 'rounded-r-md text-white bg-teal-600 cursor-pointer caret-transparent',
   cyan: 'rounded-r-md text-white bg-cyan-600 cursor-pointer caret-transparent',
-  sky: 'rounded-r-md text-white bg-sky-600 cursor-pointer caret-transparent',
+  sky: 'rounded-r-md text-white bg-sky-700 cursor-pointer caret-transparent',
   indigo: 'rounded-r-md text-white bg-indigo-600 cursor-pointer caret-transparent',
   violet: 'rounded-r-md text-white bg-violet-600 cursor-pointer caret-transparent',
   fuchsia: 'rounded-r-md text-white bg-fuchsia-600 cursor-pointer caret-transparent',
@@ -103,7 +103,7 @@ export const inBetweenCellClasses: Record<Theme, string> = {
 
 // Range button classes
 export const rangeButtonSelectedClasses: Record<Theme, string> = {
-  blue: 'bg-sky-600 text-white hover:bg-sky-600 hover:text-white',
+  blue: 'bg-sky-700 text-white hover:bg-sky-700 hover:text-white',
   orange: 'bg-orange-600 text-white hover:bg-orange-600 hover:text-white',
   green: 'bg-emerald-600 text-white hover:bg-emerald-600 hover:text-white',
   purple: 'bg-purple-600 text-white hover:bg-purple-600 hover:text-white',
@@ -119,7 +119,7 @@ export const rangeButtonSelectedClasses: Record<Theme, string> = {
   emerald: 'bg-emerald-600 text-white hover:bg-emerald-600 hover:text-white',
   teal: 'bg-teal-600 text-white hover:bg-teal-600 hover:text-white',
   cyan: 'bg-cyan-600 text-white hover:bg-cyan-600 hover:text-white',
-  sky: 'bg-sky-600 text-white hover:bg-sky-600 hover:text-white',
+  sky: 'bg-sky-700 text-white hover:bg-sky-700 hover:text-white',
   indigo: 'bg-indigo-600 text-white hover:bg-indigo-600 hover:text-white',
   violet: 'bg-violet-600 text-white hover:bg-violet-600 hover:text-white',
   fuchsia: 'bg-fuchsia-600 text-white hover:bg-fuchsia-600 hover:text-white',
@@ -182,7 +182,7 @@ export const applyButtonClasses: Record<Theme, string> = {
   emerald: 'bg-emerald-600 hover:bg-emerald-500 focus:ring-emerald-300',
   teal: 'bg-teal-600 hover:bg-teal-500 focus:ring-teal-300',
   cyan: 'bg-cyan-600 hover:bg-cyan-500 focus:ring-cyan-300',
-  sky: 'bg-sky-600 hover:bg-sky-500 focus:ring-sky-300',
+  sky: 'bg-sky-700 hover:bg-sky-600 focus:ring-sky-300',
   indigo: 'bg-indigo-600 hover:bg-indigo-500 focus:ring-indigo-300',
   violet: 'bg-violet-600 hover:bg-violet-500 focus:ring-violet-300',
   fuchsia: 'bg-fuchsia-600 hover:bg-fuchsia-500 focus:ring-fuchsia-300',

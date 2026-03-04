@@ -1,55 +1,56 @@
-import { useState } from 'react';
+import { Suspense, lazy, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
 import ReactDateTimePicker from '../../../lib/index';
 import { Theme } from '../../../lib/types';
-import CodeBlock from '../../components/CodeBlock';
 import { DateRanges } from '../../consts';
 
+const CodeBlock = lazy(() => import('../../components/CodeBlock'));
+
 const themeColors: Record<string, { bg: string; active: string }> = {
-  blue: { bg: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300', active: 'bg-blue-500 text-white' },
+  blue: { bg: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300', active: 'bg-blue-600 text-white' },
   orange: {
     bg: 'bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300',
-    active: 'bg-orange-500 text-white',
+    active: 'bg-orange-600 text-white',
   },
   green: {
     bg: 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300',
-    active: 'bg-green-500 text-white',
+    active: 'bg-green-600 text-white',
   },
   purple: {
     bg: 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300',
-    active: 'bg-purple-500 text-white',
+    active: 'bg-purple-600 text-white',
   },
-  red: { bg: 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300', active: 'bg-red-500 text-white' },
+  red: { bg: 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300', active: 'bg-red-600 text-white' },
   amber: {
     bg: 'bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300',
-    active: 'bg-amber-500 text-white',
+    active: 'bg-amber-600 text-white',
   },
   emerald: {
     bg: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300',
-    active: 'bg-emerald-500 text-white',
+    active: 'bg-emerald-600 text-white',
   },
-  teal: { bg: 'bg-teal-100 text-teal-700 dark:bg-teal-900 dark:text-teal-300', active: 'bg-teal-500 text-white' },
-  cyan: { bg: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900 dark:text-cyan-300', active: 'bg-cyan-500 text-white' },
-  sky: { bg: 'bg-sky-100 text-sky-700 dark:bg-sky-900 dark:text-sky-300', active: 'bg-sky-500 text-white' },
+  teal: { bg: 'bg-teal-100 text-teal-700 dark:bg-teal-900 dark:text-teal-300', active: 'bg-teal-600 text-white' },
+  cyan: { bg: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900 dark:text-cyan-300', active: 'bg-cyan-600 text-white' },
+  sky: { bg: 'bg-sky-100 text-sky-700 dark:bg-sky-900 dark:text-sky-300', active: 'bg-sky-600 text-white' },
   indigo: {
     bg: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300',
-    active: 'bg-indigo-500 text-white',
+    active: 'bg-indigo-600 text-white',
   },
   violet: {
     bg: 'bg-violet-100 text-violet-700 dark:bg-violet-900 dark:text-violet-300',
-    active: 'bg-violet-500 text-white',
+    active: 'bg-violet-600 text-white',
   },
   fuchsia: {
     bg: 'bg-fuchsia-100 text-fuchsia-700 dark:bg-fuchsia-900 dark:text-fuchsia-300',
-    active: 'bg-fuchsia-500 text-white',
+    active: 'bg-fuchsia-600 text-white',
   },
-  pink: { bg: 'bg-pink-100 text-pink-700 dark:bg-pink-900 dark:text-pink-300', active: 'bg-pink-500 text-white' },
-  rose: { bg: 'bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300', active: 'bg-rose-500 text-white' },
+  pink: { bg: 'bg-pink-100 text-pink-700 dark:bg-pink-900 dark:text-pink-300', active: 'bg-pink-600 text-white' },
+  rose: { bg: 'bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300', active: 'bg-rose-600 text-white' },
   slate: {
     bg: 'bg-slate-100 text-slate-700 dark:bg-slate-900 dark:text-slate-300',
-    active: 'bg-slate-500 text-white',
+    active: 'bg-slate-600 text-white',
   },
 };
 
@@ -159,7 +160,7 @@ export default function HomePage() {
         <div className="mt-6 flex justify-center gap-3">
           <Link
             to="/docs/installation"
-            className="rounded-lg bg-sky-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-sky-700"
+            className="rounded-lg bg-sky-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-sky-800"
           >
             Get Started
           </Link>
@@ -171,7 +172,15 @@ export default function HomePage() {
           </Link>
         </div>
         <div className="mx-auto mt-6 max-w-md">
-          <CodeBlock code="npm install react-tailwindcss-datetimepicker" lang="bash" />
+          <Suspense
+            fallback={
+              <pre className="overflow-x-auto rounded-lg bg-slate-50 p-4 text-sm text-slate-800 dark:bg-slate-800 dark:text-slate-200">
+                <code>npm install react-tailwindcss-datetimepicker</code>
+              </pre>
+            }
+          >
+            <CodeBlock code="npm install react-tailwindcss-datetimepicker" lang="bash" />
+          </Suspense>
         </div>
       </div>
 
@@ -211,9 +220,15 @@ export default function HomePage() {
               <button>Pick a date</button>
             </ReactDateTimePicker>
           </div>
-          <div>
+          <Suspense
+            fallback={
+              <pre className="overflow-x-auto rounded-lg bg-slate-50 p-4 text-sm text-slate-800 dark:bg-slate-800 dark:text-slate-200">
+                <code>{quickExample}</code>
+              </pre>
+            }
+          >
             <CodeBlock code={quickExample} lang="tsx" />
-          </div>
+          </Suspense>
         </div>
       </div>
 
