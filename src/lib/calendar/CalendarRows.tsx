@@ -59,6 +59,6 @@ export default class CalendarRows extends React.Component<Props> {
 
   render() {
     const calendarRows = this.generateDays();
-    return <div>{calendarRows}</div>;
+    return <div role="grid">{calendarRows}</div>;
   }
 }

@@ -58,6 +58,6 @@ export default class CalendarRow extends React.Component<Props> {
 
   render() {
     const cells = this.generateCells();
-    return <div className="grid grid-cols-7 text-center">{cells}</div>;
+    return <div role="row" className="grid grid-cols-7 text-center">{cells}</div>;
   }
 }
