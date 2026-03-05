@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useDarkMode } from 'usehooks-ts';
+import { useLocalStorage, useMediaQuery } from 'usehooks-ts';
 
 import { useHighlighter } from '../hooks/useHighlighter';
 
@@ -11,7 +11,8 @@ interface CodeBlockProps {
 
 export default function CodeBlock({ code, lang = 'tsx' }: CodeBlockProps) {
   const highlighter = useHighlighter();
-  const { isDarkMode } = useDarkMode();
+  const isDarkOS = useMediaQuery('(prefers-color-scheme: dark)');
+  const [isDarkMode] = useLocalStorage('usehooks-ts-dark-mode', isDarkOS);
   const [copied, setCopied] = useState(false);
   const [html, setHtml] = useState('');
 

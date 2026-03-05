@@ -1,12 +1,14 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
-import { useDarkMode } from 'usehooks-ts';
+import { useLocalStorage, useMediaQuery } from 'usehooks-ts';
 
 import MoonIcon from '../assets/moon.svg?react';
 import SunIcon from '../assets/sun.svg?react';
 
 function ThemeToggler() {
-  const { isDarkMode, toggle } = useDarkMode();
+  const isDarkOS = useMediaQuery('(prefers-color-scheme: dark)');
+  const [isDarkMode, setDarkMode] = useLocalStorage('usehooks-ts-dark-mode', isDarkOS);
+  const toggle = useCallback(() => setDarkMode((prev) => !prev), [setDarkMode]);
 
   useEffect(() => {
     document.body.className = isDarkMode ? 'dark' : 'light';
