@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import logo from '../assets/logo.webp';
 
+import CopyLlmButton from './CopyLlmButton';
 import ThemeToggler from './ThemeToggler';
 
 export default function NavBar({ onToggleSidebar }: { onToggleSidebar?: () => void }) {
@@ -45,6 +46,7 @@ export default function NavBar({ onToggleSidebar }: { onToggleSidebar?: () => vo
           <NavLink to="/playground" className={linkClass}>
             Playground
           </NavLink>
+          <CopyLlmButton />
           <div className="ml-2 flex items-center border-l border-slate-200 pl-3 dark:border-slate-700">
             <ThemeToggler />
           </div>
