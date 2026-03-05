@@ -1,0 +1,141 @@
+# react-tailwindcss-datetimepicker
+
+> A React 18 date-time range picker component built with TailwindCSS. Published on npm as `react-tailwindcss-datetimepicker`.
+
+## Official Documentation
+
+https://reactdatetime.dev
+
+## Installation
+
+```sh
+npm install react-tailwindcss-datetimepicker
+```
+
+Import the CSS (skip if already using TailwindCSS):
+
+```ts
+import 'react-tailwindcss-datetimepicker/style.css';
+```
+
+## Quick Start
+
+```tsx
+import { useState } from 'react';
+import DateTimePicker from 'react-tailwindcss-datetimepicker';
+import 'react-tailwindcss-datetimepicker/style.css';
+
+function App() {
+  const [range, setRange] = useState({
+    start: new Date(new Date().setDate(new Date().getDate() - 2)),
+    end: new Date(),
+  });
+
+  return (
+    <DateTimePicker
+      start={range.start}
+      end={range.end}
+      applyCallback={(start, end) => setRange({ start, end })}
+    >
+      <button>Pick dates</button>
+    </DateTimePicker>
+  );
+}
+```
+
+## Props (API Reference)
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| start | Date | Yes | — | Start date of selected range |
+| end | Date | Yes | — | End date of selected range |
+| applyCallback | (start: Date, end: Date) => void | Yes | — | Called when user applies selection |
+| children | ReactNode | Yes | — | Trigger element that opens the picker |
+| ranges | Record<string, [Date, Date]> | No | — | Preset date range shortcuts |
+| rangeCallback | (index: number, value: string) => void | No | — | Called when a preset range is clicked |
+| minDate | Date | No | — | Earliest selectable date |
+| maxDate | Date | No | — | Latest selectable date |
+| autoApply | boolean | No | false | Apply selection immediately without clicking Apply |
+| standalone | boolean | No | false | Always-visible calendar (no trigger element needed) |
+| smartMode | boolean | No | false | Intelligent start/end date swapping |
+| pastSearchFriendly | boolean | No | false | Optimize for past date selection |
+| twelveHoursClock | boolean | No | false | Use 12-hour time format |
+| descendingYears | boolean | No | false | Year dropdown in descending order |
+| years | [number, number] | No | — | Min and max year range for the year dropdown |
+| noMobileMode | boolean | No | false | Disable mobile-optimized layout |
+| forceMobileMode | boolean | No | false | Force mobile-optimized layout |
+| alignment | 'left' \| 'center' \| 'right' | No | 'left' | Horizontal alignment of the picker |
+| theme | Theme | No | 'sky' | Color theme (22 Tailwind CSS named colors) |
+| classNames | ClassNames | No | — | Custom CSS class overrides for internal elements |
+| locale | Locale | No | — | Localization strings and format settings |
+| displayMinDate | boolean | No | false | Show the minimum date label in the UI |
+| displayMaxDate | boolean | No | false | Show the maximum date label in the UI |
+
+## Available Themes
+
+blue, orange, green, purple, slate, gray, zinc, neutral, stone, red, amber, yellow, lime, emerald, teal, cyan, sky (default), indigo, violet, fuchsia, pink, rose
+
+## Locale Object
+
+```ts
+type Locale = {
+  format?: string;        // Date format string (e.g., 'MM/DD/YYYY')
+  sundayFirst?: boolean;  // Start week on Sunday
+  days?: [string, string, string, string, string, string, string];
+  months?: [string, string, string, string, string, string, string, string, string, string, string, string];
+  fromDate?: string;      // Label for "From" date
+  toDate?: string;        // Label for "To" date
+  selectingFrom?: string; // Status text when selecting start date
+  selectingTo?: string;   // Status text when selecting end date
+  minDate?: string;       // Min date label
+  maxDate?: string;       // Max date label
+  close?: string;         // Close button text
+  apply?: string;         // Apply button text
+  cancel?: string;        // Cancel button text
+};
+```
+
+## ClassNames Object
+
+```ts
+type ClassNames = {
+  rootContainer?: string;
+  rangesContainer?: string;
+  rangeButtonDefault?: string;
+  rangeButtonSelected?: string;
+  fromToRangeContainer?: string;
+  normalCell?: string;
+  normalCellHover?: string;
+  greyCell?: string;
+  invalidCell?: string;
+  startCell?: string;
+  endCell?: string;
+  withinRangeCell?: string;
+  startDot?: string;
+  endDot?: string;
+  footerContainer?: string;
+  applyButton?: string;
+  cancelButton?: string;
+};
+```
+
+## Key Features
+
+- Date range selection with start and end times
+- Customizable preset ranges (e.g., Today, Last 7 Days, Last Month)
+- Keyboard navigation and accessibility support
+- Full TypeScript support with exported types
+- Built-in dark mode (class-based, works with Tailwind's dark mode)
+- Responsive layout with mobile-optimized mode
+- 22 color themes matching all Tailwind CSS named colors
+- Localization support for labels, date formats, and week start day
+- Uses date-fns for date manipulation
+
+## Links
+
+- Official Documentation: https://reactdatetime.dev
+- npm: https://www.npmjs.com/package/react-tailwindcss-datetimepicker
+- GitHub: https://github.com/mohsentaleb/react-tailwindcss-datetimepicker
+- Interactive Playground: https://reactdatetime.dev/playground
+- API Reference: https://reactdatetime.dev/docs/api-reference
+- Installation Guide: https://reactdatetime.dev/docs/installation

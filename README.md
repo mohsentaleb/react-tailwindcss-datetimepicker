@@ -18,7 +18,7 @@
 </p>
 
 <p align="center">
-  <a href="https://reactdatetime.dev"><strong>Documentation & Playground &rarr;</strong></a>
+  <a href="https://reactdatetime.dev"><strong>Official Documentation & Playground &rarr;</strong></a>
 </p>
 
 ![Date Time Picker](https://raw.githubusercontent.com/mohsentaleb/react-tailwindcss-datetimepicker/master/public/demo.gif)
@@ -67,7 +67,7 @@ function App() {
 
 ## Documentation
 
-Visit **[reactdatetime.dev](https://reactdatetime.dev)** for the full documentation:
+Visit the official documentation at **[reactdatetime.dev](https://reactdatetime.dev)**:
 
 - [Installation & Setup](https://reactdatetime.dev/docs/installation)
 - [API Reference](https://reactdatetime.dev/docs/api-reference)
@@ -78,7 +78,7 @@ Visit **[reactdatetime.dev](https://reactdatetime.dev)** for the full documentat
 
 ## Links
 
-- [Documentation](https://reactdatetime.dev)
+- [Official Documentation](https://reactdatetime.dev)
 - [Discussion forums](https://github.com/mohsentaleb/react-tailwindcss-datetimepicker/discussions)
 - [Report an issue](https://github.com/mohsentaleb/react-tailwindcss-datetimepicker/issues/new/choose)
 
