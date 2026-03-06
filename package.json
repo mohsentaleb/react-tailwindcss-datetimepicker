@@ -1,6 +1,6 @@
 {
   "name": "react-tailwindcss-datetimepicker",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "description": "Feature-rich React date-time range picker with customizable presets, keyboard navigation, TypeScript support, and dark mode. Built on React 18 and TailwindCSS 4.",
   "type": "module",
   "files": [
