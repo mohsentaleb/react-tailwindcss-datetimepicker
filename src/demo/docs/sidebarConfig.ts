@@ -1,73 +1,72 @@
-export type SidebarItem = { label: string; to: string };
-export type SidebarSection = { heading: string | null; items: SidebarItem[] };
+export type SidebarSubItem = { label: string; hash: string };
+export type SidebarItem = {
+  label: string;
+  to: string;
+  subItems?: SidebarSubItem[];
+};
 
-export const sidebarConfig: SidebarSection[] = [
+export const sidebarConfig: SidebarItem[] = [
+  { label: 'Home', to: '/docs' },
   {
-    heading: null,
-    items: [{ label: 'Home', to: '/docs' }],
-  },
-  {
-    heading: 'Installation',
-    items: [
-      { label: 'With Tailwind', to: '/docs/installation#with-tailwind' },
-      { label: 'Without Tailwind', to: '/docs/installation#without-tailwind' },
+    label: 'Installation',
+    to: '/docs/installation',
+    subItems: [
+      { label: 'With Tailwind', hash: 'with-tailwind' },
+      { label: 'Without Tailwind', hash: 'without-tailwind' },
     ],
   },
   {
-    heading: 'Getting Started',
-    items: [
-      { label: 'Basic Usage', to: '/docs/getting-started#basic-usage' },
-      { label: 'Class Components', to: '/docs/getting-started#class-components' },
+    label: 'Getting Started',
+    to: '/docs/getting-started',
+    subItems: [
+      { label: 'Basic Usage', hash: 'basic-usage' },
+      { label: 'Class Components', hash: 'class-components' },
     ],
   },
   {
-    heading: 'Features',
-    items: [
-      { label: 'Date Range', to: '/docs/features#date-range' },
-      { label: 'Smart Mode', to: '/docs/features#smart-mode' },
-      { label: 'Time Selection', to: '/docs/features#time-selection' },
-      { label: 'Preset Ranges', to: '/docs/features#preset-ranges' },
-      { label: 'Dark Mode', to: '/docs/features#dark-mode' },
-      { label: 'Mobile Support', to: '/docs/features#mobile-support' },
+    label: 'Features',
+    to: '/docs/features',
+    subItems: [
+      { label: 'Date Range', hash: 'date-range' },
+      { label: 'Smart Mode', hash: 'smart-mode' },
+      { label: 'Time Selection', hash: 'time-selection' },
+      { label: 'Preset Ranges', hash: 'preset-ranges' },
+      { label: 'Dark Mode', hash: 'dark-mode' },
+      { label: 'Mobile Support', hash: 'mobile-support' },
     ],
   },
   {
-    heading: 'Customization',
-    items: [
-      { label: 'Themes', to: '/docs/customization#themes' },
-      { label: 'classNames Overrides', to: '/docs/customization#classnames' },
+    label: 'Customization',
+    to: '/docs/customization',
+    subItems: [
+      { label: 'Themes', hash: 'themes' },
+      { label: 'classNames Overrides', hash: 'classnames' },
+    ],
+  },
+  { label: 'Localization', to: '/docs/localization' },
+  {
+    label: 'API Reference',
+    to: '/docs/api-reference',
+    subItems: [
+      { label: 'Required Props', hash: 'required' },
+      { label: 'Date Constraints', hash: 'constraints' },
+      { label: 'Behavior', hash: 'behavior' },
+      { label: 'Layout', hash: 'layout' },
+      { label: 'Time', hash: 'time' },
+      { label: 'Styling', hash: 'styling' },
     ],
   },
   {
-    heading: null,
-    items: [{ label: 'Localization', to: '/docs/localization' }],
-  },
-  {
-    heading: 'API Reference',
-    items: [
-      { label: 'Required Props', to: '/docs/api-reference#required' },
-      { label: 'Date Constraints', to: '/docs/api-reference#constraints' },
-      { label: 'Behavior', to: '/docs/api-reference#behavior' },
-      { label: 'Layout', to: '/docs/api-reference#layout' },
-      { label: 'Time', to: '/docs/api-reference#time' },
-      { label: 'Styling', to: '/docs/api-reference#styling' },
+    label: 'Guides',
+    to: '/docs/guides',
+    subItems: [
+      { label: 'Preset Ranges', hash: 'preset-ranges' },
+      { label: 'Restricting Dates', hash: 'restricting-dates' },
+      { label: 'Custom Styling', hash: 'custom-styling' },
+      { label: 'Localization', hash: 'localization' },
     ],
   },
-  {
-    heading: 'Guides',
-    items: [
-      { label: 'Preset Ranges', to: '/docs/guides#preset-ranges' },
-      { label: 'Restricting Dates', to: '/docs/guides#restricting-dates' },
-      { label: 'Custom Styling', to: '/docs/guides#custom-styling' },
-      { label: 'Localization', to: '/docs/guides#localization' },
-    ],
-  },
-  {
-    heading: null,
-    items: [
-      { label: 'Migration', to: '/docs/migration' },
-      { label: 'Development', to: '/docs/development' },
-      { label: 'License', to: '/docs/license' },
-    ],
-  },
+  { label: 'Migration', to: '/docs/migration' },
+  { label: 'Development', to: '/docs/development' },
+  { label: 'License', to: '/docs/license' },
 ];

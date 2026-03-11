@@ -4,11 +4,19 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 import NavBar from '../components/NavBar';
 
+import OnThisPage from './OnThisPage';
 import Sidebar from './Sidebar';
+import { sidebarConfig } from './sidebarConfig';
 
 export default function DocsLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    const base = 'React TailwindCSS Date & Time Picker';
+    const section = sidebarConfig.find((item) => item.to === pathname);
+    document.title = section && section.label !== 'Home' ? `${base} | ${section.label}` : base;
+  }, [pathname]);
 
   useEffect(() => {
     if (hash) {
@@ -31,6 +39,7 @@ export default function DocsLayout() {
             <Outlet />
           </div>
         </main>
+        <OnThisPage />
       </div>
     </div>
   );

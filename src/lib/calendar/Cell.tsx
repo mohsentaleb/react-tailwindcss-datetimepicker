@@ -83,6 +83,13 @@ export default class Cell extends React.Component<Props, State> {
       this.cell?.focus();
       this.props.focusOnCallback(false);
     }
+
+    const isSelected = this.isStartOrEndDate();
+    if (isSelected && !this.isCellMonthSameAsPropMonth(this.props.cellDay)) {
+      document.addEventListener('keydown', this.keyDown, false);
+    } else {
+      document.removeEventListener('keydown', this.keyDown, false);
+    }
   }
 
   pastMaxDatePropsChecker(isCellDateProp: boolean, days: number) {
@@ -339,13 +346,7 @@ export default class Cell extends React.Component<Props, State> {
     const dateFormatted = format(this.props.cellDay, 'd');
     const dateLabel = format(this.props.cellDay, 'MMMM d, yyyy');
     const isSelected = this.isStartOrEndDate();
-    let tabIndex = -1;
-    if (isSelected && !this.isCellMonthSameAsPropMonth(this.props.cellDay)) {
-      document.addEventListener('keydown', this.keyDown, false);
-      tabIndex = 0;
-    } else {
-      document.removeEventListener('keydown', this.keyDown, false);
-    }
+    const tabIndex = isSelected && !this.isCellMonthSameAsPropMonth(this.props.cellDay) ? 0 : -1;
     return (
       <div
         ref={(cell) => {

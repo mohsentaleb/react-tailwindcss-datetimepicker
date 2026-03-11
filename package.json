@@ -22,7 +22,7 @@
     "build": "tsc -p ./tsconfig-build.json && vite build",
     "build:types": "tsc",
     "lint": "eslint src --ext js,jsx,ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "build:demo": "vite build --config vite.config.demo.js",
+    "build:demo": "vite build --config vite.config.demo.js && node scripts/prerender.js",
     "deploy:demo": "npm run build:demo && npx wrangler deploy --config dist-demo/wrangler.json",
     "preview": "vite preview",
     "test": "vitest",

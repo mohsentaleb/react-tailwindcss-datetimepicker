@@ -6,8 +6,9 @@ import App from './App';
 
 import '../lib/index.css';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.hydrateRoot(
+  document.getElementById('root'),
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
