@@ -111,12 +111,17 @@ class DateTimeRangePicker extends React.Component<Props, State> {
       format(this.props.start, 'dd-MM-yyyy HH:mm') !== format(prevProps.start, 'dd-MM-yyyy HH:mm') ||
       format(this.props.end, 'dd-MM-yyyy HH:mm') !== format(prevProps.end, 'dd-MM-yyyy HH:mm');
     if (isDifferentMomentObject || isDifferentTime) {
+      // Sync from props as-is. This is not a user action, so it must not call applyCallback/rangeCallback.
+      // The calendars update their visible month themselves when their date props change.
       this.setState(
         {
           start: this.props.start,
           end: this.props.end,
         },
-        () => this.updateStartEndAndLabels(this.props.start, this.props.end, true)
+        () => {
+          this.updateStartEndAndLabels(this.props.start, this.props.end);
+          this.setToRangeValue(this.props.start, this.props.end);
+        }
       );
     }
 
@@ -208,25 +213,13 @@ class DateTimeRangePicker extends React.Component<Props, State> {
     }
   }
 
-  updateStartEndAndLabels(newStart: Date, newEnd: Date, updateCalendar?: boolean) {
-    this.setState(
-      {
-        start: newStart,
-        startLabel: format(newStart, this.state.dateFormat),
-        end: newEnd,
-        endLabel: format(newEnd, this.state.dateFormat),
-      },
-      () => {
-        if (updateCalendar) {
-          this.updateCalendarRender();
-        }
-      }
-    );
-  }
-
-  updateCalendarRender() {
-    this.dateTextFieldCallback('start');
-    this.dateTextFieldCallback('end');
+  updateStartEndAndLabels(newStart: Date, newEnd: Date) {
+    this.setState({
+      start: newStart,
+      startLabel: format(newStart, this.state.dateFormat),
+      end: newEnd,
+      endLabel: format(newEnd, this.state.dateFormat),
+    });
   }
 
   // Currently called from Cell selection
